@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Pathfinding
-{
+namespace Pathfinding {
 	/** Simplifies a path using raycasting.
 	 * \ingroup modifiers
 	 * This modifier will try to remove as many nodes as possible from the path using raycasting (linecasting) to validate the node removal.
@@ -11,15 +10,13 @@ namespace Pathfinding
 	[RequireComponent(typeof(Seeker))]
 	[System.Serializable]
 	[HelpURL("http://arongranberg.com/astar/docs/class_pathfinding_1_1_raycast_modifier.php")]
-	public class RaycastModifier : MonoModifier
-	{
-#if UNITY_EDITOR
+	public class RaycastModifier : MonoModifier {
+	#if UNITY_EDITOR
 		[UnityEditor.MenuItem("CONTEXT/Seeker/Add Raycast Simplifier Modifier")]
-		public static void AddComp(UnityEditor.MenuCommand command)
-		{
+		public static void AddComp (UnityEditor.MenuCommand command) {
 			(command.context as Component).gameObject.AddComponent(typeof(RaycastModifier));
 		}
-#endif
+	#endif
 
 		public override int Order { get { return 40; } }
 
@@ -42,8 +39,8 @@ namespace Pathfinding
 
 		[HideInInspector]
 		public bool subdivideEveryIter;
-		
-		public int iterations = 1;
+
+		public int iterations = 2;
 
 		/** Use raycasting on the graphs. Only currently works with GridGraph and NavmeshGraph and RecastGraph. \astarpro */
 		[HideInInspector]
@@ -52,8 +49,7 @@ namespace Pathfinding
 		/** To avoid too many memory allocations. An array is kept between the checks and filled in with the positions instead of allocating a new one every time.*/
 		private static List<Vector3> nodes;
 
-		public override void Apply(Path p)
-		{
+		public override void Apply (Path p) {
 			//System.DateTime startTime = System.DateTime.UtcNow;
 
 			if (iterations <= 0) {
@@ -71,39 +67,39 @@ namespace Pathfinding
 
 			for (int it = 0; it < iterations; it++) {
 				if (subdivideEveryIter && it != 0) {
-					if (nodes.Capacity < nodes.Count * 3) {
-						nodes.Capacity = nodes.Count * 3;
+					if (nodes.Capacity < nodes.Count*3) {
+						nodes.Capacity = nodes.Count*3;
 					}
 
 					int preLength = nodes.Count;
 
-					for (int j = 0; j < preLength - 1; j++) {
+					for (int j = 0; j < preLength-1; j++) {
 						nodes.Add(Vector3.zero);
 						nodes.Add(Vector3.zero);
 					}
 
-					for (int j = preLength - 1; j > 0; j--) {
+					for (int j = preLength-1; j > 0; j--) {
 						Vector3 p1 = nodes[j];
-						Vector3 p2 = nodes[j + 1];
+						Vector3 p2 = nodes[j+1];
 
-						nodes[j * 3] = nodes[j];
+						nodes[j*3] = nodes[j];
 
-						if (j != preLength - 1) {
-							nodes[j * 3 + 1] = Vector3.Lerp(p1, p2, 0.33F);
-							nodes[j * 3 + 2] = Vector3.Lerp(p1, p2, 0.66F);
+						if (j != preLength-1) {
+							nodes[j*3+1] = Vector3.Lerp(p1, p2, 0.33F);
+							nodes[j*3+2] = Vector3.Lerp(p1, p2, 0.66F);
 						}
 					}
 				}
 
 				int i = 0;
-				while (i < nodes.Count - 2) {
+				while (i < nodes.Count-2) {
 					Vector3 start = nodes[i];
-					Vector3 end = nodes[i + 2];
+					Vector3 end = nodes[i+2];
 
 					var watch = System.Diagnostics.Stopwatch.StartNew();
-					
+
 					if (ValidateLine(null, null, start, end)) {
-						nodes.RemoveAt(i + 1);
+						nodes.RemoveAt(i+1);
 					} else {
 						i++;
 					}
@@ -117,18 +113,17 @@ namespace Pathfinding
 		}
 
 		/** Check if a straight path between v1 and v2 is valid */
-		public bool ValidateLine(GraphNode n1, GraphNode n2, Vector3 v1, Vector3 v2)
-		{
+		public bool ValidateLine (GraphNode n1, GraphNode n2, Vector3 v1, Vector3 v2) {
 			if (useRaycasting) {
 				// Use raycasting to check if a straight path between v1 and v2 is valid
 				if (thickRaycast && thickRaycastRadius > 0) {
 					RaycastHit hit;
-					if (Physics.SphereCast(v1 + raycastOffset, thickRaycastRadius, v2 - v1, out hit, (v2 - v1).magnitude, mask)) {
+					if (Physics.SphereCast(v1+raycastOffset, thickRaycastRadius, v2-v1, out hit, (v2-v1).magnitude, mask)) {
 						return false;
 					}
 				} else {
 					RaycastHit hit;
-					if (Physics.Linecast(v1 + raycastOffset, v2 + raycastOffset, out hit, mask)) {
+					if (Physics.Linecast(v1+raycastOffset, v2+raycastOffset, out hit, mask)) {
 						return false;
 					}
 				}
