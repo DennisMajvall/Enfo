@@ -1118,7 +1118,11 @@ MonoBehaviour:
   currentMana: 0
   maxMana: 5000
   manaRegeneration: 10
-  currentMovementSpeed: 0
+  currentMovementSpeed: 5
+  damage: 60
+  projectileSpeed: 20
+  range: 10
+  acquisitionRange: 10
   currentExperience: 0
   heroName: 
   properName: 

@@ -1,25 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StatsChangeEffect : MonoBehaviour
+public class StatsChangeEffect : HeroStats
 {
-	float Health;
-	float MaxHealth;
-	float HealthRegen;
-
-	float Mana;
-	float MaxMana;
-	float ManaRegen;
-
-	float AttackDamage;
-
 	void Start()
 	{
-
+		ChangeHealthRegeneration(3f);
 	}
 	
 	void Update()
 	{
-
 	}
 }

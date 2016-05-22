@@ -6,8 +6,7 @@ public class AttackOrder : Order
 	public GameObject projectilePrefab;
 
 	public GameObject target;
-	public float range = 20f;
-
+	
 	MoveOrder moveOrder;
 	Seeker seeker;
 
@@ -21,16 +20,17 @@ public class AttackOrder : Order
 	float timeSinceMoveOrdered = 0f;
 	float moveOrderInterval = 3f;
 
-	public AttackOrder(Vector3 currentPosition, GameObject target, Seeker seeker)
+	public AttackOrder(UnitStats stats, Vector3 currentPosition, GameObject target, Seeker seeker)
 	{
+		this.stats = stats;
 		this.currentPosition = currentPosition;
 		this.target = target;
 		this.seeker = seeker;
-		moveOrder = new MoveOrder(currentPosition);
+		moveOrder = new MoveOrder(stats, currentPosition);
 	}
 
 	public bool TargetIsInsideRange() {
-		return (currentPosition - target.transform.position).sqrMagnitude < range * range;
+		return (currentPosition - target.transform.position).sqrMagnitude < stats.Range * stats.Range;
 	}
 	
 	public override void Update()
@@ -44,7 +44,7 @@ public class AttackOrder : Order
 		if (!isChannelingAttack)
 			currentCooldown -= Time.deltaTime;
 
-		if (distanceToTarget <= range || isChannelingAttack) {
+		if (distanceToTarget <= stats.Range || isChannelingAttack) {
 			AttemptToAttackTarget();
 		} else {
 			AttemptToReachTarget();
@@ -60,8 +60,13 @@ public class AttackOrder : Order
 			currentChannelTime = 0f;
 			currentCooldown = cooldown;
 			isChannelingAttack = false;
+
 			GameObject projectile = (GameObject)GameObject.Instantiate(projectilePrefab, currentPosition, new Quaternion());
-			projectile.GetComponent<HomingProjectile>().target = target;
+
+			HomingProjectile projectileScript = projectile.GetComponent<HomingProjectile>();
+			projectileScript.Target = target;
+			projectileScript.Damage = stats.Damage;
+			projectileScript.Speed = stats.ProjectileSpeed;
 		}
 	}
 

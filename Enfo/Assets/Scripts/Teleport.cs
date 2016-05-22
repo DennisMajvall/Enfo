@@ -20,7 +20,6 @@ public class Teleport : MonoBehaviour
 	// On collision...?
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("aa");
 		if (other.gameObject.layer == LayerNames.Ally10) {
 			other.gameObject.GetComponent<OrderBehaviour>().Stop();
 			other.gameObject.transform.position = destination.gameObject.transform.position;
