@@ -20,32 +20,37 @@ public class Stats : MonoBehaviour {
     public float CurrentMovementSpeed { get { return currentMovementSpeed; } }
 
     // Setters
-    void changeHealth(float delta)
+    public void changeHealth(float delta)
     {
         currentHealth += delta;
+        print(currentHealth);
+        if (CurrentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void changeMaxHealth(float delta)
+    public void changeMaxHealth(float delta)
     {
         maxHealth += delta;
     }
 
-    void changeMana(float delta)
+    public void changeMana(float delta)
     {
         currentMana += delta;
     }
 
-    void changeMaxMana(float delta)
+    public void changeMaxMana(float delta)
     {
         maxMana += delta;
     }
 
-    void changeExperience(float delta)
+    public void changeExperience(float delta)
     {
         currentExperience += delta;
     }
 
-    void changeMovementSpeed(float delta)
+    public void changeMovementSpeed(float delta)
     {
         currentMovementSpeed += delta;
     }
