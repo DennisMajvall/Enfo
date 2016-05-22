@@ -166,8 +166,8 @@ GameObject:
   - 136: {fileID: 13698738}
   - 114: {fileID: 11429272}
   - 54: {fileID: 5472204}
-  - 114: {fileID: 11490976}
-  - 114: {fileID: 11473242}
+  - 114: {fileID: 11492476}
+  - 114: {fileID: 11477892}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Untagged
@@ -1083,7 +1083,7 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!114 &11473242
+--- !u!114 &11477892
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   AffectsLayer: 10
   AffectsSelf: 1
   auraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
---- !u!114 &11490976
+--- !u!114 &11492476
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1109,14 +1109,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 130870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda88ac8650bd4c479fc3591f498ff95, type: 3}
+  m_Script: {fileID: 11500000, guid: 12811bfe6f768394bbd753c40c6ccb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 1000
-  maxHealth: 1000
+  currentHealth: 5000
+  maxHealth: 5000
+  healthRegeneration: 1000
   currentMana: 0
-  maxMana: 0
+  maxMana: 5000
+  manaRegeneration: 10
   currentMovementSpeed: 0
+  currentExperience: 0
+  heroName: 
+  properName: 
 --- !u!114 &11495938
 MonoBehaviour:
   m_ObjectHideFlags: 1
