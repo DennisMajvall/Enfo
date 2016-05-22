@@ -5,10 +5,10 @@ public class MoveOrder : Order
 {
 	Path path;
 	int currentCheckpoint = 0;
-	float movementSpeed = 5f;
 
-	public MoveOrder(Vector3 currentPosition)
+	public MoveOrder(UnitStats stats, Vector3 currentPosition)
 	{
+		this.stats = stats;
 		this.currentPosition = currentPosition;
 	}
 
@@ -36,7 +36,7 @@ public class MoveOrder : Order
 			return;
 		}
 		
-		float currentSpeed = movementSpeed * Time.deltaTime;
+		float currentSpeed = stats.CurrentMovementSpeed * Time.deltaTime;
 
 		if (currentSpeed == 0f)
 			return;

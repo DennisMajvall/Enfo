@@ -5,7 +5,6 @@ public class SpawnerBehaviour : MonoBehaviour
 {
 	public bool activeTimer = true;
 	public List<GameObject> waveGameobjects;
-	public SpikedTree lol;
 	public int current_wave = 0;
 
 	const int total_units = 21;

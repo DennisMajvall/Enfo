@@ -360,7 +360,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471288, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11440482, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
       propertyPath: heroToFollow
@@ -721,6 +721,10 @@ Prefab:
       propertyPath: active_timer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11422424, guid: a04ff4a6ae8d7ca409c8400efed232b8, type: 2}
+      propertyPath: lol
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a04ff4a6ae8d7ca409c8400efed232b8, type: 2}
   m_IsPrefabParent: 0
@@ -766,6 +770,10 @@ Prefab:
     - target: {fileID: 475212, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11114128, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}

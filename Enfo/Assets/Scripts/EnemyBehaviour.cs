@@ -8,18 +8,20 @@ public class EnemyBehaviour : MonoBehaviour
 	Seeker seeker;
 	GameObject goal_go;
 	AttackMoveOrder attackMoveOrder;
+	UnitStats stats;
 	
 	// Use this for initialization
 	void Start()
 	{
 		seeker = GetComponent<Seeker>();
+		stats = GetComponent<UnitStats>();
 		goal_go = GameObject.FindGameObjectWithTag("goal");
 
 		if (!goal_go) {
 			Debug.Log("Could not find goal.");
 		}
 
-		attackMoveOrder = new AttackMoveOrder(transform.position, seeker, goal_go.transform.position);
+		attackMoveOrder = new AttackMoveOrder(stats, transform.position, seeker, goal_go.transform.position);
 		attackMoveOrder.SetProjectilePrefab(projectilePrefab);
 		attackMoveOrder.enemyLayer = LayerMasks.Ally10;
 	}

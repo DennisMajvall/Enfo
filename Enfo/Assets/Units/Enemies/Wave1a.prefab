@@ -105,10 +105,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
-  healthRegeneration: 0
+  healthRegeneration: 1
   currentMana: 0
   maxMana: 0
-  currentMovementSpeed: 0
+  manaRegeneration: 0
+  currentMovementSpeed: 5
+  damage: 20
+  projectileSpeed: 20
+  range: 4
+  acquisitionRange: 10
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1

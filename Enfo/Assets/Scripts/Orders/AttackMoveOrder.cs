@@ -12,14 +12,15 @@ public class AttackMoveOrder : Order
 	float currentTargetingCooldown = 0f;
 	const float targetingCooldown = 0.2f;
 
-	public AttackMoveOrder(Vector3 currentPosition, Seeker seeker, Vector3 targetPosition)
+	public AttackMoveOrder(UnitStats stats, Vector3 currentPosition, Seeker seeker, Vector3 targetPosition)
 	{
+		this.stats = stats;
 		this.currentPosition = currentPosition;
 		this.seeker = seeker;
 		this.targetPosition = targetPosition;
 
-		attackOrder = new AttackOrder(currentPosition, null, seeker);
-		moveOrder = new MoveOrder(currentPosition);
+		attackOrder = new AttackOrder(stats, currentPosition, null, seeker);
+		moveOrder = new MoveOrder(stats, currentPosition);
 	}
 
 	public override void Update()
@@ -51,7 +52,7 @@ public class AttackMoveOrder : Order
 		if (currentTargetingCooldown <= 0f) {
 			currentTargetingCooldown = targetingCooldown;
 
-			Collider[] colliders = Physics.OverlapSphere(currentPosition, attackOrder.range, enemyLayer, QueryTriggerInteraction.Ignore);
+			Collider[] colliders = Physics.OverlapSphere(currentPosition, attackOrder.stats.AcquisitionRange, enemyLayer, QueryTriggerInteraction.Ignore);
 			if (colliders.Length > 0) {
 				attackOrder.target = Globals.GetClosestCollider(colliders, currentPosition).gameObject;
 				attackOrder.isCompleted = false;
