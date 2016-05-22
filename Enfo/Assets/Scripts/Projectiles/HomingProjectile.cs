@@ -23,7 +23,7 @@ public class HomingProjectile : MonoBehaviour {
 			transform.position += moveDelta;
 
 			if (canReachCheckpointNow) {
-                target.GetComponent<Stats>().changeHealth(-damage);
+                target.GetComponent<BasicUnitStats>().changeHealth(-damage);
 				Destroy(gameObject);
 			}
 		} else {
