@@ -166,9 +166,9 @@ GameObject:
   - 136: {fileID: 13698738}
   - 114: {fileID: 11429272}
   - 54: {fileID: 5472204}
-  - 114: {fileID: 11490976}
+  - 114: {fileID: 11492476}
   m_Layer: 10
-  m_Name: Cha_Knight
+  m_Name: Paladin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!114 &11490976
+--- !u!114 &11492476
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1090,15 +1090,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 130870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda88ac8650bd4c479fc3591f498ff95, type: 3}
+  m_Script: {fileID: 11500000, guid: 12811bfe6f768394bbd753c40c6ccb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 1000
-  maxHealth: 1000
+  currentHealth: 5000
+  maxHealth: 5000
+  healthRegeneration: 1000
   currentMana: 0
-  maxMana: 0
-  currentExperience: 0
+  maxMana: 5000
+  manaRegeneration: 10
   currentMovementSpeed: 0
+  currentExperience: 0
+  heroName: 
+  properName: 
 --- !u!114 &11495938
 MonoBehaviour:
   m_ObjectHideFlags: 1

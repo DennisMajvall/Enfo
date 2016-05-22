@@ -759,6 +759,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11490976, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: healthRegeneration
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490976, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: maxMana
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490976, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: manaRegeneration
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
