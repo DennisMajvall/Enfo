@@ -167,6 +167,7 @@ GameObject:
   - 114: {fileID: 11429272}
   - 54: {fileID: 5472204}
   - 114: {fileID: 11492476}
+  - 114: {fileID: 11477892}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Untagged
@@ -876,7 +877,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.184383, y: 0.4800098, z: 43.81093}
+  m_LocalPosition: {x: 20.5, y: 0.5, z: 43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1082,6 +1083,24 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &11477892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd9d2ce0401d2b48bde2b6ab640925d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: No Name
+  Level: 1
+  LevelRequirement: 0
+  Range: 5
+  AffectsLayer: 10
+  AffectsSelf: 1
+  auraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
 --- !u!114 &11492476
 MonoBehaviour:
   m_ObjectHideFlags: 1
