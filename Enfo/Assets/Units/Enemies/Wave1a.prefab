@@ -13,9 +13,8 @@ GameObject:
   - 114: {fileID: 11441606}
   - 114: {fileID: 11483094}
   - 65: {fileID: 6581116}
-  - 114: {fileID: 11496192}
   - 114: {fileID: 11482474}
-  - 114: {fileID: 11436406}
+  - 114: {fileID: 11479236}
   m_Layer: 9
   m_Name: Wave1a
   m_TagString: Untagged
@@ -81,17 +80,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11436406
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda88ac8650bd4c479fc3591f498ff95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11441606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +92,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 142628, guid: 05b1f01a8ce9d5a438f892a0f7a33d43, type: 2}
+--- !u!114 &11479236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda88ac8650bd4c479fc3591f498ff95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  healthRegeneration: 0
+  currentMana: 0
+  maxMana: 0
+  currentMovementSpeed: 0
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,18 +157,6 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!114 &11496192
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0be12c626ab47ca4fad59fd6369c0e13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
