@@ -366,6 +366,10 @@ Prefab:
       propertyPath: heroToFollow
       value: 
       objectReference: {fileID: 1354249761}
+    - target: {fileID: 11440482, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
+      propertyPath: HeroToFollow
+      value: 
+      objectReference: {fileID: 1354249761}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
   m_IsPrefabParent: 0

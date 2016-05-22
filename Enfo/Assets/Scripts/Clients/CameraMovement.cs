@@ -4,10 +4,11 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour
 {
 	[Range(5.0f, 100.0f)]
-	public float speed = 15f;
-    public GameObject heroToFollow;
+	public float Speed = 15f;
 
-    bool isSpaceDown = false;
+	public GameObject HeroToFollow;
+
+	bool isFollowingHero;
 	GameObject cameraPos;
 	Vector3 delta;
 
@@ -29,9 +30,18 @@ public class CameraMovement : MonoBehaviour
 			delta.z -= 1;
 	}
 
+	void UpdateFollowKey()
+	{
+		if (Input.GetKeyDown("space"))
+			isFollowingHero = true;
+		else if (Input.GetKeyUp("space"))
+			isFollowingHero = false;
+	}
+
 	void UpdateKeys()
 	{
 		UpdateArrowKeys();
+		UpdateFollowKey();
 	}
 
 	void UpdateMouse()
@@ -41,39 +51,28 @@ public class CameraMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		// Reset
+		delta = Vector3.zero;
 
-        if (Input.GetKeyDown("space"))
-        {
-            isSpaceDown = true;
-        }
+		// Detect changes
+		UpdateKeys();
+		UpdateMouse();
 
-        if (Input.GetKeyUp("space"))
-        {
-            isSpaceDown = false;
-        }
+		// Apply changes
+		if (isFollowingHero) {
+			const float zOffset = 5f;
 
+			Vector3 followPos = HeroToFollow.transform.position;
+			followPos.y = cameraPos.transform.position.y;
+			followPos.z -= zOffset;
 
-        if (isSpaceDown)
-        {
-            delta = Vector3.zero;
-            delta.x = heroToFollow.transform.position.x;
-            delta.y = cameraPos.transform.position.y;
-            delta.z = heroToFollow.transform.position.z - 5;
-            cameraPos.transform.position = delta;
-        }
-        else
-        {
-            delta = Vector3.zero;
-
-            UpdateKeys();
-            UpdateMouse();
-
-            if (delta != Vector3.zero)
-            {
-                delta *= speed * Time.deltaTime;
-                cameraPos.transform.position += delta;
-            }
-        }
+			cameraPos.transform.position = followPos;
+		} else {
+			if (delta != Vector3.zero) {
+				delta *= Speed * Time.deltaTime;
+				cameraPos.transform.position += delta;
+			}
+		}
 
 
 	}
