@@ -36,7 +36,7 @@ public class MoveOrder : Order
 			return;
 		}
 		
-		float currentSpeed = stats.CurrentMovementSpeed * Time.deltaTime;
+		float currentSpeed = stats.MovementSpeed * Time.deltaTime;
 
 		if (currentSpeed == 0f)
 			return;
