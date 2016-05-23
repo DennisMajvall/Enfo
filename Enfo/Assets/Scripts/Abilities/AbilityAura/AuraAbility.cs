@@ -1,44 +1,48 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class AuraAbility : Ability
 {
 	public float Range = -1f;
-	public int AffectsLayer = LayerNames.Ally10;
 	public bool AffectsSelf = true;
-	public GameObject auraGameObject;
+	public List<int> AffectsLayers;
+	public GameObject AuraGameObject;
 
 	// Override this
 	protected virtual void OnAuraEnter(Collider other)
 	{
-		if (other.gameObject.layer == AffectsLayer) {
-			Debug.Log(other.gameObject.name + " entered the Aura of " + Name);
+		foreach (int i in AffectsLayers) {
+			if (other.gameObject.layer == i) {
+				Debug.Log(other.gameObject.name + " entered an Aura.");
+			}
 		}
 	}
 
 	// Override this
 	protected virtual void OnAuraExit(Collider other)
 	{
-		if (other.gameObject.layer == AffectsLayer) {
-			Debug.Log(other.gameObject.name + " exited the Aura of " + Name);
+		foreach (int i in AffectsLayers) {
+			if (other.gameObject.layer == i) {
+				Debug.Log(other.gameObject.name + " exited an Aura.");
+			}
 		}
 	}
 
 	// Private:
-	SphereCollider sphere;
-	AuraTriggerScript auraScript;
+	//SphereCollider sphere;
+	//AuraTriggerScript auraScript;
 
 	void Start()
 	{
 		if (Range > 0f) {
-			auraGameObject = GameObject.Instantiate<GameObject>(auraGameObject);
-			auraGameObject.transform.parent = gameObject.transform;
-			auraGameObject.transform.localPosition = Vector3.zero;
+			AuraGameObject = GameObject.Instantiate<GameObject>(AuraGameObject);
+			AuraGameObject.transform.parent = gameObject.transform;
+			AuraGameObject.transform.localPosition = Vector3.zero;
 
-			sphere = auraGameObject.GetComponent<SphereCollider>();
+			SphereCollider sphere = AuraGameObject.GetComponent<SphereCollider>();
 			sphere.radius = Range;
 
-			auraScript = auraGameObject.GetComponent<AuraTriggerScript>();
+			AuraTriggerScript auraScript = AuraGameObject.GetComponent<AuraTriggerScript>();
 			auraScript.OnEnter = OnAuraEnter;
 			auraScript.OnExit = OnAuraExit;
 		}

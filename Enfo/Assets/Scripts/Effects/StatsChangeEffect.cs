@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StatsChangeEffect : HeroStats
+public class StatsChangeEffect : Effect
 {
+	public HeroStats stats = new HeroStats();
+
 	void Start()
 	{
-		ChangeHealthRegeneration(3f);
-	}
-	
-	void Update()
-	{
+		stats.enabled = false;
+		stats.ChangeHealthRegeneration(3f);
 	}
 }
