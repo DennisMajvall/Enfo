@@ -13,6 +13,22 @@ public static class LayerNames
 	public const int Targetable9 = 9;
 	public const int Ally10 = 10;
 };
+
+public enum LayerEnum
+{
+	Default,
+	TransparentFX,
+	IgnoreRaycast,
+	Blank,
+	Water,
+	UI,
+	Blank6,
+	Blank7,
+	Terrainm,
+	Targetable,
+	Ally
+}
+
 public static class LayerMasks
 {
 	public const int Default0		= 1 << LayerNames.Default0;

@@ -129,6 +129,35 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 457026, guid: f0857194387f571488715b7cfb5e15d4, type: 2}
   m_PrefabInternal: {fileID: 664883844}
+--- !u!1 &357388375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 357388377}
+  m_Layer: 1
+  m_Name: Effects
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &357388377
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357388375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.5, y: 0.5, z: 43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 529011740}
+  m_Father: {fileID: 906567035}
+  m_RootOrder: 2
 --- !u!1 &368499528
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +389,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471288, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11440482, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
       propertyPath: heroToFollow
@@ -373,6 +402,59 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53e365f7c314d7146ab80f17d421dee3, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &529011738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 529011740}
+  - 114: {fileID: 529011739}
+  m_Layer: 1
+  m_Name: CourageEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &529011739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 529011738}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee95468b08a45b4086062028e381507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    currentHealth: 0
+    maxHealth: 0
+    healthRegeneration: 4
+    currentMana: 0
+    maxMana: 0
+    manaRegeneration: 0
+    movementSpeed: 0
+    goldDropped: 0
+    damage: 0
+    projectileSpeed: 0
+    range: 0
+    acquisitionRange: 0
+--- !u!4 &529011740
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 529011738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 357388377}
+  m_RootOrder: 0
 --- !u!1001 &664883844
 Prefab:
   m_ObjectHideFlags: 0
@@ -462,6 +544,10 @@ Prefab:
       propertyPath: m_Name
       value: Teleporter East Ledge
       objectReference: {fileID: 0}
+    - target: {fileID: 137724, guid: 489c26b2a433e18488bd65468fa9b158, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 489c26b2a433e18488bd65468fa9b158, type: 2}
   m_IsPrefabParent: 0
@@ -493,6 +579,8 @@ Transform:
   m_Children:
   - {fileID: 960702599}
   - {fileID: 348453399}
+  - {fileID: 357388377}
+  - {fileID: 1302866207}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1 &960702598
@@ -732,6 +820,54 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400956, guid: a04ff4a6ae8d7ca409c8400efed232b8, type: 2}
   m_PrefabInternal: {fileID: 1216977276}
+--- !u!1 &1302866206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1302866207}
+  - 114: {fileID: 1302866208}
+  m_Layer: 1
+  m_Name: Abilities
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1302866207
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302866206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 906567035}
+  m_RootOrder: 3
+--- !u!114 &1302866208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302866206}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd9d2ce0401d2b48bde2b6ab640925d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 0
+  LevelRequirement: 0
+  Effects:
+  - {fileID: 529011739}
+  Range: -1
+  AffectsSelf: 1
+  AffectsLayers: 0a000000
+  AuraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
 --- !u!1001 &1354249760
 Prefab:
   m_ObjectHideFlags: 0
@@ -771,10 +907,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11114128, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 11402032, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: Effects.Array.data[0]
+      value: 
+      objectReference: {fileID: 529011739}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
   m_IsPrefabParent: 0

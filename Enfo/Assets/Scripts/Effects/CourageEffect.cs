@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StatsChangeEffect : Effect
+public class CourageEffect : StatsChangeEffect
 {
-	public UnitStats stats;
 
 	void Start()
 	{

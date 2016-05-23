@@ -3,22 +3,18 @@ using System.Collections;
 
 public class Courage : AuraAbility
 {
-	void Awake()
-	{
-		Name = "Courage";
-	}
-
 	protected override void OnAuraEnter(Collider other)
 	{
-		if (other.gameObject.layer == AffectsLayer) {
-			Debug.Log(other.gameObject.name + " entered the Courage Aura.");
+		CourageEffect component = other.gameObject.AddComponent<CourageEffect>();
+		foreach(CourageEffect fx in Effects) {
+			component.stats = fx.stats;
 		}
+		Debug.Log(other.gameObject.name + " entered the Courage Aura.");
 	}
 
 	protected override void OnAuraExit(Collider other)
 	{
-		if (other.gameObject.layer == AffectsLayer) {
-			Debug.Log(other.gameObject.name + " exited the Courage Aura.");
-		}
+		Destroy(other.gameObject.GetComponent<CourageEffect>());
+		Debug.Log(other.gameObject.name + " exited the Courage Aura.");
 	}
 }

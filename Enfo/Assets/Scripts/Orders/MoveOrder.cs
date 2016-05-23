@@ -6,7 +6,7 @@ public class MoveOrder : Order
 	Path path;
 	int currentCheckpoint = 0;
 
-	public MoveOrder(UnitStats stats, Vector3 currentPosition)
+	public MoveOrder(UnitStatsComponent stats, Vector3 currentPosition)
 	{
 		this.stats = stats;
 		this.currentPosition = currentPosition;

@@ -20,7 +20,7 @@ public class AttackOrder : Order
 	float timeSinceMoveOrdered = 0f;
 	float moveOrderInterval = 3f;
 
-	public AttackOrder(UnitStats stats, Vector3 currentPosition, GameObject target, Seeker seeker)
+	public AttackOrder(UnitStatsComponent stats, Vector3 currentPosition, GameObject target, Seeker seeker)
 	{
 		this.stats = stats;
 		this.currentPosition = currentPosition;

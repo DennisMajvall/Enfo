@@ -16,7 +16,7 @@ public class HomingProjectile : ProjectileBehaviour
 		float currentSpeed = Speed * Time.deltaTime;
 
 		if (currentSpeed >= distanceLeft) {
-			Target.GetComponent<UnitStats>().ChangeHealth(-Damage);
+			Target.GetComponent<UnitStatsComponent>().ChangeHealth(-Damage);
 			Destroy(gameObject);
 			return;
 		}

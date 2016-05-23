@@ -12,7 +12,7 @@ public class AttackMoveOrder : Order
 	float currentTargetingCooldown = 0f;
 	const float targetingCooldown = 0.2f;
 
-	public AttackMoveOrder(UnitStats stats, Vector3 currentPosition, Seeker seeker, Vector3 targetPosition)
+	public AttackMoveOrder(UnitStatsComponent stats, Vector3 currentPosition, Seeker seeker, Vector3 targetPosition)
 	{
 		this.stats = stats;
 		this.currentPosition = currentPosition;

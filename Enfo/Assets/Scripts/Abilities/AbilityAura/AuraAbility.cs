@@ -1,47 +1,50 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class AuraAbility : Ability
 {
 	public float Range = -1f;
-	public int AffectsLayer = LayerNames.Ally10;
 	public bool AffectsSelf = true;
-	public GameObject auraGameObject;
+	public List<LayerEnum> AffectsLayers;
+	public GameObject AuraGameObject;
 
 	// Override this
-	protected virtual void OnAuraEnter(Collider other)
-	{
-		if (other.gameObject.layer == AffectsLayer) {
-			Debug.Log(other.gameObject.name + " entered the Aura of " + Name);
-		}
-	}
+	protected virtual void OnAuraEnter(Collider other) { }
 
 	// Override this
-	protected virtual void OnAuraExit(Collider other)
-	{
-		if (other.gameObject.layer == AffectsLayer) {
-			Debug.Log(other.gameObject.name + " exited the Aura of " + Name);
-		}
-	}
+	protected virtual void OnAuraExit(Collider other) { }
+
 
 	// Private:
-	SphereCollider sphere;
-	AuraTriggerScript auraScript;
 
 	void Start()
 	{
 		if (Range > 0f) {
-			auraGameObject = GameObject.Instantiate<GameObject>(auraGameObject);
-			auraGameObject.transform.parent = gameObject.transform;
-			auraGameObject.transform.localPosition = Vector3.zero;
+			AuraGameObject = GameObject.Instantiate<GameObject>(AuraGameObject);
+			AuraGameObject.transform.parent = gameObject.transform;
+			AuraGameObject.transform.localPosition = Vector3.zero;
 
-			sphere = auraGameObject.GetComponent<SphereCollider>();
+			SphereCollider sphere = AuraGameObject.GetComponent<SphereCollider>();
 			sphere.radius = Range;
 
-			auraScript = auraGameObject.GetComponent<AuraTriggerScript>();
-			auraScript.OnEnter = OnAuraEnter;
-			auraScript.OnExit = OnAuraExit;
+			AuraTriggerScript auraScript = AuraGameObject.GetComponent<AuraTriggerScript>();
+			auraScript.OnEnter = SendOnAuraEnter;
+			auraScript.OnExit = SendOnAuraExit;
 		}
+	}
+
+	void SendOnAuraEnter(Collider other)
+	{
+		foreach (int i in AffectsLayers)
+			if (other.gameObject.layer == i)
+				OnAuraEnter(other);
+	}
+
+	void SendOnAuraExit(Collider other)
+	{
+		foreach (int i in AffectsLayers)
+			if (other.gameObject.layer == i)
+				OnAuraExit(other);
 	}
 
 }
