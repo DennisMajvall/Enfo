@@ -16,8 +16,17 @@ public class HomingProjectile : ProjectileBehaviour
 		float currentSpeed = Speed * Time.deltaTime;
 
 		if (currentSpeed >= distanceLeft) {
-			Target.GetComponent<UnitStatsComponent>().ChangeHealth(-Damage);
-			Destroy(gameObject);
+
+			float evasionChance = Target.GetComponent<UnitStatsComponent> ().EvasionChance;
+
+			if (evasionChance > 0f && Random.value < evasionChance) {
+				// Projectile missed the target
+				//print ("evaded dmg");
+			} else {
+				// Projectile hit the target
+				Target.GetComponent<UnitStatsComponent> ().ChangeHealth (-Damage);
+			}
+			Destroy (gameObject);
 			return;
 		}
 

@@ -14,6 +14,7 @@ public class UnitStats
 
 	public float movementSpeed;
 	public float goldDropped;
+	public float evasionChance; // Between 0.0 - 1.0
 
 	public float damage;
 	public float projectileSpeed;
@@ -27,23 +28,24 @@ public class UnitStatsComponent : MonoBehaviour
 	[SerializeField] UnitStats unitStats;
 
 	// Getters
-	public float CurrentHealth { get { return unitStats.currentHealth; } }
-	public float MaxHealth { get { return unitStats.maxHealth; } }
+	public float CurrentHealth 		{ get { return unitStats.currentHealth; } }
+	public float MaxHealth 			{ get { return unitStats.maxHealth; } }
 	public float HealthRegeneration { get { return unitStats.healthRegeneration; } }
 
-	public float CurrentMana { get { return unitStats.currentMana; } }
-	public float MaxMana { get { return unitStats.maxMana; } }
-	public float ManaRegeneration { get { return unitStats.manaRegeneration; } }
+	public float CurrentMana 		{ get { return unitStats.currentMana; } }
+	public float MaxMana 			{ get { return unitStats.maxMana; } }
+	public float ManaRegeneration 	{ get { return unitStats.manaRegeneration; } }
 
-	public float MovementSpeed { get { return unitStats.movementSpeed; } }
-	public float GoldDropped { get { return unitStats.goldDropped; } }
+	public float MovementSpeed		{ get { return unitStats.movementSpeed; } }
+	public float GoldDropped 		{ get { return unitStats.goldDropped; } }
+	public float EvasionChance		{ get { return unitStats.evasionChance; } }
 
-	public float Damage { get { return unitStats.damage; } }
-	public float ProjectileSpeed { get { return unitStats.projectileSpeed; } }
-	public float Range { get { return unitStats.range; } }
-	public float AcquisitionRange { get { return unitStats.acquisitionRange; } }
+	public float Damage 			{ get { return unitStats.damage; } }
+	public float ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
+	public float Range 				{ get { return unitStats.range; } }
+	public float AcquisitionRange 	{ get { return unitStats.acquisitionRange; } }
 
-	public bool IsDead { get { return CurrentHealth <= 0f; } }
+	public bool IsDead 				{ get { return CurrentHealth <= 0f; } }
 
 	// Changers
 	public void ChangeHealth(float delta)
@@ -51,19 +53,24 @@ public class UnitStatsComponent : MonoBehaviour
 		unitStats.currentHealth += delta;
 
 		if (IsDead) {
+			// Give gold to killing player
 			GameObject client = GameObject.Find("Client");
 			client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
+
+			// and destroy
 			Destroy(gameObject);
 		} else if (CurrentHealth > MaxHealth) {
 			unitStats.currentHealth = unitStats.maxHealth;
 		}
 	}
 
-	public void ChangeMaxHealth(float delta) { unitStats.maxHealth += delta; }
+	public void ChangeMaxHealth(float delta) 			{ unitStats.maxHealth += delta; }
 
-	public void ChangeHealthRegeneration(float delta) { unitStats.healthRegeneration += delta; }
+	public void ChangeHealthRegeneration(float delta) 	{ unitStats.healthRegeneration += delta; }
 
-	public void ChangeManaRegeneration(float delta) { unitStats.manaRegeneration += delta; }
+
+
+	public void ChangeManaRegeneration(float delta) 	{ unitStats.manaRegeneration += delta; }
 
 	public void ChangeMana(float delta)
 	{
@@ -75,19 +82,25 @@ public class UnitStatsComponent : MonoBehaviour
 			unitStats.currentMana = unitStats.maxMana;
 	}
 
-	public void ChangeMaxMana(float delta) { unitStats.maxMana += delta; }
+	public void ChangeMaxMana(float delta) 				{ unitStats.maxMana += delta; }
 
-	public void ChangeMovementSpeed(float delta) { unitStats.movementSpeed += delta; }
 
-	public void ChangeGoldDropped(float delta) { unitStats.goldDropped += delta; }
 
-	public void ChangeDamage(float delta) { unitStats.damage += delta; }
+	public void ChangeMovementSpeed(float delta) 		{ unitStats.movementSpeed += delta; }
 
-	public void ChangeProjectileSpeed(float delta) { unitStats.projectileSpeed += delta; }
+	public void ChangeGoldDropped(float delta) 			{ unitStats.goldDropped += delta; }
 
-	public void ChangeRange(float delta) { unitStats.range += delta; }
+	public void ChangeEvasionChance(float delta)		{ unitStats.evasionChance += delta; }
 
-	public void ChangeAcquisionRange(float delta) { unitStats.acquisitionRange += delta; }
+
+
+	public void ChangeDamage(float delta) 				{ unitStats.damage += delta; }
+
+	public void ChangeProjectileSpeed(float delta) 		{ unitStats.projectileSpeed += delta; }
+
+	public void ChangeRange(float delta) 				{ unitStats.range += delta; }
+
+	public void ChangeAcquisionRange(float delta) 		{ unitStats.acquisitionRange += delta; }
 
 	// Update
 	void Update()
