@@ -109,7 +109,8 @@ MonoBehaviour:
   currentMana: 0
   maxMana: 0
   manaRegeneration: 0
-  currentMovementSpeed: 5
+  movementSpeed: 5
+  goldDropped: 4
   damage: 20
   projectileSpeed: 20
   range: 4
