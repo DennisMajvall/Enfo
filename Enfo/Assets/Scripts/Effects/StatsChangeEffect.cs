@@ -3,11 +3,9 @@ using System.Collections;
 
 public class StatsChangeEffect : Effect
 {
-	public HeroStats stats = new HeroStats();
+	public UnitStats stats;
 
 	void Start()
 	{
-		stats.enabled = false;
-		stats.ChangeHealthRegeneration(3f);
 	}
 }

@@ -10,7 +10,7 @@ public class OrderBehaviour : MonoBehaviour
 	List<Order> orders;
 	IdleAttackOrder idleAttackOrder;
 	Seeker seeker;
-	UnitStats stats;
+	UnitStatsComponent stats;
 
 	public void Stop()
 	{
@@ -20,7 +20,7 @@ public class OrderBehaviour : MonoBehaviour
 	void Start()
 	{
 		seeker = GetComponent<Seeker>();
-		stats = GetComponent<UnitStats>();
+		stats = GetComponent<UnitStatsComponent>();
 		orders = new List<Order>();
 		idleAttackOrder = new IdleAttackOrder(stats, transform.position, seeker);
 		idleAttackOrder.SetProjectilePrefab(projectilePrefab);

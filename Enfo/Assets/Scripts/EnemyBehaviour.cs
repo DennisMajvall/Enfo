@@ -8,13 +8,13 @@ public class EnemyBehaviour : MonoBehaviour
 	Seeker seeker;
 	GameObject goal_go;
 	AttackMoveOrder attackMoveOrder;
-	UnitStats stats;
+	UnitStatsComponent stats;
 	
 	// Use this for initialization
 	void Start()
 	{
 		seeker = GetComponent<Seeker>();
-		stats = GetComponent<UnitStats>();
+		stats = GetComponent<UnitStatsComponent>();
 		goal_go = GameObject.FindGameObjectWithTag("goal");
 
 		if (!goal_go) {

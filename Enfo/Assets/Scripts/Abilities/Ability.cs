@@ -14,19 +14,7 @@ public class Ability : MonoBehaviour
 	protected List<Action> OnAttackActions = new List<Action>();
 	protected List<Action> OnAttackedActions = new List<Action>();
 	protected List<Action> OnActivation = new List<Action>();
-
-	// Use this for initialization
-	void Start()
-	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
-
+	
 	public void DoOnAttackActions()
 	{
 		foreach (Action action in OnAttackActions) {

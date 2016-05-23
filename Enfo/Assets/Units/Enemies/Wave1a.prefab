@@ -103,18 +103,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda88ac8650bd4c479fc3591f498ff95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
-  healthRegeneration: 1
-  currentMana: 0
-  maxMana: 0
-  manaRegeneration: 0
-  movementSpeed: 5
-  goldDropped: 4
-  damage: 20
-  projectileSpeed: 20
-  range: 4
-  acquisitionRange: 10
+  unitStats:
+    currentHealth: 100
+    maxHealth: 100
+    healthRegeneration: 4
+    currentMana: 0
+    maxMana: 0
+    manaRegeneration: 0
+    movementSpeed: 4
+    goldDropped: 4
+    damage: 20
+    projectileSpeed: 20
+    range: 2
+    acquisitionRange: 8
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1
