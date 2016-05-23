@@ -429,19 +429,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee95468b08a45b4086062028e381507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    currentHealth: 0
-    maxHealth: 0
-    healthRegeneration: 4
-    currentMana: 0
-    maxMana: 0
-    manaRegeneration: 0
-    movementSpeed: 0
-    goldDropped: 0
-    damage: 0
-    projectileSpeed: 0
-    range: 0
-    acquisitionRange: 0
+  HealthRegen:
+  - 4
+  - 4
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  MovementSpeed:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!4 &529011740
 Transform:
   m_ObjectHideFlags: 0
