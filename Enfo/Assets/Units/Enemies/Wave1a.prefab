@@ -112,6 +112,9 @@ MonoBehaviour:
     manaRegeneration: 0
     movementSpeed: 4
     goldDropped: 4
+    evasionChance: 0
+    critChance: 0.5
+    critMultiplier: 1
     damage: 20
     projectileSpeed: 20
     range: 2

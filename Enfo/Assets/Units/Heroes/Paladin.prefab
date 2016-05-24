@@ -1114,12 +1114,16 @@ MonoBehaviour:
     manaRegeneration: 10
     movementSpeed: 5
     goldDropped: 0
+    evasionChance: 0
+    critChance: 0.4
+    critMultiplier: 1
     damage: 60
     projectileSpeed: 20
     range: 8
     acquisitionRange: 8
   heroStats:
     experience: 0
+    level: 0
     heroName: Paladin
     properName: 
 --- !u!114 &11495938

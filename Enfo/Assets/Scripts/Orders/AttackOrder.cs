@@ -6,6 +6,7 @@ public class AttackOrder : Order
 	public GameObject projectilePrefab;
 
 	public GameObject target;
+	public GameObject thrower;
 	
 	MoveOrder moveOrder;
 	Seeker seeker;
@@ -20,8 +21,9 @@ public class AttackOrder : Order
 	float timeSinceMoveOrdered = 0f;
 	float moveOrderInterval = 3f;
 
-	public AttackOrder(UnitStatsComponent stats, Vector3 currentPosition, GameObject target, Seeker seeker)
+	public AttackOrder(UnitStatsComponent stats, Vector3 currentPosition, GameObject target, Seeker seeker, GameObject self)
 	{
+		this.thrower = self;
 		this.stats = stats;
 		this.currentPosition = currentPosition;
 		this.target = target;
@@ -65,6 +67,7 @@ public class AttackOrder : Order
 
 			HomingProjectile projectileScript = projectile.GetComponent<HomingProjectile>();
 			projectileScript.Target = target;
+			projectileScript.Thrower = thrower;
 			projectileScript.Damage = stats.Damage;
 			projectileScript.Speed = stats.ProjectileSpeed;
 		}

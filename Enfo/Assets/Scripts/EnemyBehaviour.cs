@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
 			Debug.Log("Could not find goal.");
 		}
 
-		attackMoveOrder = new AttackMoveOrder(stats, transform.position, seeker, goal_go.transform.position);
+		attackMoveOrder = new AttackMoveOrder(stats, transform.position, seeker, goal_go.transform.position, gameObject);
 		attackMoveOrder.SetProjectilePrefab(projectilePrefab);
 		attackMoveOrder.enemyLayer = LayerMasks.Ally10;
 	}

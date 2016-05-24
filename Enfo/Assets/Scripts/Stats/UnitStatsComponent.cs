@@ -14,7 +14,10 @@ public class UnitStats
 
 	public float movementSpeed;
 	public float goldDropped;
+
 	public float evasionChance; // Between 0.0 - 1.0
+	public float critChance;
+	public float critMultiplier;
 
 	public float damage;
 	public float projectileSpeed;
@@ -42,7 +45,10 @@ public class UnitStatsComponent : MonoBehaviour
 	public float MovementSpeed		{ get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
 	public float MovementSpeedPercentage	{ get { return unitStats.movementSpeedPercentage; } }
 	public float GoldDropped 		{ get { return unitStats.goldDropped; } }
+
 	public float EvasionChance		{ get { return unitStats.evasionChance; } }
+	public float CritChance			{ get { return unitStats.critChance; } }
+	public float CritMultiplier		{ get { return unitStats.critMultiplier; } }
 
 	public float Damage 			{ get { return unitStats.damage; } }
 	public float ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
@@ -95,7 +101,13 @@ public class UnitStatsComponent : MonoBehaviour
 
 	public void ChangeGoldDropped(float delta) 			{ unitStats.goldDropped += delta; }
 
+
+
 	public void ChangeEvasionChance(float delta)		{ unitStats.evasionChance += delta; }
+
+	public void ChangeCritChance(float delta)			{ unitStats.critChance += delta; }
+
+	public void ChangeCritMultiplier(float delta)		{ unitStats.critMultiplier += delta; }
 
 
 
