@@ -6,7 +6,7 @@ public class Courage : AuraAbility
 	protected override void OnAuraEnter(Collider other)
 	{
 		CourageEffect component = other.gameObject.AddComponent<CourageEffect>();
-		component.ApplyEffect();
+		component.ApplyEffect(Level);
 		Debug.Log(other.gameObject.name + " entered the Courage Aura.");
 	}
 
