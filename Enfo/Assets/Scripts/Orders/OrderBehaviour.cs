@@ -22,7 +22,7 @@ public class OrderBehaviour : MonoBehaviour
 		seeker = GetComponent<Seeker>();
 		stats = GetComponent<UnitStatsComponent>();
 		orders = new List<Order>();
-		idleAttackOrder = new IdleAttackOrder(stats, transform.position, seeker);
+		idleAttackOrder = new IdleAttackOrder(stats, transform.position, seeker, gameObject);
 		idleAttackOrder.SetProjectilePrefab(projectilePrefab);
 		var go = GameObject.Find("StartPos");
 		transform.position = go.transform.position;
@@ -49,7 +49,7 @@ public class OrderBehaviour : MonoBehaviour
 			if (!queue_order)
 				orders.Clear();
 
-			AttackMoveOrder attack_move_order = new AttackMoveOrder(stats, transform.position, seeker, hit.point);
+			AttackMoveOrder attack_move_order = new AttackMoveOrder(stats, transform.position, seeker, hit.point, gameObject);
 			attack_move_order.SetProjectilePrefab(projectilePrefab);
 			orders.Add(attack_move_order);
 		}
@@ -61,7 +61,7 @@ public class OrderBehaviour : MonoBehaviour
 			if (!queue_order)
 				orders.Clear();
 
-			AttackOrder attack_order = new AttackOrder(stats, gameObject.transform.position, hit.collider.gameObject, seeker);
+			AttackOrder attack_order = new AttackOrder(stats, gameObject.transform.position, hit.collider.gameObject, seeker, gameObject);
 			attack_order.projectilePrefab = projectilePrefab;
 			orders.Add(attack_order);
 		}

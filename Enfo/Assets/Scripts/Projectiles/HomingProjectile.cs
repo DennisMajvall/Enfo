@@ -4,6 +4,7 @@ using System.Collections;
 public class HomingProjectile : ProjectileBehaviour
 {
 	public GameObject Target;
+	public GameObject Thrower; // the unit who threw/shot/cast the projectile at the target
 	
 	void Update()
 	{
@@ -24,6 +25,15 @@ public class HomingProjectile : ProjectileBehaviour
 				//print ("evaded dmg");
 			} else {
 				// Projectile hit the target
+
+				if (Thrower.GetComponent<UnitStatsComponent>()) {
+					print (Thrower.GetComponent<UnitStatsComponent> ().CritChance);
+				} else {
+					print ("No crit chance for thrower");
+				}
+
+
+
 				Target.GetComponent<UnitStatsComponent> ().ChangeHealth (-Damage);
 			}
 			Destroy (gameObject);
