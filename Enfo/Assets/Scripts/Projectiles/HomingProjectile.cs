@@ -21,21 +21,21 @@ public class HomingProjectile : ProjectileBehaviour
 			float evasionChance = Target.GetComponent<UnitStatsComponent> ().EvasionChance;
 
 			if (evasionChance > 0f && Random.value < evasionChance) {
-				// Projectile missed the target
-				//print ("evaded dmg");
+				// Projectile was evaded
+
 			} else {
 				// Projectile hit the target
+				float critChance = Thrower.GetComponent<UnitStatsComponent> ().CritChance;
 
-				if (Thrower.GetComponent<UnitStatsComponent>()) {
-					print (Thrower.GetComponent<UnitStatsComponent> ().CritChance);
+				if (critChance > 0f && Random.value < critChance) {
+					// Crit was successful
+					Target.GetComponent<UnitStatsComponent> ().ChangeHealth (-1 * Damage * (1 + Thrower.GetComponent<UnitStatsComponent> ().CritMultiplier));
 				} else {
-					print ("No crit chance for thrower");
+					// Crit was unsuccessful
+					Target.GetComponent<UnitStatsComponent> ().ChangeHealth (-1 * Damage);
 				}
-
-
-
-				Target.GetComponent<UnitStatsComponent> ().ChangeHealth (-Damage);
 			}
+
 			Destroy (gameObject);
 			return;
 		}
