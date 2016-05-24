@@ -17,7 +17,7 @@ public class UnitStats
 
 	public float evasionChance; // Between 0.0 - 1.0
 	public float critChance;
-	public float critMultiplier;
+	public float critExtraMultiplier;
 
 	public float damage;
 	public float projectileSpeed;
@@ -48,7 +48,7 @@ public class UnitStatsComponent : MonoBehaviour
 
 	public float EvasionChance		{ get { return unitStats.evasionChance; } }
 	public float CritChance			{ get { return unitStats.critChance; } }
-	public float CritMultiplier		{ get { return unitStats.critMultiplier; } }
+	public float CritExtraMultiplier{ get { return unitStats.critExtraMultiplier; } }
 
 	public float Damage 			{ get { return unitStats.damage; } }
 	public float ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
@@ -107,7 +107,7 @@ public class UnitStatsComponent : MonoBehaviour
 
 	public void ChangeCritChance(float delta)			{ unitStats.critChance += delta; }
 
-	public void ChangeCritMultiplier(float delta)		{ unitStats.critMultiplier += delta; }
+	public void ChangeCritExtraMultiplier(float delta)	{ unitStats.critExtraMultiplier += delta; }
 
 
 
