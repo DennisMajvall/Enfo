@@ -1,13 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Effect : MonoBehaviour
+public class Effect : MonoBehaviour
 {
+	public const int NumLevels = 10;
 	protected int Level;
+	protected bool IsApplied;
 
-	public abstract void ApplyEffect(int Level = 0);
+	public void ApplyEffect(int level = 0)
+	{
+		if (level == Level)
+			return;
 
-	public abstract void RemoveEffect();
+		RemoveEffect();
+		if (level == 0)
+			return;
+		
+		Level = level;
+		OnApplyEffect(level); // Override this method in your inherited class
+		IsApplied = true;
+	}
 
-	public abstract void SetLevel(int level);
+	public void RemoveEffect()
+	{
+		if (IsApplied) {
+			OnRemoveEffect(); // Override this method in your inherited class
+			IsApplied = false;
+		}
+	}
+
+	// Override this method in your inherited class
+	protected virtual void OnApplyEffect(int level = 0)
+	{
+		Debug.LogError("Effect.OnApplyEffect(int) must be overriden by the inherited class.");
+		throw new System.NotImplementedException();
+	}
+
+	// Override this method in your inherited class
+	protected virtual void OnRemoveEffect()
+	{
+		Debug.LogError("Effect.OnRemoveEffect() must be overriden by the inherited class.");
+		throw new System.NotImplementedException();
+	}
 }

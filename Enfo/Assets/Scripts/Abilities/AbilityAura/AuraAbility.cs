@@ -31,6 +31,10 @@ public class AuraAbility : Ability
 			auraScript.OnEnter = SendOnAuraEnter;
 			auraScript.OnExit = SendOnAuraExit;
 		}
+
+		if (AffectsSelf) {
+			OnAuraEnter(GetComponent<Collider>());
+		}
 	}
 
 	void SendOnAuraEnter(Collider other)

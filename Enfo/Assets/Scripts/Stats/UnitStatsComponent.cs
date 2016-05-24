@@ -20,6 +20,9 @@ public class UnitStats
 	public float projectileSpeed;
 	public float range;
 	public float acquisitionRange;
+
+	[HideInInspector]
+	public float movementSpeedPercentage = 1.0f;
 }
 
 public class UnitStatsComponent : MonoBehaviour
@@ -36,7 +39,8 @@ public class UnitStatsComponent : MonoBehaviour
 	public float MaxMana 			{ get { return unitStats.maxMana; } }
 	public float ManaRegeneration 	{ get { return unitStats.manaRegeneration; } }
 
-	public float MovementSpeed		{ get { return unitStats.movementSpeed; } }
+	public float MovementSpeed		{ get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
+	public float MovementSpeedPercentage	{ get { return unitStats.movementSpeedPercentage; } }
 	public float GoldDropped 		{ get { return unitStats.goldDropped; } }
 	public float EvasionChance		{ get { return unitStats.evasionChance; } }
 
@@ -87,6 +91,7 @@ public class UnitStatsComponent : MonoBehaviour
 
 
 	public void ChangeMovementSpeed(float delta) 		{ unitStats.movementSpeed += delta; }
+	public void ChangeMovementSpeedPercentage(float delta)	{ unitStats.movementSpeedPercentage += delta; }
 
 	public void ChangeGoldDropped(float delta) 			{ unitStats.goldDropped += delta; }
 
