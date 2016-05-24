@@ -6,19 +6,28 @@ public class Ability : MonoBehaviour
 {
 	public int Level = 0;
 	public int LevelRequirement = 0;
-	public List<Effect> Effects;
-
-	//public float CurrentCooldown = 0f;
-	//public float MaxCooldown = 0f;
-
-	protected List<Action> OnAttackActions = new List<Action>();
-	protected List<Action> OnAttackedActions = new List<Action>();
-	protected List<Action> OnActivation = new List<Action>();
+	public int NumLevels = 10;
 	
-	public void DoOnAttackActions()
+	
+	// Override this
+	protected virtual void OnSetLevel(int level) { }
+
+
+	public void IncrementLevel()
 	{
-		foreach (Action action in OnAttackActions) {
-			action();
-		}
+		SetLevel(Level + 1);
+	}
+
+	public void DecrementLevel()
+	{
+		SetLevel(Level - 1);
+	}
+
+	public void SetLevel(int level)
+	{
+		Debug.Assert(level <= NumLevels && level >= 0);
+
+		OnSetLevel(level);
+		Level = level;
 	}
 }

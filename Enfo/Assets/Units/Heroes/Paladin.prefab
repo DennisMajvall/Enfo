@@ -1029,9 +1029,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Level: 1
   LevelRequirement: 0
-  Effects:
-  - {fileID: 0}
-  Range: 5
+  NumLevels: 10
+  Range: 1
   AffectsSelf: 1
   AffectsLayers: 0a000000
   AuraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
@@ -1114,12 +1113,15 @@ MonoBehaviour:
     manaRegeneration: 10
     movementSpeed: 5
     goldDropped: 0
+    evasionChance: 0
     damage: 60
     projectileSpeed: 20
     range: 8
     acquisitionRange: 8
+    movementSpeedPercentage: 1
   heroStats:
     experience: 0
+    level: 0
     heroName: Paladin
     properName: 
 --- !u!114 &11495938
