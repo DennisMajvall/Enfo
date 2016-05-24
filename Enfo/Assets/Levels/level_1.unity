@@ -424,33 +424,33 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 529011738}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ee95468b08a45b4086062028e381507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HealthRegen:
+  - 1
+  - 2
+  - 3
   - 4
-  - 4
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  MovementSpeed:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  MovementSpeedPercentage:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8000001
+  - 2
 --- !u!4 &529011740
 Transform:
   m_ObjectHideFlags: 0
@@ -920,6 +920,10 @@ Prefab:
       propertyPath: Effects.Array.data[0]
       value: 
       objectReference: {fileID: 529011739}
+    - target: {fileID: 11402032, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: Level
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
   m_IsPrefabParent: 0
