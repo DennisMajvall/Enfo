@@ -12,7 +12,7 @@ public class Effect : MonoBehaviour
 			return;
 
 		RemoveEffect();
-		if (NumLevels > 1 && level < 1 || level >= NumLevels)
+		if (NumLevels > 1 && level < 1 || level > NumLevels)
 			return;
 		
 		Level = level;

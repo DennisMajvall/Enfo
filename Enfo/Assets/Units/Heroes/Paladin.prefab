@@ -168,7 +168,7 @@ GameObject:
   - 54: {fileID: 5472204}
   - 114: {fileID: 11470914}
   - 114: {fileID: 11402032}
-  - 114: {fileID: 11467848}
+  - 114: {fileID: 11456614}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Untagged
@@ -1055,6 +1055,24 @@ MonoBehaviour:
   subdivideEveryIter: 0
   iterations: 1
   useGraphRaycasting: 0
+--- !u!114 &11456614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e10b6cc355668149affd529a72b4914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 1
+  LevelRequirement: 0
+  NumLevels: 10
+  Range: -1
+  AffectsSelf: 1
+  AffectsLayers: 
+  AuraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
 --- !u!114 &11463206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1082,17 +1100,6 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!114 &11467848
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 587937aa74b599b44984d593d185a43b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11470914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1114,6 +1121,8 @@ MonoBehaviour:
     movementSpeed: 5
     goldDropped: 0
     evasionChance: 0
+    critChance: 0
+    critExtraMultiplier: 0
     damage: 60
     projectileSpeed: 20
     range: 8

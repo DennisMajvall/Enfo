@@ -12,14 +12,15 @@ public class AttackMoveOrder : Order
 	float currentTargetingCooldown = 0f;
 	const float targetingCooldown = 0.2f;
 
-	public AttackMoveOrder(UnitStatsComponent stats, Vector3 currentPosition, Seeker seeker, Vector3 targetPosition)
+	public AttackMoveOrder(UnitStatsComponent stats, Vector3 currentPosition, Seeker seeker, Vector3 targetPosition, GameObject attacker)
 	{
+		this.self = attacker; // the unit issuing the attack. inherited from Order
 		this.stats = stats;
 		this.currentPosition = currentPosition;
 		this.seeker = seeker;
 		this.targetPosition = targetPosition;
 
-		attackOrder = new AttackOrder(stats, currentPosition, null, seeker);
+		attackOrder = new AttackOrder(stats, currentPosition, null, seeker, self);
 		moveOrder = new MoveOrder(stats, currentPosition);
 	}
 

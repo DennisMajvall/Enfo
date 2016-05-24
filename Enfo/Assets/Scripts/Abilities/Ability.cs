@@ -25,9 +25,9 @@ public class Ability : MonoBehaviour
 
 	public void SetLevel(int level)
 	{
-		Debug.Assert(level <= NumLevels && level >= 0);
+		Debug.Assert(level <= NumLevels && level >= 0, "Ability.SetLevel is out of range, fix ASAP.");
 
-		OnSetLevel(level);
 		Level = level;
+		OnSetLevel(level);
 	}
 }

@@ -9,7 +9,10 @@ public class Courage : AuraAbility
 
 	protected override void OnAuraEnter(Collider other)
 	{
-		CourageEffect component = other.gameObject.AddComponent<CourageEffect>();
+		CourageEffect component = other.gameObject.GetComponent<CourageEffect>();
+		if (!component) {
+			component = other.gameObject.AddComponent<CourageEffect>();
+		}
 		if (!appliedEffects.Contains(component)) {
 			appliedEffects.Add(component);
 		}
@@ -33,15 +36,6 @@ public class Courage : AuraAbility
 		foreach (CourageEffect effect in appliedEffects) {
 			effect.ApplyEffect(level);
 			ChangeAuraRadius(level * radiusPerLevel);
-		}
-	}
-
-	void Update()
-	{
-		if (Input.GetKeyUp(KeyCode.U)) {
-			IncrementLevel();
-		} else if (Input.GetKeyUp(KeyCode.Q)) {
-			DecrementLevel();
 		}
 	}
 }

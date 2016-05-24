@@ -112,10 +112,14 @@ MonoBehaviour:
     manaRegeneration: 0
     movementSpeed: 4
     goldDropped: 4
+    evasionChance: 0
+    critChance: 0
+    critExtraMultiplier: 0
     damage: 20
     projectileSpeed: 20
     range: 2
     acquisitionRange: 8
+    movementSpeedPercentage: 1
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1
