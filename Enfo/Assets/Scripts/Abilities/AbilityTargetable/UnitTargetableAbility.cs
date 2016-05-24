@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitTargetableAbility : MonoBehaviour
+public class UnitTargetableAbility : Ability
 {
 
 	void Start()

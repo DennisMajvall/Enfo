@@ -3,8 +3,6 @@ using System.Collections;
 
 public class CourageEffect : Effect
 {
-	new const int NumLevels = 10;
-
 	const float healthRegenPerLevel = 1f;
 	public float[] HealthRegen = new float[NumLevels] {
 		1f * healthRegenPerLevel,
@@ -35,18 +33,18 @@ public class CourageEffect : Effect
 
 	UnitStatsComponent unitStats;
 
-	protected override void OnApplyEffect(int level = 0)
+	protected override void OnApplyEffect(int level)
 	{
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent>();
 
-		unitStats.ChangeHealthRegeneration(HealthRegen[level]);
-		unitStats.ChangeMovementSpeedPercentage(MovementSpeedPercentage[level]);
+		unitStats.ChangeHealthRegeneration(HealthRegen[level - 1]);
+		unitStats.ChangeMovementSpeedPercentage(MovementSpeedPercentage[level - 1]);
 	}
 
 	protected override void OnRemoveEffect()
 	{
-		unitStats.ChangeHealthRegeneration(-HealthRegen[Level]);
-		unitStats.ChangeMovementSpeedPercentage(-MovementSpeedPercentage[Level]);
+		unitStats.ChangeHealthRegeneration(-HealthRegen[Level - 1]);
+		unitStats.ChangeMovementSpeedPercentage(-MovementSpeedPercentage[Level - 1]);
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class AuraTriggerScript : MonoBehaviour
 {
@@ -7,6 +7,8 @@ public class AuraTriggerScript : MonoBehaviour
 
 	public TriggerAction OnEnter = null;
 	public TriggerAction OnExit = null;
+
+	List<GameObject> AffectedGameObjects;
 
 	void OnTriggerEnter(Collider other)
 	{

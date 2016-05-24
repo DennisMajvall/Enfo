@@ -3,8 +3,6 @@ using System.Collections;
 
 public class CombatMasteryEffect : Effect 
 {
-	new const int NumLevels = 10;
-
 	const float evasionPerLevel = 0.05f;
 	public float[] Evasion = new float[NumLevels] {
 		1f * evasionPerLevel,
@@ -56,15 +54,15 @@ public class CombatMasteryEffect : Effect
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent>();
 
-		unitStats.ChangeEvasionChance 		(Evasion[level]);
-		unitStats.ChangeCritChance 			(CritChance[level]);
-		unitStats.ChangeCritExtraMultiplier	(CritExtraMultiplier [level]);
+		unitStats.ChangeEvasionChance 		(Evasion[level-1]);
+		unitStats.ChangeCritChance 			(CritChance[level-1]);
+		unitStats.ChangeCritExtraMultiplier	(CritExtraMultiplier [level-1]);
 	}
 
 	protected override void OnRemoveEffect()
 	{
-		unitStats.ChangeEvasionChance		(-Evasion[Level]);
-		unitStats.ChangeCritChance			(-CritChance[Level]);
-		unitStats.ChangeCritExtraMultiplier	(-CritExtraMultiplier [Level]);
+		unitStats.ChangeEvasionChance		(-Evasion[Level-1]);
+		unitStats.ChangeCritChance			(-CritChance[Level-1]);
+		unitStats.ChangeCritExtraMultiplier	(-CritExtraMultiplier [Level-1]);
 	}
 }

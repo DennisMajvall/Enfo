@@ -15,40 +15,72 @@ public class AuraAbility : Ability
 	protected virtual void OnAuraExit(Collider other) { }
 
 
+	protected List<Collider> affectedColliders = new List<Collider>();
+
 	// Private:
+	SphereCollider sphere;
 
 	void Start()
 	{
 		if (Range > 0f) {
-			AuraGameObject = GameObject.Instantiate<GameObject>(AuraGameObject);
-			AuraGameObject.transform.parent = gameObject.transform;
-			AuraGameObject.transform.localPosition = Vector3.zero;
-
-			SphereCollider sphere = AuraGameObject.GetComponent<SphereCollider>();
-			sphere.radius = Range;
-
-			AuraTriggerScript auraScript = AuraGameObject.GetComponent<AuraTriggerScript>();
-			auraScript.OnEnter = SendOnAuraEnter;
-			auraScript.OnExit = SendOnAuraExit;
+			InitiateAura(Range);
 		}
 
 		if (AffectsSelf) {
-			OnAuraEnter(GetComponent<Collider>());
+			Collider c = GetComponent<Collider>();
+			affectedColliders.Add(c);
+			OnAuraEnter(c);
+		}
+	}
+
+	void InitiateAura(float range)
+	{
+		Range = range;
+		AuraGameObject = GameObject.Instantiate<GameObject>(AuraGameObject);
+		AuraGameObject.transform.parent = gameObject.transform;
+		AuraGameObject.transform.localPosition = Vector3.zero;
+
+		sphere = AuraGameObject.GetComponent<SphereCollider>();
+		sphere.radius = range;
+
+		AuraTriggerScript auraScript = AuraGameObject.GetComponent<AuraTriggerScript>();
+		auraScript.OnEnter = SendOnAuraEnter;
+		auraScript.OnExit = SendOnAuraExit;
+	}
+
+	// Override this (Optional)
+	protected override void OnSetLevel(int level)
+	{
+		foreach (Collider c in affectedColliders) {
+			OnAuraEnter(c.GetComponent<Collider>());
 		}
 	}
 
 	void SendOnAuraEnter(Collider other)
 	{
 		foreach (int i in AffectsLayers)
-			if (other.gameObject.layer == i)
+			if (other.gameObject.layer == i) {
+				affectedColliders.Add(other);
 				OnAuraEnter(other);
+			}
 	}
 
 	void SendOnAuraExit(Collider other)
 	{
 		foreach (int i in AffectsLayers)
-			if (other.gameObject.layer == i)
+			if (other.gameObject.layer == i) {
+				affectedColliders.Remove(other);
 				OnAuraExit(other);
+			}
 	}
 
+	protected void ChangeAuraRadius(float range)
+	{
+		if (Range <= 0f) {
+			InitiateAura(range);
+		} else {
+			Range = range;
+			sphere.radius = range;
+		}
+	}
 }
