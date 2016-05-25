@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Networking;
 
 public class OrderBehaviour : MonoBehaviour
 {

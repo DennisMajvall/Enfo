@@ -4,10 +4,18 @@ using System.Collections;
 public class HomingProjectile : ProjectileBehaviour
 {
 	public GameObject Target;
-	public GameObject Thrower; // the unit who threw/shot/cast the projectile at the target
-
-	UnitStatsComponent targetStats;
-	UnitStatsComponent throwerStats;
+	public GameObject Owner; // the unit who threw/shot/cast the projectile at the target
+	
+	void Start()
+	{
+		UnitStatsComponent throwerStats = Owner.GetComponent<UnitStatsComponent>();
+		stats.evasionChance = throwerStats.EvasionChance;
+		stats.critChance = throwerStats.CritChance;
+		stats.critExtraMultiplier = throwerStats.CritExtraMultiplier;
+		stats.attackType = throwerStats.AttackType;
+		stats.damage = throwerStats.Damage;
+		stats.projectileSpeed = throwerStats.ProjectileSpeed;
+	}
 
 	void Update()
 	{
@@ -17,43 +25,31 @@ public class HomingProjectile : ProjectileBehaviour
 		}
 
 		float distanceLeft = Vector3.Distance(transform.position, Target.transform.position);
-		float currentSpeed = Speed * Time.deltaTime;
+		float currentSpeed = stats.projectileSpeed * Time.deltaTime;
 
 		if (currentSpeed >= distanceLeft) {
-			if (!targetStats) {
-				targetStats = Target.GetComponent<UnitStatsComponent>();
-				if (!targetStats)
-					return;
-			}
-			if (!throwerStats) {
-				throwerStats = Target.GetComponent<UnitStatsComponent>();
-				if (!throwerStats)
-					return;
-			}
-			
-			float evasionChance = targetStats.EvasionChance;
-
-			if (evasionChance > 0f && Random.value < evasionChance) {
-				// Projectile was evaded
+			if (stats.evasionChance > 0f && Random.value < stats.evasionChance) {
+				// Projectile was evaded - Do Nothing.
 			} else {
 				// Projectile hit the target
+				UnitStatsComponent targetStats = Target.GetComponent<UnitStatsComponent>();
+
 				// Check if the thrower crits and increase damage if successful
-				float critChance = throwerStats.CritChance;
-				if (critChance > 0f && Random.value < critChance) {
+				if (stats.critChance > 0f && Random.value < stats.critChance) {
 					// Crit was successful
-					targetStats.ChangeHealth(-Damage * (1 + throwerStats.CritExtraMultiplier));
-					print("crit! dmg: " + Damage * (1 + throwerStats.CritExtraMultiplier));
+					targetStats.ChangeHealth(-stats.damage * (1 + stats.critExtraMultiplier));
+					print("crit! dmg: " + stats.damage * (1 + stats.critExtraMultiplier));
 				} else {
 					// Crit was unsuccessful
-					targetStats.ChangeHealth(-Damage);
-					Damage *= (1 + throwerStats.CritExtraMultiplier);
+					targetStats.ChangeHealth(-stats.damage);
+					stats.damage *= (1 + stats.critExtraMultiplier);
 				}
 
 				// Modify damage from target's armor and armor type, and attacker's attack type.
-				Damage *= GameplayConstants.ArmorDamageReduction(throwerStats.AttackType, targetStats.ArmorType, targetStats.Armor);
+				stats.damage *= GameplayConstants.ArmorDamageReduction(stats.attackType, targetStats.ArmorType, targetStats.Armor);
 
 				// Reduce the target's health
-				targetStats.ChangeHealth (-Damage);
+				targetStats.ChangeHealth (-stats.damage);
 			}
 
 			Destroy(gameObject);

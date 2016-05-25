@@ -3,6 +3,5 @@ using System.Collections;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-	public float Speed;
-	public float Damage;
+	protected UnitStats stats = new UnitStats();
 }
