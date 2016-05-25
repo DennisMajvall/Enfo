@@ -30,16 +30,15 @@ public class HomingProjectile : ProjectileBehaviour
 				if (!throwerStats)
 					return;
 			}
-
+			
 			float evasionChance = targetStats.EvasionChance;
 
 			if (evasionChance > 0f && Random.value < evasionChance) {
 				// Projectile was evaded
-				print("evaded!");
 			} else {
 				// Projectile hit the target
+				// Check if the thrower crits and increase damage if successful
 				float critChance = throwerStats.CritChance;
-
 				if (critChance > 0f && Random.value < critChance) {
 					// Crit was successful
 					targetStats.ChangeHealth(-Damage * (1 + throwerStats.CritExtraMultiplier));
@@ -47,7 +46,14 @@ public class HomingProjectile : ProjectileBehaviour
 				} else {
 					// Crit was unsuccessful
 					targetStats.ChangeHealth(-Damage);
+					Damage *= (1 + throwerStats.CritExtraMultiplier);
 				}
+
+				// Modify damage from target's armor and armor type, and attacker's attack type.
+				Damage *= GameplayConstants.ArmorDamageReduction(throwerStats.AttackType, targetStats.ArmorType, targetStats.Armor);
+
+				// Reduce the target's health
+				targetStats.ChangeHealth (-Damage);
 			}
 
 			Destroy(gameObject);
