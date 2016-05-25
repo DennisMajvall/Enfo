@@ -6,7 +6,7 @@ public class Ability : MonoBehaviour
 {
 	public int Level = 0;
 	public int LevelRequirement = 0;
-	public int NumLevels = 10;
+	public const int NumLevels = 10;
 	
 	
 	// Override this

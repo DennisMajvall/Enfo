@@ -10,7 +10,6 @@ public class CombatMastery : AuraAbility
 			component = other.gameObject.AddComponent<CombatMasteryEffect>();
 		}
 		component.ApplyEffect(Level);
-		Debug.Log(other.gameObject.name + " received Combat Mastery level " + Level);
 	}
 
 	protected override void OnAuraExit(Collider other)
@@ -18,6 +17,5 @@ public class CombatMastery : AuraAbility
 		CombatMasteryEffect component = other.gameObject.GetComponent<CombatMasteryEffect>();
 		component.RemoveEffect();
 		Destroy(component);
-		Debug.Log(other.gameObject.name + " exited the Combat Mastery");
 	}
 }

@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 	GameObject goal_go;
 	AttackMoveOrder attackMoveOrder;
 	UnitStatsComponent stats;
-	
+
 	// Use this for initialization
 	void Start()
 	{
@@ -37,6 +37,11 @@ public class EnemyBehaviour : MonoBehaviour
 		attackMoveOrder.currentPosition = transform.position;
 		attackMoveOrder.Update();
 		transform.position = attackMoveOrder.currentPosition;
+	}
+
+	public void SetTarget(GameObject target)
+	{
+		attackMoveOrder.SetTarget(target);
 	}
 
 	bool IsInGoal()
