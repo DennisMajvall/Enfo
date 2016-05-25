@@ -20,9 +20,13 @@ public class UnitStats
 	public float critExtraMultiplier;
 
 	public float damage;
+	public int 	 attackType; // what int corresponds to what attack type can be found in GameplayConstants.cs
 	public float projectileSpeed;
 	public float range;
 	public float acquisitionRange;
+
+	public float armor;
+	public int 	 armorType; // what int corresponds to what armor type can be found in GameplayConstants.cs
 
 	[HideInInspector]
 	public float movementSpeedPercentage = 1.0f;
@@ -30,10 +34,12 @@ public class UnitStats
 
 public class UnitStatsComponent : MonoBehaviour
 {
-	
+
 	[SerializeField] UnitStats unitStats;
 
-	// Getters
+	/**
+	 * GETTERS
+	 */
 	public float CurrentHealth 		{ get { return unitStats.currentHealth; } }
 	public float MaxHealth 			{ get { return unitStats.maxHealth; } }
 	public float HealthRegeneration { get { return unitStats.healthRegeneration; } }
@@ -51,13 +57,20 @@ public class UnitStatsComponent : MonoBehaviour
 	public float CritExtraMultiplier{ get { return unitStats.critExtraMultiplier; } }
 
 	public float Damage 			{ get { return unitStats.damage; } }
+	public int AttackType 			{ get { return unitStats.attackType; } }
 	public float ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
 	public float Range 				{ get { return unitStats.range; } }
 	public float AcquisitionRange 	{ get { return unitStats.acquisitionRange; } }
 
+	public float Armor				{ get { return unitStats.armor; } }
+	public int ArmorType			{ get { return unitStats.armorType; } }
+
 	public bool IsDead 				{ get { return CurrentHealth <= 0f; } }
 
-	// Changers
+
+	/**
+	 * SETTERS AND CHANGERS
+	 */
 	public void ChangeHealth(float delta)
 	{
 		unitStats.currentHealth += delta;
@@ -73,15 +86,11 @@ public class UnitStatsComponent : MonoBehaviour
 			unitStats.currentHealth = unitStats.maxHealth;
 		}
 	}
-
 	public void ChangeMaxHealth(float delta) 			{ unitStats.maxHealth += delta; }
-
 	public void ChangeHealthRegeneration(float delta) 	{ unitStats.healthRegeneration += delta; }
 
 
-
 	public void ChangeManaRegeneration(float delta) 	{ unitStats.manaRegeneration += delta; }
-
 	public void ChangeMana(float delta)
 	{
 		unitStats.currentMana += delta;
@@ -91,35 +100,29 @@ public class UnitStatsComponent : MonoBehaviour
 		else if (CurrentMana > MaxMana)
 			unitStats.currentMana = unitStats.maxMana;
 	}
-
-	public void ChangeMaxMana(float delta) 				{ unitStats.maxMana += delta; }
-
+	public void ChangeMaxMana(float delta) 					{ unitStats.maxMana += delta; }
 
 
-	public void ChangeMovementSpeed(float delta) 		{ unitStats.movementSpeed += delta; }
+	public void ChangeMovementSpeed(float delta) 			{ unitStats.movementSpeed += delta; }
 	public void ChangeMovementSpeedPercentage(float delta)	{ unitStats.movementSpeedPercentage += delta; }
+	public void ChangeGoldDropped(float delta) 				{ unitStats.goldDropped += delta; }
 
-	public void ChangeGoldDropped(float delta) 			{ unitStats.goldDropped += delta; }
+	public void ChangeEvasionChance(float delta)			{ unitStats.evasionChance += delta; }
+	public void ChangeCritChance(float delta)				{ unitStats.critChance += delta; }
+	public void ChangeCritExtraMultiplier(float delta)		{ unitStats.critExtraMultiplier += delta; }
 
+	public void ChangeDamage(float delta) 					{ unitStats.damage += delta; }
+	public void SetAttackType(int attackType)				{ unitStats.attackType = attackType; }
+	public void ChangeProjectileSpeed(float delta) 			{ unitStats.projectileSpeed += delta; }
+	public void ChangeRange(float delta) 					{ unitStats.range += delta; }
+	public void ChangeAcquisionRange(float delta) 			{ unitStats.acquisitionRange += delta; }
 
+	public void ChangeArmor(float delta)					{ unitStats.armor += delta; }
+	public void SetArmorType(int newArmorType)				{ unitStats.armorType = newArmorType; }
 
-	public void ChangeEvasionChance(float delta)		{ unitStats.evasionChance += delta; }
-
-	public void ChangeCritChance(float delta)			{ unitStats.critChance += delta; }
-
-	public void ChangeCritExtraMultiplier(float delta)	{ unitStats.critExtraMultiplier += delta; }
-
-
-
-	public void ChangeDamage(float delta) 				{ unitStats.damage += delta; }
-
-	public void ChangeProjectileSpeed(float delta) 		{ unitStats.projectileSpeed += delta; }
-
-	public void ChangeRange(float delta) 				{ unitStats.range += delta; }
-
-	public void ChangeAcquisionRange(float delta) 		{ unitStats.acquisitionRange += delta; }
-
-	// Update
+	/**
+	 * UPDATE()
+	 */
 	void Update()
 	{
 		if (HealthRegeneration != 0f)
