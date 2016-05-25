@@ -17,6 +17,14 @@ public class AuraAbility : Ability
 
 	protected List<Collider> affectedColliders = new List<Collider>();
 
+	// Override this (Optional)
+	protected override void OnSetLevel(int level)
+	{
+		foreach (Collider c in affectedColliders) {
+			OnAuraEnter(c.GetComponent<Collider>());
+		}
+	}
+
 	// Private:
 	SphereCollider sphere;
 
@@ -46,14 +54,6 @@ public class AuraAbility : Ability
 		AuraTriggerScript auraScript = AuraGameObject.GetComponent<AuraTriggerScript>();
 		auraScript.OnEnter = SendOnAuraEnter;
 		auraScript.OnExit = SendOnAuraExit;
-	}
-
-	// Override this (Optional)
-	protected override void OnSetLevel(int level)
-	{
-		foreach (Collider c in affectedColliders) {
-			OnAuraEnter(c.GetComponent<Collider>());
-		}
 	}
 
 	void SendOnAuraEnter(Collider other)
