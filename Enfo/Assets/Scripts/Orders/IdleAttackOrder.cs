@@ -8,12 +8,13 @@ public class IdleAttackOrder : Order
 	float currentCooldown = 0f;
 	float cooldown = 0.35f;
 
-	public IdleAttackOrder(UnitStatsComponent stats, Vector3 currentPosition, Seeker seeker, GameObject attacker)
+	public IdleAttackOrder(UnitStatsComponent stats, Vector3 currentPosition, Seeker seeker, GameObject self)
 	{
+		this.self = self;
 		this.stats = stats;
 		this.currentPosition = currentPosition;
 
-		attackOrder = new AttackOrder(stats, currentPosition, null, seeker, attacker);
+		attackOrder = new AttackOrder(stats, currentPosition, null, seeker, self);
 	}
 
 

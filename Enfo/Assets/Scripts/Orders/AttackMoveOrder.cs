@@ -27,7 +27,7 @@ public class AttackMoveOrder : Order
 		this.seeker = seeker;
 		this.targetPosition = targetPosition;
 
-		attackOrder = new AttackOrder(stats, currentPosition, null, seeker, self);
+		attackOrder = new AttackOrder(stats, currentPosition, null, seeker, attacker);
 		moveOrder = new MoveOrder(stats, currentPosition);
 	}
 
