@@ -122,7 +122,7 @@ MonoBehaviour:
     manaRegeneration: 0
     movementSpeed: 4
     goldDropped: 4
-    experienceDropped: 0
+    experienceDropped: 10
     name: 
     movementSpeedPercentage: 1
 --- !u!114 &11482474
