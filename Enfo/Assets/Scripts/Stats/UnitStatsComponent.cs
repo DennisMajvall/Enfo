@@ -124,7 +124,7 @@ public class UnitStatsComponent : MonoBehaviour
 			}
 		}
 	}
-	public void ChangeHealth(float delta)
+	public void IncreaseHealth(float delta)
 	{
 		unitStats.health += delta;
 
@@ -139,7 +139,7 @@ public class UnitStatsComponent : MonoBehaviour
 
 		if (alsoChangeCurrentHealth) {
 			float relativeHealth = Health / (Mathf.Max(oldMaxHealth, 1));
-			ChangeHealth(relativeHealth * delta);
+			IncreaseHealth(relativeHealth * delta);
 		}
 	}
 
@@ -185,7 +185,7 @@ public class UnitStatsComponent : MonoBehaviour
 	void Update()
 	{
 		if (HealthRegeneration > 0f)
-			ChangeHealth(HealthRegeneration * Time.deltaTime);
+			IncreaseHealth(HealthRegeneration * Time.deltaTime);
 
 		if (ManaRegeneration > 0f)
 			ChangeMana(ManaRegeneration * Time.deltaTime);
