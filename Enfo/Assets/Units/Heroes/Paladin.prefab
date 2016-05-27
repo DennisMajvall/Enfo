@@ -1156,7 +1156,7 @@ MonoBehaviour:
     strengthPerLevel: 3.7
     strength: 9
     intelligence: 3
-    agility: 9
+    agility: 6
 --- !u!114 &11472612
 MonoBehaviour:
   m_ObjectHideFlags: 1
