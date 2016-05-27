@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11482474}
   - 114: {fileID: 11479236}
   m_Layer: 9
-  m_Name: Wave1a
+  m_Name: 3a_CrazedMadman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,27 +104,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats:
-    health: 100
-    maxHealth: 100
-    healthRegeneration: 4
+    abilitiesHero: []
+    abilitiesNormal: []
+    selectionScale: 1
+    health: 150
+    maxHealth: 150
+    healthRegeneration: 0.5
     evasionChance: 0
-    armor: 10
-    armorType: 0
-    damage: 20
-    attackType: 0
-    projectileSpeed: 20
-    range: 2
-    acquisitionRange: 8
+    armor: 1
+    armorType: 2
+    cooldownTime: 1
+    damage: 9
+    damageFactorMedium: 0
+    damageFactorSmall: 0
+    damageNumDice: 1
+    damageSidesPerDice: 8
+    attackType: 2
+    projectileSpeed: 7.03125
+    range: 0.78125
+    acquisitionRange: 5.46875
     critChance: 0
     critExtraMultiplier: 0
-    mana: 0
+    projectileHomingEnabled: 0
+    mana: 30
     maxMana: 0
     manaRegeneration: 0
-    movementSpeed: 4
-    goldDropped: 4
+    movementSpeed: 0.859375
     experienceDropped: 0
-    name: 
+    turnRate: 0.5
+    goldDropped: 4
+    goldBountyAwardedBase: 30
+    goldBountyAwardedNumbersPerDice: 1
+    goldBountyAwardedSidesPerDice: 20
+    name: Crazed Madman
     movementSpeedPercentage: 1
+    attackSpeedPercentage: 1
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1

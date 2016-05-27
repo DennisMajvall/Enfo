@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level: 1
-  LevelRequirement: 0
+  LevelRequirement: 1
   Range: 1
   AffectsSelf: 1
   AffectsLayers: 0a000000
@@ -1066,8 +1066,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e10b6cc355668149affd529a72b4914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 1
-  LevelRequirement: 0
+  Level: 5
+  LevelRequirement: 1
   Range: -1
   AffectsSelf: 1
   AffectsLayers: 
@@ -1111,32 +1111,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats:
-    health: 0
-    maxHealth: 5000
-    healthRegeneration: 1000
+    abilitiesHero: []
+    abilitiesNormal: []
+    selectionScale: 1.7
+    health: 10
+    maxHealth: 10
+    healthRegeneration: 0.25
     evasionChance: 0
-    armor: 5
-    armorType: 1
-    damage: 60
+    armor: 4
+    armorType: 3
+    cooldownTime: 1.28
+    damage: 2
+    damageFactorMedium: 0
+    damageFactorSmall: 0
+    damageNumDice: 1
+    damageSidesPerDice: 8
     attackType: 1
-    projectileSpeed: 20
-    range: 8
-    acquisitionRange: 8
+    projectileSpeed: 7.03125
+    range: 1.328125
+    acquisitionRange: 3.125
     critChance: 0
     critExtraMultiplier: 0
+    projectileHomingEnabled: 0
     mana: 0
-    maxMana: 3000
-    manaRegeneration: 10
-    movementSpeed: 5
-    goldDropped: 0
+    maxMana: 0
+    manaRegeneration: 0.02
+    movementSpeed: 2.734375
     experienceDropped: 0
-    name: 
+    turnRate: 0.6
+    goldDropped: 0
+    goldBountyAwardedBase: 0
+    goldBountyAwardedNumbersPerDice: 0
+    goldBountyAwardedSidesPerDice: 0
+    name: Steelrose
     movementSpeedPercentage: 1
+    attackSpeedPercentage: 1
   heroStats:
     experience: 0
-    level: 0
+    level: 1
     heroName: Paladin
-    properName: 
+    primaryAttribute: 2
+    agilityPerLevel: 2
+    intelligencePerLevel: 1
+    strengthPerLevel: 3.7
+    strength: 9
+    intelligence: 3
+    agility: 9
 --- !u!114 &11472612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1148,11 +1168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b54549bbf42ebc41b9072fd76c60464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 0
+  Level: 1
   LevelRequirement: 0
   CurrentCooldown: 0
   Cooldown: 5
-  ManaCost: 100
+  ManaCost: 25
   Radius: 10
 --- !u!114 &11495938
 MonoBehaviour:

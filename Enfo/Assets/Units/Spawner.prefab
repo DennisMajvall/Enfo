@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9, y: 1.1, z: 124}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -77,7 +78,8 @@ MonoBehaviour:
   activeTimer: 1
   waveGameobjects:
   - {fileID: 181520, guid: cc572605953972e4bb4aa5a328f41df2, type: 2}
-  lol: {fileID: 0}
+  - {fileID: 181520, guid: 1a8252adf531ffb4892a3cd11a7d6b2b, type: 2}
+  - {fileID: 181520, guid: 47b90b9b403a64345b649bacfc4d7532, type: 2}
   current_wave: 0
   num_spawned: 0
   time_until_spawn: 5

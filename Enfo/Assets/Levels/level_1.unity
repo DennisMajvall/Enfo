@@ -809,16 +809,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11402032, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
-      propertyPath: Level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11456614, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
-      propertyPath: Level
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11467848, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1354249761 stripped
