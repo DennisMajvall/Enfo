@@ -1,54 +1,74 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class GameplayConstants : MonoBehaviour {
+public class GameplayConstants
+{
+	public const float DamagePerPrimaryAttribute = 2.5f;
 
-	/**
-	 * ARMOR DAMAGE REDUCTION MULTIPLIER
-	 */
-	public const float ARMOR_REDUCTION_MULTIPLIER = 0.06f;
+	public const float HealthPerStrength = 40f;
+	public const float HealthRegenPerStrength = 0.03f;
 
-	public static float ArmorDamageReduction(int attackType, int armorType, float armorAmount) {
-		float typeRed = attackTypeVsArmorTypeMultiplier [attackType, armorType];
-		float red;
+	public const float ArmorPerAgility = 0.05f;
+	public const float AttackSpeedPerAgility = 0.01f;
+
+	public const float ManaPerIntelligence = 16f;
+	public const float ManaRegenPerIntelligence = 0.05f;
+
+	const float ArmorReductionMultiplier = 0.06f;
+
+	public static float ArmorDamageReduction(AttackTypeEnum attackType, ArmorTypeEnum armorType, float armorAmount)
+	{
+		float typeReduction = GetSpecificArmorReduction(attackType, armorType);
+		float reduction = armorAmount * ArmorReductionMultiplier;
 
 		if (armorAmount >= 0f) {
-			red = 1 - (armorAmount * ARMOR_REDUCTION_MULTIPLIER) / (1 + (armorAmount * ARMOR_REDUCTION_MULTIPLIER));
+			reduction = 1f - (reduction / (1f + reduction));
 		} else {
-			red = 2f - Mathf.Pow(1f - ARMOR_REDUCTION_MULTIPLIER, -1f * armorAmount);
+			reduction = 2f - Mathf.Pow(1f - ArmorReductionMultiplier, -armorAmount);
 		}
 
-		return red * typeRed;
+		return reduction * typeReduction;
 	}
-		
-	/**
-	 * ARMOR AND ATTACK TYPES
-	 */ 
-	public const int ATTACK_TYPE_CHAOS		= 0;
-	public const int ATTACK_TYPE_HERO 		= 1;
-	public const int ATTACK_TYPE_NORMAL 	= 2;
-	public const int ATTACK_TYPE_MAGIC  	= 3;
-	public const int ATTACK_TYPE_PIERCE 	= 4;
-	public const int ATTACK_TYPE_SIEGE 		= 5;
-	public const int ATTACK_TYPE_SPELLS 	= 6;
 
-	public const int ARMOR_TYPE_LIGHT 		= 0;
-	public const int ARMOR_TYPE_MEDIUM 		= 1;
-	public const int ARMOR_TYPE_HEAVY 		= 2;
-	public const int ARMOR_TYPE_FORTIFIED 	= 3;
-	public const int ARMOR_TYPE_NORMAL 		= 4;
-	public const int ARMOR_TYPE_HERO 		= 5;
-	public const int ARMOR_TYPE_UNARMORED	= 6;
+	public static float GetSpecificArmorReduction(AttackTypeEnum attackType, ArmorTypeEnum armorType)
+	{
+		return attackTypeVsArmorTypeMultiplier[(int)attackType, (int)armorType];
+	}
 
-	// attackTypeVsArmorTypeMultiplier[ATTACK_TYPE, ARMOR_TYPE]
-	public static float[,] attackTypeVsArmorTypeMultiplier = new float[7,7] {
+	private const int numAtk = (int)AttackTypeEnum.NUM_TYPES;
+	private const int numArmor = (int)ArmorTypeEnum.NUM_TYPES;
+	// attackTypeVsArmorTypeMultiplier[AttackType, ArmorType]
+	private static float[,] attackTypeVsArmorTypeMultiplier = new float[numAtk, numArmor] {
 		/* 				  Light,	Medium,		Heavy,		Fortified,	Normal,		Hero,		Unarmored */
-		/* Chaos 	*/	{ 1.00f,	1.00f, 		1.00f,		1.00f, 		1.00f, 		1.00f, 		1.00f },
-		/* Hero 	*/ 	{ 1.00f, 	1.00f, 		1.00f,		0.50f, 		1.00f, 		1.00f, 		1.00f },
-		/* Magic 	*/ 	{ 1.25f,	0.75f, 		1.50f, 		0.40f, 		1.00f, 		0.50f, 		1.00f },
-		/* Normal 	*/ 	{ 1.00f, 	1.25f, 		1.00f, 		0.80f, 		1.00f, 		1.00f, 		1.00f },
-		/* Pierce 	*/ 	{ 2.00f, 	0.75f, 		1.00f, 		0.50f, 		1.00f, 		0.50f, 		1.00f },
-		/* Siege 	*/ 	{ 1.00f, 	0.50f, 		1.00f, 		1.50f, 		1.00f, 		0.50f, 		1.50f },
-		/* Spells 	*/ 	{ 1.00f, 	1.00f, 		1.25f, 		1.00f, 		1.00f, 		0.75f, 		1.00f },
+		/* Chaos 	*/	{ 1.00f,    1.00f,      1.00f,      1.00f,      1.00f,      1.00f,      1.00f },
+		/* Hero 	*/ 	{ 1.00f,    1.00f,      1.00f,      0.50f,      1.00f,      1.00f,      1.00f },
+		/* Magic 	*/ 	{ 1.25f,    0.75f,      1.50f,      0.40f,      1.00f,      0.50f,      1.00f },
+		/* Normal 	*/ 	{ 1.00f,    1.25f,      1.00f,      0.80f,      1.00f,      1.00f,      1.00f },
+		/* Pierce 	*/ 	{ 2.00f,    0.75f,      1.00f,      0.50f,      1.00f,      0.50f,      1.00f },
+		/* Siege 	*/ 	{ 1.00f,    0.50f,      1.00f,      1.50f,      1.00f,      0.50f,      1.50f },
+		/* Spells 	*/ 	{ 1.00f,    1.00f,      1.25f,      1.00f,      1.00f,      0.75f,      1.00f },
 	};
+}
+
+public enum AttackTypeEnum : int
+{
+	Chaos,
+	Hero,
+	Normal,
+	Magic,
+	Pierce,
+	Siege,
+	Spells,
+	NUM_TYPES // Must be the last element
+}
+
+public enum ArmorTypeEnum : int
+{
+	Light,
+	Medium,
+	Heavy,
+	Fortified,
+	Normal,
+	Hero,
+	Unarmored,
+	NUM_TYPES // Must be the last element
 }

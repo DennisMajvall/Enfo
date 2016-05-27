@@ -1111,27 +1111,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats:
-    currentHealth: 5000
-    maxHealth: 5000
-    healthRegeneration: 1000
-    currentMana: 0
-    maxMana: 3000
-    manaRegeneration: 10
-    movementSpeed: 5
+    abilitiesHero: []
+    abilitiesNormal: []
+    selectionScale: 1.7
+    acquisitionRange: 3.125
+    attackType: 2
+    cooldownTime: 1.28
+    damage: 2
+    damageFactorMedium: 0
+    damageFactorSmall: 0
+    damageNumDice: 1
+    damageSidesPerDice: 8
+    projectileHomingEnabled: 0
+    projectileSpeed: 7.03125
+    range: 1.328125
+    armor: 4
+    armorType: 3
+    movementSpeed: 2.734375
+    turnRate: 0.6
+    goldBountyAwardedBase: 0
+    goldBountyAwardedNumbersPerDice: 0
+    goldBountyAwardedSidesPerDice: 0
+    currentHealth: 10
+    maxHealth: 10
+    healthRegeneration: 0.25
+    currentMana: 30
+    maxMana: 30
+    manaRegeneration: 0.02
+    Name: Steelrose
     goldDropped: 0
     evasionChance: 0
     critChance: 0
     critExtraMultiplier: 0
-    damage: 60
-    projectileSpeed: 20
-    range: 8
-    acquisitionRange: 8
     movementSpeedPercentage: 1
+    attackSpeedPercentage: 1
   heroStats:
     experience: 0
-    level: 0
+    level: 1
     heroName: Paladin
-    properName: 
+    primaryAttribute: 2
+    agilityPerLevel: 2
+    intelligencePerLevel: 1
+    strengthPerLevel: 3.7
+    strength: 6
+    intelligence: 6
+    agility: 6
 --- !u!114 &11472612
 MonoBehaviour:
   m_ObjectHideFlags: 1

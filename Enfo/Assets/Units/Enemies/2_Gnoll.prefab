@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11482474}
   - 114: {fileID: 11479236}
   m_Layer: 9
-  m_Name: Wave1a
+  m_Name: 2_Gnoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,21 +104,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats:
-    currentHealth: 100
-    maxHealth: 100
-    healthRegeneration: 4
+    abilitiesHero: []
+    abilitiesNormal: []
+    selectionScale: 1
+    acquisitionRange: 5.46875
+    attackType: 2
+    cooldownTime: 1.7
+    damage: 7
+    damageFactorMedium: 0
+    damageFactorSmall: 0
+    damageNumDice: 1
+    damageSidesPerDice: 3
+    projectileHomingEnabled: 0
+    projectileSpeed: 0
+    range: 0.78125
+    armor: 1
+    armorType: 2
+    movementSpeed: 0.8203125
+    turnRate: 0.5
+    goldBountyAwardedBase: 10
+    goldBountyAwardedNumbersPerDice: 1
+    goldBountyAwardedSidesPerDice: 20
+    currentHealth: 85
+    maxHealth: 85
+    healthRegeneration: 0.5
     currentMana: 0
     maxMana: 0
     manaRegeneration: 0
-    movementSpeed: 4
+    Name: Gnoll
     goldDropped: 4
     evasionChance: 0
     critChance: 0
     critExtraMultiplier: 0
-    damage: 20
-    projectileSpeed: 20
-    range: 2
-    acquisitionRange: 8
     movementSpeedPercentage: 1
 --- !u!114 &11482474
 MonoBehaviour:

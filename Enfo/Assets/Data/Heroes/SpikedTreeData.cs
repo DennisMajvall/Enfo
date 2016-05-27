@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SpikedTree : ScriptableObject
+public class SpikedTreeData : ScriptableObject
 {
 	public string[] abilities_hero = { "Poison Gas", "Hardened Skin", "Rootage Trap", "Backfire Aura" };
 	public string[] abilities_normal = { "Spiked Tree - Barkskin" }; // Not hero glow effect and inventory
@@ -25,7 +25,7 @@ public class SpikedTree : ScriptableObject
 
 	public string weapon_type = "Normal";
 
-	public float defense_base = 5;
+	public float defense_base = 3;
 	public string defense_type = "Large";
 
 	public float speed_base = 350;
