@@ -16,19 +16,22 @@ public class HeroStatsComponent : UnitStatsComponent
 	HeroStats heroStats;
 
 	// Getters
-	public float Experience		{ get { return heroStats.experience; } }
-	public int Level			{ get { return heroStats.level; } }
-	public string HeroName 		{ get { return heroStats.heroName; } }
-	public string ProperName	{ get { return heroStats.properName; } }
+	public float 	Experience	{ get { return heroStats.experience; } }
+	public int 		Level		{ get { return heroStats.level; } }
+	public string 	HeroName 	{ get { return heroStats.heroName; } }
+	public string 	ProperName	{ get { return heroStats.properName; } }
 
 
 	// Setters
 	public void ChangeExperience(float delta) 			{ heroStats.experience += delta; }
-
 	public void ChangeHeroName(string newName)			{ heroStats.heroName = newName; }
-
 	public void ChangeProperName(string newProperName) 	{ heroStats.properName = newProperName; }
-
 	public void ChangeLevel(int delta)					{ heroStats.level += delta; }
+	public void AddExperience(float delta) {
+		heroStats.experience += delta;
+
+		// Something about leveling up here
+
+	}
 
 }

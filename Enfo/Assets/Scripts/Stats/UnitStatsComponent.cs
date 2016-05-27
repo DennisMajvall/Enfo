@@ -4,29 +4,36 @@ using System.Collections;
 [System.Serializable]
 public class UnitStats
 {
-	public float currentHealth;
+	// defence
+	public float health;
 	public float maxHealth;
 	public float healthRegeneration;
+	public float evasionChance;
+	public float armor;
+	public int 	 armorType; // what int corresponds to what armor type can be found in GameplayConstants.cs
 
-	public float currentMana;
-	public float maxMana;
-	public float manaRegeneration;
-
-	public float movementSpeed;
-	public float goldDropped;
-
-	public float evasionChance; // Between 0.0 - 1.0
-	public float critChance;
-	public float critExtraMultiplier;
-
+	// offence
 	public float damage;
 	public int 	 attackType; // what int corresponds to what attack type can be found in GameplayConstants.cs
 	public float projectileSpeed;
 	public float range;
 	public float acquisitionRange;
+	public float critChance;
+	public float critExtraMultiplier;
 
-	public float armor;
-	public int 	 armorType; // what int corresponds to what armor type can be found in GameplayConstants.cs
+	// magic
+	public float mana;
+	public float maxMana;
+	public float manaRegeneration;
+
+	// utility
+	public float movementSpeed;
+	public float goldDropped;
+	public float experienceDropped;
+	public string name;
+
+
+
 
 	[HideInInspector]
 	public float movementSpeedPercentage = 1.0f;
@@ -40,93 +47,116 @@ public class UnitStatsComponent : MonoBehaviour
 	/**
 	 * GETTERS
 	 */
-	public float CurrentHealth 		{ get { return unitStats.currentHealth; } }
-	public float MaxHealth 			{ get { return unitStats.maxHealth; } }
-	public float HealthRegeneration { get { return unitStats.healthRegeneration; } }
+	// defence
+	public float Health 					{ get { return unitStats.health; } }
+	public float MaxHealth 					{ get { return unitStats.maxHealth; } }
+	public float HealthRegeneration 		{ get { return unitStats.healthRegeneration; } }
+	public float EvasionChance				{ get { return unitStats.evasionChance; } }
+	public float Armor						{ get { return unitStats.armor; } }
+	public int 	 ArmorType					{ get { return unitStats.armorType; } }
 
-	public float CurrentMana 		{ get { return unitStats.currentMana; } }
-	public float MaxMana 			{ get { return unitStats.maxMana; } }
-	public float ManaRegeneration 	{ get { return unitStats.manaRegeneration; } }
+	// offence
+	public float Damage 					{ get { return unitStats.damage; } }
+	public int   AttackType 				{ get { return unitStats.attackType; } }
+	public float ProjectileSpeed 			{ get { return unitStats.projectileSpeed; } }
+	public float Range 						{ get { return unitStats.range; } }
+	public float AcquisitionRange 			{ get { return unitStats.acquisitionRange; } }
+	public float CritChance					{ get { return unitStats.critChance; } }
+	public float CritExtraMultiplier		{ get { return unitStats.critExtraMultiplier; } }
 
-	public float MovementSpeed		{ get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
+	// magic
+	public float Mana 						{ get { return unitStats.mana; } }
+	public float MaxMana 					{ get { return unitStats.maxMana; } }
+	public float ManaRegeneration 			{ get { return unitStats.manaRegeneration; } }
+
+	// utility
+	public float MovementSpeed				{ get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
 	public float MovementSpeedPercentage	{ get { return unitStats.movementSpeedPercentage; } }
-	public float GoldDropped 		{ get { return unitStats.goldDropped; } }
+	public float GoldDropped 				{ get { return unitStats.goldDropped; } }
+	public float ExperienceDropped			{ get { return unitStats.experienceDropped; } }
+	public string Name						{ get { return unitStats.name; } }
 
-	public float EvasionChance		{ get { return unitStats.evasionChance; } }
-	public float CritChance			{ get { return unitStats.critChance; } }
-	public float CritExtraMultiplier{ get { return unitStats.critExtraMultiplier; } }
-
-	public float Damage 			{ get { return unitStats.damage; } }
-	public int AttackType 			{ get { return unitStats.attackType; } }
-	public float ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
-	public float Range 				{ get { return unitStats.range; } }
-	public float AcquisitionRange 	{ get { return unitStats.acquisitionRange; } }
-
-	public float Armor				{ get { return unitStats.armor; } }
-	public int ArmorType			{ get { return unitStats.armorType; } }
-
-	public bool IsDead 				{ get { return CurrentHealth <= 0f; } }
+	// other
+	public bool  IsDead 					{ get { return Health <= 0f; } }
 
 
 	/**
-	 * SETTERS AND CHANGERS
+	 * SETTERS AND MODIFIERS
 	 */
-	public void ChangeHealth(float delta)
+	// defence
+	public void DealDamage(float amount, UnitStats attackerStats)
 	{
-		unitStats.currentHealth += delta;
+		// Check if the target evades the projectile and proceed if it doesn't
+		if (!(EvasionChance > 0f && Random.value < EvasionChance)) {
+			
+			// Check if the thrower crits and increase damage if successful
+			if (attackerStats.critChance > 0f && Random.value < attackerStats.critChance) {
+				// Crit was successful
+				amount *= (1 + attackerStats.critExtraMultiplier);
+			}
 
-		if (IsDead) {
-			// Give gold to killing player
-			GameObject client = GameObject.Find("Client");
-			client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
+			// Modify damage from target's armor and armor type, and attacker's attack type.
+			amount *= GameplayConstants.ArmorDamageReduction (attackerStats.attackType, ArmorType, Armor);
 
-			// and destroy
-			Destroy(gameObject);
-		} else if (CurrentHealth > MaxHealth) {
-			unitStats.currentHealth = unitStats.maxHealth;
+			unitStats.health -= amount;
+
+			if (IsDead) {
+				// Give gold to killing player
+				GameObject client = GameObject.Find ("Client");
+				client.GetComponent<GoldContainer> ().ChangeGold (gameObject.GetComponent<UnitStatsComponent> ().GoldDropped);
+
+				// and destroy
+				Destroy (gameObject);
+			} else if (Health > MaxHealth) {
+				unitStats.health = unitStats.maxHealth;
+			}
 		}
 	}
-	public void ChangeMaxHealth(float delta) 			{ unitStats.maxHealth += delta; }
-	public void ChangeHealthRegeneration(float delta) 	{ unitStats.healthRegeneration += delta; }
 
+	void changeHealth(float delta) {
+		if (Health + delta > MaxHealth) {
+			unitStats.health = MaxHealth;
+		} else {
+			unitStats.health += delta;
+		}
+	}
 
-	public void ChangeManaRegeneration(float delta) 	{ unitStats.manaRegeneration += delta; }
+	public void IncreaseHealthRegeneration(float amount) 	{ unitStats.healthRegeneration += amount; }
+	public void IncreaseEvasionChance(float amount)			{ unitStats.evasionChance += amount; }
+
+	// offence
+	public void IncreaseCritChance(float amount)			{ unitStats.critChance += amount; }
+	public void IncreaseCritExtraMultiplier(float amount)	{ unitStats.critExtraMultiplier += amount; }
+
+	// magic
 	public void ChangeMana(float delta)
 	{
-		unitStats.currentMana += delta;
+		unitStats.mana += delta;
 
-		if (CurrentMana <= 0f)
-			unitStats.currentMana = 0f;
-		else if (CurrentMana > MaxMana)
-			unitStats.currentMana = unitStats.maxMana;
+		if (Mana <= 0f)
+			unitStats.mana = 0f;
+		else if (Mana > MaxMana)
+			unitStats.mana = unitStats.maxMana;
 	}
-	public void ChangeMaxMana(float delta) 					{ unitStats.maxMana += delta; }
-
-
-	public void ChangeMovementSpeed(float delta) 			{ unitStats.movementSpeed += delta; }
+		
+	// utility
 	public void ChangeMovementSpeedPercentage(float delta)	{ unitStats.movementSpeedPercentage += delta; }
-	public void ChangeGoldDropped(float delta) 				{ unitStats.goldDropped += delta; }
-
-	public void ChangeEvasionChance(float delta)			{ unitStats.evasionChance += delta; }
-	public void ChangeCritChance(float delta)				{ unitStats.critChance += delta; }
-	public void ChangeCritExtraMultiplier(float delta)		{ unitStats.critExtraMultiplier += delta; }
-
-	public void ChangeDamage(float delta) 					{ unitStats.damage += delta; }
-	public void SetAttackType(int attackType)				{ unitStats.attackType = attackType; }
-	public void ChangeProjectileSpeed(float delta) 			{ unitStats.projectileSpeed += delta; }
-	public void ChangeRange(float delta) 					{ unitStats.range += delta; }
-	public void ChangeAcquisionRange(float delta) 			{ unitStats.acquisitionRange += delta; }
-
-	public void ChangeArmor(float delta)					{ unitStats.armor += delta; }
-	public void SetArmorType(int newArmorType)				{ unitStats.armorType = newArmorType; }
 
 	/**
 	 * UPDATE()
 	 */
 	void Update()
 	{
-		if (HealthRegeneration != 0f)
-			ChangeHealth(HealthRegeneration * Time.deltaTime);
+		if (HealthRegeneration != 0f) {
+			float amount = HealthRegeneration * Time.deltaTime;
+
+			if (Health + amount > MaxHealth) {
+				unitStats.health = MaxHealth;
+			} else {
+				unitStats.health += amount;
+			}
+
+		}
 
 		if (ManaRegeneration != 0f)
 			ChangeMana(ManaRegeneration * Time.deltaTime);

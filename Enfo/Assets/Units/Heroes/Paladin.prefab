@@ -1111,21 +1111,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitStats:
-    currentHealth: 5000
+    health: 0
     maxHealth: 5000
     healthRegeneration: 1000
-    currentMana: 0
+    evasionChance: 0
+    armor: 5
+    armorType: 1
+    damage: 60
+    attackType: 1
+    projectileSpeed: 20
+    range: 8
+    acquisitionRange: 8
+    critChance: 0
+    critExtraMultiplier: 0
+    mana: 0
     maxMana: 3000
     manaRegeneration: 10
     movementSpeed: 5
     goldDropped: 0
-    evasionChance: 0
-    critChance: 0
-    critExtraMultiplier: 0
-    damage: 60
-    projectileSpeed: 20
-    range: 8
-    acquisitionRange: 8
+    experienceDropped: 0
+    name: 
     movementSpeedPercentage: 1
   heroStats:
     experience: 0

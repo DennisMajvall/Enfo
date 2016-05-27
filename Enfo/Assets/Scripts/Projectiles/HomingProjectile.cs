@@ -28,29 +28,11 @@ public class HomingProjectile : ProjectileBehaviour
 		float currentSpeed = stats.projectileSpeed * Time.deltaTime;
 
 		if (currentSpeed >= distanceLeft) {
-			if (stats.evasionChance > 0f && Random.value < stats.evasionChance) {
-				// Projectile was evaded - Do Nothing.
-			} else {
-				// Projectile hit the target
-				UnitStatsComponent targetStats = Target.GetComponent<UnitStatsComponent>();
+			// Deal damage to the target
+			Target.GetComponent<UnitStatsComponent>().DealDamage (stats.damage, stats);
 
-				// Check if the thrower crits and increase damage if successful
-				if (stats.critChance > 0f && Random.value < stats.critChance) {
-					// Crit was successful
-					targetStats.ChangeHealth(-stats.damage * (1 + stats.critExtraMultiplier));
-					print("crit! dmg: " + stats.damage * (1 + stats.critExtraMultiplier));
-				} else {
-					// Crit was unsuccessful
-					targetStats.ChangeHealth(-stats.damage);
-					stats.damage *= (1 + stats.critExtraMultiplier);
-				}
 
-				// Modify damage from target's armor and armor type, and attacker's attack type.
-				stats.damage *= GameplayConstants.ArmorDamageReduction(stats.attackType, targetStats.ArmorType, targetStats.Armor);
 
-				// Reduce the target's health
-				targetStats.ChangeHealth (-stats.damage);
-			}
 
 			Destroy(gameObject);
 			return;
