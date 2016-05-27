@@ -51,4 +51,11 @@ public class GameplayConstants : MonoBehaviour {
 		/* Siege 	*/ 	{ 1.00f, 	0.50f, 		1.00f, 		1.50f, 		1.00f, 		0.50f, 		1.50f },
 		/* Spells 	*/ 	{ 1.00f, 	1.00f, 		1.25f, 		1.00f, 		1.00f, 		0.75f, 		1.00f },
 	};
+
+	/*
+	 * WARCRAFT III DISTANCE TO UNITY DISTANCE
+	 */
+	public static float wc3distanceToUnityDistance(float wc3dist) {
+		return wc3dist / 128f;
+	}
 }
