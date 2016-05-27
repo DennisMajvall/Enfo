@@ -108,36 +108,38 @@ MonoBehaviour:
     abilitiesNormal:
     - Critical Strike (Neutral Hostile)
     selectionScale: 1
-    acquisitionRange: 5.46875
-    attackType: 2
+    health: 100
+    maxHealth: 100
+    healthRegeneration: 0.5
+    evasionChance: 0
+    armor: 0
+    armorType: 0
     cooldownTime: 2.2
     damage: 9
     damageFactorMedium: 0
     damageFactorSmall: 0
     damageNumDice: 1
     damageSidesPerDice: 6
-    projectileHomingEnabled: 0
-    projectileSpeed: 0
+    attackType: 2
+    projectileSpeed: 3.125
     range: 3.125
-    armor: 0
-    armorType: 0
+    acquisitionRange: 5.46875
+    critChance: 0
+    critExtraMultiplier: 0
+    projectileHomingEnabled: 0
+    mana: 30
+    maxMana: 0
+    manaRegeneration: 0
     movementSpeed: 0.859375
+    experienceDropped: 0
     turnRate: 0.5
+    goldDropped: 4
     goldBountyAwardedBase: 30
     goldBountyAwardedNumbersPerDice: 1
     goldBountyAwardedSidesPerDice: 20
-    currentHealth: 100
-    maxHealth: 100
-    healthRegeneration: 0.5
-    currentMana: 0
-    maxMana: 0
-    manaRegeneration: 0
-    Name: Crazed Spearman
-    goldDropped: 4
-    evasionChance: 0
-    critChance: 0
-    critExtraMultiplier: 0
+    name: Crazed Spearman
     movementSpeedPercentage: 1
+    attackSpeedPercentage: 1
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,6 +2,7 @@
 
 public class GameplayConstants
 {
+	#region Attributes
 	public const float DamagePerPrimaryAttribute = 2.5f;
 
 	public const float HealthPerStrength = 40f;
@@ -12,6 +13,7 @@ public class GameplayConstants
 
 	public const float ManaPerIntelligence = 16f;
 	public const float ManaRegenPerIntelligence = 0.05f;
+	#endregion
 
 	const float ArmorReductionMultiplier = 0.06f;
 
@@ -47,6 +49,14 @@ public class GameplayConstants
 		/* Siege 	*/ 	{ 1.00f,    0.50f,      1.00f,      1.50f,      1.00f,      0.50f,      1.50f },
 		/* Spells 	*/ 	{ 1.00f,    1.00f,      1.25f,      1.00f,      1.00f,      0.75f,      1.00f },
 	};
+
+	/*
+	 * WARCRAFT III DISTANCE TO UNITY DISTANCE
+	 */
+	public static float wc3distanceToUnityDistance(float wc3dist)
+	{
+		return wc3dist / 128f;
+	}
 }
 
 public enum AttackTypeEnum : int

@@ -107,36 +107,38 @@ MonoBehaviour:
     abilitiesHero: []
     abilitiesNormal: []
     selectionScale: 1
-    acquisitionRange: 5.46875
-    attackType: 2
+    health: 150
+    maxHealth: 150
+    healthRegeneration: 0.5
+    evasionChance: 0
+    armor: 1
+    armorType: 2
     cooldownTime: 1
     damage: 9
     damageFactorMedium: 0
     damageFactorSmall: 0
     damageNumDice: 1
     damageSidesPerDice: 8
-    projectileHomingEnabled: 0
-    projectileSpeed: 0
+    attackType: 2
+    projectileSpeed: 7.03125
     range: 0.78125
-    armor: 1
-    armorType: 2
+    acquisitionRange: 5.46875
+    critChance: 0
+    critExtraMultiplier: 0
+    projectileHomingEnabled: 0
+    mana: 30
+    maxMana: 0
+    manaRegeneration: 0
     movementSpeed: 0.859375
+    experienceDropped: 0
     turnRate: 0.5
+    goldDropped: 4
     goldBountyAwardedBase: 30
     goldBountyAwardedNumbersPerDice: 1
     goldBountyAwardedSidesPerDice: 20
-    currentHealth: 150
-    maxHealth: 150
-    healthRegeneration: 0.5
-    currentMana: 0
-    maxMana: 0
-    manaRegeneration: 0
-    Name: Crazed Madman
-    goldDropped: 4
-    evasionChance: 0
-    critChance: 0
-    critExtraMultiplier: 0
+    name: Crazed Madman
     movementSpeedPercentage: 1
+    attackSpeedPercentage: 1
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1

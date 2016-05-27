@@ -477,6 +477,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 906567035}
+  - 114: {fileID: 906567036}
   m_Layer: 0
   m_Name: Globals
   m_TagString: Untagged
@@ -499,6 +500,39 @@ Transform:
   - {fileID: 348453399}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &906567036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 906567034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729ada8c06b94de45b330a70df677be7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WestTeam:
+  - {fileID: 1354249761}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  EastTeam:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &960702598
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,20 +809,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11402032, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
-      propertyPath: Level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11470914, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
-      propertyPath: heroStats.Strength
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 11470914, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
-      propertyPath: heroStats.Intelligence
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11467848, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1354249761 stripped

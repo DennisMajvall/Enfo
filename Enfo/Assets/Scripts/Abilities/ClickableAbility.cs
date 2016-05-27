@@ -19,7 +19,7 @@ public class ClickableAbility : Ability
 	public virtual bool ManaIsEnough()
 	{
 		Debug.Assert(OwnerStats, "The OwnerStats variable may not be null when calling ClickableAbility.ManaIsEnough");
-		return ManaCost < OwnerStats.CurrentMana;
+		return ManaCost < OwnerStats.Mana;
 	}
 
 	public virtual bool CanBeUsed()

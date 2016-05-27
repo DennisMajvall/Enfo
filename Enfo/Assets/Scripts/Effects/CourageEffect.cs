@@ -38,13 +38,13 @@ public class CourageEffect : Effect
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent>();
 
-		unitStats.ChangeHealthRegeneration(HealthRegen[level - 1]);
+		unitStats.IncreaseHealthRegeneration(HealthRegen[level - 1]);
 		unitStats.ChangeMovementSpeedPercentage(MovementSpeedPercentage[level - 1]);
 	}
 
 	protected override void OnRemoveEffect()
 	{
-		unitStats.ChangeHealthRegeneration(-HealthRegen[Level - 1]);
+		unitStats.IncreaseHealthRegeneration(-HealthRegen[Level - 1]);
 		unitStats.ChangeMovementSpeedPercentage(-MovementSpeedPercentage[Level - 1]);
 	}
 }

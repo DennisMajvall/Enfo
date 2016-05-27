@@ -54,15 +54,15 @@ public class CombatMasteryEffect : Effect
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent>();
 
-		unitStats.ChangeEvasionChance 		(Evasion[level-1]);
-		unitStats.ChangeCritChance 			(CritChance[level-1]);
-		unitStats.ChangeCritExtraMultiplier	(CritExtraMultiplier [level-1]);
+		unitStats.IncreaseEvasionChance 		(Evasion[level-1]);
+		unitStats.IncreaseCritChance 			(CritChance[level-1]);
+		unitStats.IncreaseCritExtraMultiplier	(CritExtraMultiplier [level-1]);
 	}
 
 	protected override void OnRemoveEffect()
 	{
-		unitStats.ChangeEvasionChance		(-Evasion[Level-1]);
-		unitStats.ChangeCritChance			(-CritChance[Level-1]);
-		unitStats.ChangeCritExtraMultiplier	(-CritExtraMultiplier [Level-1]);
+		unitStats.IncreaseEvasionChance		(-Evasion[Level-1]);
+		unitStats.IncreaseCritChance			(-CritChance[Level-1]);
+		unitStats.IncreaseCritExtraMultiplier	(-CritExtraMultiplier [Level-1]);
 	}
 }

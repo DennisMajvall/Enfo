@@ -107,36 +107,38 @@ MonoBehaviour:
     abilitiesHero: []
     abilitiesNormal: []
     selectionScale: 1
-    acquisitionRange: 5.46875
-    attackType: 2
+    health: 85
+    maxHealth: 85
+    healthRegeneration: 0.5
+    evasionChance: 0
+    armor: 1
+    armorType: 2
     cooldownTime: 1.7
     damage: 7
     damageFactorMedium: 0
     damageFactorSmall: 0
     damageNumDice: 1
     damageSidesPerDice: 3
-    projectileHomingEnabled: 0
-    projectileSpeed: 0
+    attackType: 2
+    projectileSpeed: 7.03125
     range: 0.78125
-    armor: 1
-    armorType: 2
+    acquisitionRange: 5.46875
+    critChance: 0
+    critExtraMultiplier: 0
+    projectileHomingEnabled: 0
+    mana: 30
+    maxMana: 0
+    manaRegeneration: 0
     movementSpeed: 0.8203125
+    experienceDropped: 0
     turnRate: 0.5
+    goldDropped: 4
     goldBountyAwardedBase: 10
     goldBountyAwardedNumbersPerDice: 1
     goldBountyAwardedSidesPerDice: 20
-    currentHealth: 85
-    maxHealth: 85
-    healthRegeneration: 0.5
-    currentMana: 0
-    maxMana: 0
-    manaRegeneration: 0
-    Name: Gnoll
-    goldDropped: 4
-    evasionChance: 0
-    critChance: 0
-    critExtraMultiplier: 0
+    name: Gnoll
     movementSpeedPercentage: 1
+    attackSpeedPercentage: 1
 --- !u!114 &11482474
 MonoBehaviour:
   m_ObjectHideFlags: 1
