@@ -2,6 +2,9 @@
 
 public class GameplayConstants
 {
+	/**
+	 * GAMEPLAY CONSTANTS
+	 */
 	#region Attributes
 	public const float DamagePerPrimaryAttribute	= 2.5f;
 
@@ -22,12 +25,23 @@ public class GameplayConstants
 	public const float MonsterExpDropIncreaseFactorPerLevel	= 0.2f;
 	#endregion
 
-	#region Other
+	#region Armor
 	const float ArmorReductionMultiplier = 0.06f;
+
+	private static float[,] attackTypeVsArmorTypeMultiplier = new float[numAtk, numArmor] {
+		/* 				  Light,	Medium,		Heavy,		Fortified,	Normal,		Hero,		Unarmored */
+		/* Chaos 	*/	{ 1.00f,    1.00f,      1.00f,      1.00f,      1.00f,      1.00f,      1.00f },
+		/* Hero 	*/ 	{ 1.00f,    1.00f,      1.00f,      0.50f,      1.00f,      1.00f,      1.00f },
+		/* Magic 	*/ 	{ 1.25f,    0.75f,      1.50f,      0.40f,      1.00f,      0.50f,      1.00f },
+		/* Normal 	*/ 	{ 1.00f,    1.25f,      1.00f,      0.80f,      1.00f,      1.00f,      1.00f },
+		/* Pierce 	*/ 	{ 2.00f,    0.75f,      1.00f,      0.50f,      1.00f,      0.50f,      1.00f },
+		/* Siege 	*/ 	{ 1.00f,    0.50f,      1.00f,      1.50f,      1.00f,      0.50f,      1.50f },
+		/* Spells 	*/ 	{ 1.00f,    1.00f,      1.25f,      1.00f,      1.00f,      0.75f,      1.00f },
+	};
 	#endregion
 
 	/**
-	 * Calculates damage reduction from armor based on attacker's attack type, and target's armor type and armor.
+	 * METHODS
 	 */
 	public static float ArmorDamageReduction(AttackTypeEnum attackType, ArmorTypeEnum armorType, float armorAmount)
 	{
@@ -50,20 +64,7 @@ public class GameplayConstants
 
 	private const int numAtk = (int)AttackTypeEnum.NUM_TYPES;
 	private const int numArmor = (int)ArmorTypeEnum.NUM_TYPES;
-	private static float[,] attackTypeVsArmorTypeMultiplier = new float[numAtk, numArmor] {
-		/* 				  Light,	Medium,		Heavy,		Fortified,	Normal,		Hero,		Unarmored */
-		/* Chaos 	*/	{ 1.00f,    1.00f,      1.00f,      1.00f,      1.00f,      1.00f,      1.00f },
-		/* Hero 	*/ 	{ 1.00f,    1.00f,      1.00f,      0.50f,      1.00f,      1.00f,      1.00f },
-		/* Magic 	*/ 	{ 1.25f,    0.75f,      1.50f,      0.40f,      1.00f,      0.50f,      1.00f },
-		/* Normal 	*/ 	{ 1.00f,    1.25f,      1.00f,      0.80f,      1.00f,      1.00f,      1.00f },
-		/* Pierce 	*/ 	{ 2.00f,    0.75f,      1.00f,      0.50f,      1.00f,      0.50f,      1.00f },
-		/* Siege 	*/ 	{ 1.00f,    0.50f,      1.00f,      1.50f,      1.00f,      0.50f,      1.50f },
-		/* Spells 	*/ 	{ 1.00f,    1.00f,      1.25f,      1.00f,      1.00f,      0.75f,      1.00f },
-	};
 
-	/*
-	 * WARCRAFT III DISTANCE TO UNITY DISTANCE
-	 */
 	public static float wc3distanceToUnityDistance(float wc3dist)
 	{
 		return wc3dist / 128f;
