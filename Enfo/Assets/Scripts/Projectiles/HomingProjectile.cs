@@ -31,9 +31,6 @@ public class HomingProjectile : ProjectileBehaviour
 			// Deal damage to the target
 			Target.GetComponent<UnitStatsComponent>().DealDamage (stats.damage, stats);
 
-
-
-
 			Destroy(gameObject);
 			return;
 		}

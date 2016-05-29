@@ -112,14 +112,23 @@ public class UnitStatsComponent : MonoBehaviour
 
 			unitStats.health -= amount;
 
-			if (IsDead) {
+			 if (IsDead) {
 				// Give gold to killing player
-				GameObject client = GameObject.Find("Client");
-				client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
+				// Give gold to killing player (always gives to Client as-of-now)
+				GameObject client = GameObject.Find ("Client");
+				client.GetComponent<GoldContainer> ().ChangeGold (gameObject.GetComponent<UnitStatsComponent> ().GoldDropped);
 
-				// and destroy
-				Destroy(gameObject);
-			} else if (Health > MaxHealth) {
+				// Give experience to the killing team (always gives to west team as-of-now)
+				Teams team = GameObject.Find ("Globals").GetComponent<Teams>();
+				int teamMembers = team.countTeam(true);
+				foreach (GameObject hero in team.WestTeam) {
+					if (hero)
+						hero.GetComponent<HeroStatsComponent> ().AddExperience (ExperienceDropped / teamMembers);
+				}
+
+ 				// and destroy
+ 				Destroy (gameObject);
+ 			} else if (Health > MaxHealth) {
 				unitStats.health = unitStats.maxHealth;
 			}
 		}

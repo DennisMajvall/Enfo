@@ -130,7 +130,7 @@ MonoBehaviour:
     maxMana: 30
     manaRegeneration: 0.02
     movementSpeed: 0.78125
-    experienceDropped: 0
+    experienceDropped: 10
     turnRate: 0.5
     goldDropped: 4
     goldBountyAwardedBase: 5
