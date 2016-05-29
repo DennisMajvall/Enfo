@@ -2,6 +2,9 @@
 
 public static class Globals
 {
+	public static GameObject 	GlobalsGameObject	= GameObject.Find ("Globals");				// The Globals game object in the hierarchy
+	public static Teams 		Teams 				= GlobalsGameObject.GetComponent<Teams> ();	// The Teams game component of Globals
+
 	public static RaycastHit GetClosestRaycastHit(RaycastHit[] ray_hits)
 	{
 		int shortest_index = 0;

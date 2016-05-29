@@ -119,7 +119,7 @@ public class UnitStatsComponent : MonoBehaviour
 				client.GetComponent<GoldContainer> ().ChangeGold (gameObject.GetComponent<UnitStatsComponent> ().GoldDropped);
 
 				// Give experience to the killing team (always gives to west team as-of-now)
-				Teams team = GameObject.Find ("Globals").GetComponent<Teams>();
+				Teams team = Globals.Teams;
 				int teamMembers = team.countTeam(true);
 				foreach (GameObject hero in team.WestTeam) {
 					if (hero)
