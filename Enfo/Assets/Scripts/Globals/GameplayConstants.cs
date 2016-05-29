@@ -20,7 +20,8 @@ public class GameplayConstants
 
 	#region Experience
 	public const float ExpRequiredAtLevelOne 				= 100f;
-	public const float ExpRequiredIncreaseFactorPerLevel	= 0.20f;
+	public const float ExpRequiredIncreaseFactorPerLevel	= 1.20f;
+
 	public const float MonsterLevelOneExpDrop				= 10f;
 	public const float MonsterExpDropIncreaseFactorPerLevel	= 0.2f;
 	#endregion
