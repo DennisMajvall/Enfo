@@ -15,6 +15,7 @@ public class UnitStats
 	public float 			evasionChance;
 	public float 			armor;
 	public ArmorTypeEnum	armorType = ArmorTypeEnum.Normal;
+	public bool				invulnerable;
 
 	// offence
 	public float 			cooldownTime = 1.20f;
@@ -55,7 +56,7 @@ public class UnitStatsComponent : MonoBehaviour
 {
 
 	[SerializeField]
-	UnitStats unitStats;
+	UnitStats unitStats = new UnitStats();
 
 	/**
 	 * GETTERS
@@ -67,7 +68,8 @@ public class UnitStatsComponent : MonoBehaviour
 	public float 			EvasionChance 		{ get { return unitStats.evasionChance; } }
 	public float 			Armor 				{ get { return unitStats.armor; } }
 	public ArmorTypeEnum 	ArmorType 			{ get { return unitStats.armorType; } }
-
+	public bool				Invulnerable		{ get { return unitStats.invulnerable; } }
+	
 	// offence
 	public float 			Damage 				{ get { return unitStats.damage; } }
 	public AttackTypeEnum	AttackType			{ get { return unitStats.attackType; } }
@@ -98,6 +100,9 @@ public class UnitStatsComponent : MonoBehaviour
 	// defence
 	public void DealDamage(float amount, UnitStats attackerStats)
 	{
+		if (Invulnerable)
+			return;
+
 		// Check if the target evades the projectile and proceed if it doesn't
 		if (!(EvasionChance > 0f && Random.value < EvasionChance)) {
 
@@ -119,7 +124,7 @@ public class UnitStatsComponent : MonoBehaviour
 
 				// Give experience to the killing team (always gives to west team as-of-now)
 				Teams team = Globals.Teams;
-				int teamMembers = team.countTeam(true);
+				int teamMembers = team.CountTeam(true);
 				foreach (GameObject hero in team.WestTeam) {
 					if (hero) {
 						// Divide experience between all Heroes on the killing team, calculated from a base value factored by the killed unit's level
@@ -154,9 +159,10 @@ public class UnitStatsComponent : MonoBehaviour
 		}
 	}
 
-	public void ChangeArmor(float delta) { unitStats.armor += delta; }
+	public void ChangeArmor(float delta)				{ unitStats.armor += delta; }
 	public void IncreaseHealthRegeneration(float delta) { unitStats.healthRegeneration += delta; }
-	public void IncreaseEvasionChance(float amount) { unitStats.evasionChance += amount; }
+	public void IncreaseEvasionChance(float amount)		{ unitStats.evasionChance += amount; }
+	public void SetInvulnerable(bool value)				{ unitStats.invulnerable = value; }
 
 	// offence
 	public void ChangeDamage(float delta) { unitStats.damage += delta; }

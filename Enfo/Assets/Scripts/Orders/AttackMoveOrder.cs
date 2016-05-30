@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Pathfinding;
+using System.Collections.Generic;
 
 public class AttackMoveOrder : Order
 {
@@ -14,7 +14,7 @@ public class AttackMoveOrder : Order
 
 	public void SetTarget(GameObject target)
 	{
-		attackOrder.target = target;
+		attackOrder.SetTarget(target);
 		attackOrder.isCompleted = false;
 		moveOrder.hasStarted = false;
 	}
@@ -33,12 +33,14 @@ public class AttackMoveOrder : Order
 
 	public override void Update()
 	{
+		if (!attackOrder.target)
+			GetTarget();
+
 		if (attackOrder.target) {
 			attackOrder.currentPosition = currentPosition;
 			attackOrder.Update();
 			currentPosition = attackOrder.currentPosition;
-		} else
-			GetTarget();
+		}
 
 		if (!attackOrder.target) {
 			if (moveOrder.hasStarted == false) {
@@ -59,11 +61,15 @@ public class AttackMoveOrder : Order
 
 		if (currentTargetingCooldown <= 0f) {
 			currentTargetingCooldown = targetingCooldown;
+			Collider[] colliderArray = Physics.OverlapSphere(currentPosition, attackOrder.stats.AcquisitionRange, enemyLayer, QueryTriggerInteraction.Ignore);
 
-			Collider[] colliders = Physics.OverlapSphere(currentPosition, attackOrder.stats.AcquisitionRange, enemyLayer, QueryTriggerInteraction.Ignore);
-			if (colliders.Length > 0) {
-				attackOrder.target = Globals.GetClosestCollider(colliders, currentPosition).gameObject;
-				attackOrder.isCompleted = false;
+			if (colliderArray.Length > 0) {
+				Collider closestCollider = Globals.GetClosestCollider(colliderArray, currentPosition, true);
+				
+				attackOrder.SetTarget(closestCollider ? closestCollider.gameObject : null);
+				if (attackOrder.target) {
+					attackOrder.isCompleted = false;
+				}
 			}
 		}
 	}

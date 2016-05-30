@@ -3,7 +3,9 @@ using System.Collections;
 
 public class CourageEffect : Effect
 {
-	const float healthRegenPerLevel = 1f;
+	const float healthRegenPerLevel = 4f;
+	const float movementPercentagePerLevel = 0.2f;
+	#region arrays
 	public float[] HealthRegen = new float[NumLevels] {
 		1f * healthRegenPerLevel,
 		2f * healthRegenPerLevel,
@@ -17,7 +19,6 @@ public class CourageEffect : Effect
 		10f* healthRegenPerLevel,
 	};
 
-	const float movementPercentagePerLevel = 0.2f;
 	public float[] MovementSpeedPercentage = new float[NumLevels] {
 		1f * movementPercentagePerLevel,
 		2f * movementPercentagePerLevel,
@@ -30,6 +31,7 @@ public class CourageEffect : Effect
 		9f * movementPercentagePerLevel,
 		10f* movementPercentagePerLevel,
 	};
+	#endregion
 
 	UnitStatsComponent unitStats;
 

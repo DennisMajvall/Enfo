@@ -4,6 +4,10 @@ using System.Collections;
 public class CombatMasteryEffect : Effect 
 {
 	const float evasionPerLevel = 0.05f;
+	const float critChancePerLevel = 0.09f;
+	const float critExtraMultiplier = 1f;
+
+	#region arrays
 	public float[] Evasion = new float[NumLevels] {
 		1f * evasionPerLevel,
 		2f * evasionPerLevel,
@@ -17,7 +21,6 @@ public class CombatMasteryEffect : Effect
 		10f* evasionPerLevel,
 	};
 
-	const float critChancePerLevel = 0.09f;
 	public float[] CritChance = new float[NumLevels] {
 		1f * critChancePerLevel,
 		2f * critChancePerLevel,
@@ -31,7 +34,6 @@ public class CombatMasteryEffect : Effect
 		10f* critChancePerLevel,
 	};
 
-	const float critExtraMultiplier = 1f;
 	public float[] CritExtraMultiplier = new float[NumLevels] {
 		critExtraMultiplier,
 		critExtraMultiplier,
@@ -44,9 +46,8 @@ public class CombatMasteryEffect : Effect
 		critExtraMultiplier,
 		critExtraMultiplier,
 	};
-
-
-
+	#endregion
+	
 	UnitStatsComponent unitStats;
 
 	protected override void OnApplyEffect(int level = 0)
@@ -61,7 +62,7 @@ public class CombatMasteryEffect : Effect
 
 	protected override void OnRemoveEffect()
 	{
-		unitStats.IncreaseEvasionChance		(-Evasion[Level-1]);
+		unitStats.IncreaseEvasionChance			(-Evasion[Level-1]);
 		unitStats.IncreaseCritChance			(-CritChance[Level-1]);
 		unitStats.IncreaseCritExtraMultiplier	(-CritExtraMultiplier [Level-1]);
 	}

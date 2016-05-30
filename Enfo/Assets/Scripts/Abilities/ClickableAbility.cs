@@ -43,9 +43,7 @@ public class ClickableAbility : Ability
 
 	void Update()
 	{
-		CurrentCooldown -= Time.deltaTime;
-		if (Input.GetKeyUp(KeyCode.T)) {
-			OnClick();
-		}
+		if (CurrentCooldown > 0f)
+			CurrentCooldown -= Time.deltaTime;
 	}
 }

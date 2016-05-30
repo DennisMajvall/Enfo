@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ac61b8c0fd832cd459f4b0528de67846
+timeCreated: 1464600953
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - AuraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

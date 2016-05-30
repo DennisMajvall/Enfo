@@ -1,21 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class CombatMastery : AuraAbility
+public class CombatMastery : PassiveAbility
 {
-	protected override void OnAuraEnter(Collider other)
+	CombatMasteryEffect effect_component;
+	
+	sealed protected override void OnApplyEffect(int level)
 	{
-		CombatMasteryEffect component = other.gameObject.GetComponent<CombatMasteryEffect>();
-		if (!component) {
-			component = other.gameObject.AddComponent<CombatMasteryEffect>();
-		}
-		component.ApplyEffect(Level);
-	}
+		if (!effect_component)
+			effect_component = gameObject.AddComponent<CombatMasteryEffect>();
 
-	protected override void OnAuraExit(Collider other)
-	{
-		CombatMasteryEffect component = other.gameObject.GetComponent<CombatMasteryEffect>();
-		component.RemoveEffect();
-		Destroy(component);
+		effect_component.ApplyEffect(Level);
 	}
 }
