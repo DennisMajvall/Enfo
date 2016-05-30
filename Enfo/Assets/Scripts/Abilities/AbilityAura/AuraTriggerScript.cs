@@ -8,8 +8,6 @@ public class AuraTriggerScript : MonoBehaviour
 	public TriggerAction OnEnter = null;
 	public TriggerAction OnExit = null;
 
-	List<GameObject> AffectedGameObjects = new List<GameObject>();
-
 	void OnTriggerEnter(Collider other)
 	{
 		if (OnEnter != null)

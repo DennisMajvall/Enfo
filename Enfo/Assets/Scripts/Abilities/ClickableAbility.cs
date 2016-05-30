@@ -41,7 +41,7 @@ public class ClickableAbility : Ability
 		}
 	}
 
-	void Update()
+	protected virtual void Update()
 	{
 		if (CurrentCooldown > 0f)
 			CurrentCooldown -= Time.deltaTime;

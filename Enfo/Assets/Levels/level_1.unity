@@ -807,6 +807,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475212, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478810, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: Level
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
