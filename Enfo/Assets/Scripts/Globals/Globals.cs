@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public static class Globals
 {
@@ -20,12 +21,26 @@ public static class Globals
 		return ray_hits[shortest_index];
 	}
 
-	public static Collider GetClosestCollider(Collider[] colliders, Vector3 pos)
+	public static Collider GetClosestCollider(Collider[] colliderArray, Vector3 pos, bool ignoreInvulnerable = false)
 	{
+		List<Collider> colliders = new List<Collider>(colliderArray);
+
+		if (ignoreInvulnerable) {
+			for (int i = 0; i < colliders.Count; ++i) {
+				if (colliders[i].GetComponent<UnitStatsComponent>().Invulnerable) {
+					colliders.RemoveAt(i--);
+				}
+			}
+		}
+
+		if (colliders.Count == 0)
+			return null;
+
 		int shortest_index = 0;
 		float shortest_dist = (colliders[0].transform.position - pos).sqrMagnitude;
+		
+		for (int i = 1; i < colliders.Count; ++i) {
 
-		for (int i = 1; i < colliders.Length; ++i) {
 			float dist = (colliders[i].transform.position - pos).sqrMagnitude;
 			if (dist < shortest_dist) {
 				shortest_index = i;
@@ -35,6 +50,7 @@ public static class Globals
 
 		return colliders[shortest_index];
 	}
+	
 
 	public static RaycastHit[] RaycastFromMouse(int layerMasks)
 	{
@@ -42,5 +58,12 @@ public static class Globals
 		float y = Input.mousePosition.y;
 		Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y, Camera.main.nearClipPlane));
 		return Physics.RaycastAll(ray, 100f, layerMasks, QueryTriggerInteraction.Ignore);
+	}
+	
+	public static void Swap<T>(ref T left, ref T right)
+	{
+		T temp = left;
+		left = right;
+		right = temp;
 	}
 }

@@ -15,6 +15,7 @@ public class HeroStats
 	public float 	reqExperience;
 	public int 		level;
 	public string 	heroName; // class name, i.e. 'Ranger' 'Paladin'
+	public bool		isInWestTeam;
 	
 	//Attributes
 	public AttributeTypes primaryAttribute;
@@ -30,7 +31,7 @@ public class HeroStats
 public class HeroStatsComponent : UnitStatsComponent
 {
 	[SerializeField]
-	HeroStats heroStats;
+	HeroStats heroStats = new HeroStats();
 
 	/**
 	 * GETTERS
@@ -40,6 +41,7 @@ public class HeroStatsComponent : UnitStatsComponent
 	public int 		Level				{ get { return heroStats.level; } }
 	public string 	HeroName 			{ get { return heroStats.heroName; } }
 	public int 		Strength			{ get { return Mathf.RoundToInt(heroStats.strength); } }
+	public bool		IsInWestTeam		{ get { return heroStats.isInWestTeam; } }
 
 	/**
 	 * SETTERS AND CHANGERS

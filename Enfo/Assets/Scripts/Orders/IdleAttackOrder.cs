@@ -24,7 +24,7 @@ public class IdleAttackOrder : Order
 			attackOrder.currentPosition = currentPosition;
 			attackOrder.Update();
 			if (!attackOrder.TargetIsInsideRange()) {
-				attackOrder.target = null;
+				attackOrder.SetTarget(null);
 				attackOrder.isCompleted = false;
 			}
 		} else
@@ -45,7 +45,7 @@ public class IdleAttackOrder : Order
 			
 			Collider[] colliders = Physics.OverlapSphere(currentPosition, attackOrder.stats.Range, LayerMasks.Targetable9, QueryTriggerInteraction.Ignore);
 			if (colliders.Length > 0) {
-				attackOrder.target = Globals.GetClosestCollider(colliders, currentPosition).gameObject;
+				attackOrder.SetTarget(Globals.GetClosestCollider(colliders, currentPosition).gameObject);
 				attackOrder.isCompleted = false;
 			}
 		}

@@ -9,21 +9,19 @@ public class Teams : MonoBehaviour {
 	/**
 	 * west = true to count West team's members, false to count East's
 	 */
-	public int countTeam(bool west) {
-		GameObject[] team;
-		int count = 0;
+	public int CountTeam(bool west) {
+		return GetTeamMembers(west).Count;
+	}
 
-		if (west) {
-			team = WestTeam;
-		} else {
-			team = EastTeam;
-		}
+	public List<GameObject> GetTeamMembers(bool west)
+	{
+		List<GameObject> result = new List<GameObject>();
+		GameObject[] team = west ? WestTeam : EastTeam;
+		
+		foreach (GameObject member in team)
+			if (member)
+				result.Add(member);
 
-		foreach (GameObject member in team) {
-			if (member) {
-				count++;
-			}
-		}
-		return count;
+		return result;
 	}
 }

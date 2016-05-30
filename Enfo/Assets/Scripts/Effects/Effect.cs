@@ -3,7 +3,7 @@
 public class Effect : MonoBehaviour
 {
 	public const int NumLevels = 10;
-	protected int Level;
+	public int Level;
 	protected bool IsApplied;
 
 	public void ApplyEffect(int level = 0)

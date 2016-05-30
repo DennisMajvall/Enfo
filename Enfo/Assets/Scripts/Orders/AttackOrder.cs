@@ -4,11 +4,11 @@ using Pathfinding;
 public class AttackOrder : Order
 {
 	public GameObject projectilePrefab;
+	public GameObject target { get; private set; }
 
-	public GameObject target;
-	
 	MoveOrder moveOrder;
 	Seeker seeker;
+	UnitStatsComponent targetStats;
 
 	bool isChannelingAttack = false;
 	float currentChannelTime = 0f;
@@ -19,6 +19,20 @@ public class AttackOrder : Order
 
 	float timeSinceMoveOrdered = 0f;
 	float moveOrderInterval = 3f;
+
+	public void SetTarget(GameObject new_target)
+	{
+		GameObject oldTarget = this.target;
+		this.target = new_target;
+		
+		target = new_target;
+		if (new_target != null && oldTarget != new_target) {
+			targetStats = target.GetComponent<UnitStatsComponent>();
+			if (targetStats && targetStats.Invulnerable) {
+				target = null;
+			}
+		}
+	}
 
 	public AttackOrder(UnitStatsComponent stats, Vector3 currentPosition, GameObject target, Seeker seeker, GameObject attacker)
 	{
@@ -38,6 +52,11 @@ public class AttackOrder : Order
 	{
 		if (target == null || isCompleted) {
 			isCompleted = true;
+			return;
+		}
+
+		if (targetStats && targetStats.Invulnerable) {
+			SetTarget(null);
 			return;
 		}
 
