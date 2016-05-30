@@ -130,13 +130,13 @@ MonoBehaviour:
     maxMana: 0
     manaRegeneration: 0
     movementSpeed: 0.859375
-    experienceDropped: 0
     turnRate: 0.5
     goldDropped: 4
     goldBountyAwardedBase: 30
     goldBountyAwardedNumbersPerDice: 1
     goldBountyAwardedSidesPerDice: 20
     name: Crazed Madman
+    monsterLevel: 2
     movementSpeedPercentage: 1
     attackSpeedPercentage: 1
 --- !u!114 &11482474

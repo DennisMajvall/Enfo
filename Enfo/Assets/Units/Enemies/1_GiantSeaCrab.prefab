@@ -130,13 +130,13 @@ MonoBehaviour:
     maxMana: 30
     manaRegeneration: 0.02
     movementSpeed: 0.78125
-    experienceDropped: 10
     turnRate: 0.5
     goldDropped: 4
     goldBountyAwardedBase: 5
     goldBountyAwardedNumbersPerDice: 1
     goldBountyAwardedSidesPerDice: 8
     name: Giant Salt Crab
+    monsterLevel: 1
     movementSpeedPercentage: 1
     attackSpeedPercentage: 1
 --- !u!114 &11482474

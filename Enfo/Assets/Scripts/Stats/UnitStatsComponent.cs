@@ -38,13 +38,13 @@ public class UnitStats
 
 	// utility
 	public float 			movementSpeed = 350f;
-	public float 			experienceDropped;
 	public float 			turnRate = 0.6f;
 	public float 			goldDropped;
 	public float 			goldBountyAwardedBase;					// Needed for the Wc3 porting
 	public float 			goldBountyAwardedNumbersPerDice	= 1f;	// Needed for the Wc3 porting
 	public float 			goldBountyAwardedSidesPerDice;			// Needed for the Wc3 porting
 	public string 			name = "ProperName/TextName";
+	public int 				monsterLevel;
 
 
 	[HideInInspector] public float movementSpeedPercentage = 1.0f;
@@ -85,8 +85,8 @@ public class UnitStatsComponent : MonoBehaviour
 	// utility
 	public float 			MovementSpeed 		{ get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
 	public float 			GoldDropped 		{ get { return unitStats.goldDropped; } }
-	public float 			ExperienceDropped 	{ get { return unitStats.experienceDropped; } }
 	public string 			Name 				{ get { return unitStats.name; } }
+	public int 				MonsterLevel		{ get { return unitStats.monsterLevel; } }
 
 	// other
 	public bool 			IsDead 				{ get { return Health <= 0f; } }
@@ -113,7 +113,6 @@ public class UnitStatsComponent : MonoBehaviour
 			unitStats.health -= amount;
 
 			 if (IsDead) {
-				// Give gold to killing player
 				// Give gold to killing player (always gives to Client as-of-now)
 				GameObject client = GameObject.Find ("Client");
 				client.GetComponent<GoldContainer> ().ChangeGold (gameObject.GetComponent<UnitStatsComponent> ().GoldDropped);
@@ -122,8 +121,11 @@ public class UnitStatsComponent : MonoBehaviour
 				Teams team = Globals.Teams;
 				int teamMembers = team.countTeam(true);
 				foreach (GameObject hero in team.WestTeam) {
-					if (hero)
-						hero.GetComponent<HeroStatsComponent> ().AddExperience (ExperienceDropped / teamMembers);
+					if (hero) {
+						// Divide experience between all Heroes on the killing team, calculated from a base value factored by the killed unit's level
+						float experience = GameplayConstants.MonsterLevelOneExpDrop * Mathf.Pow(GameplayConstants.MonsterExpDropIncreaseFactorPerLevel, MonsterLevel) / teamMembers;
+						hero.GetComponent<HeroStatsComponent> ().AddExperience (experience);
+					}
 				}
 
  				// and destroy
