@@ -5,16 +5,17 @@ public class HomingProjectile : ProjectileBehaviour
 {
 	public GameObject Target;
 	public GameObject Owner; // the unit who threw/shot/cast the projectile at the target
-	
+	public UnitStatsComponent ownerStats;
+
 	void Start()
 	{
-		UnitStatsComponent throwerStats = Owner.GetComponent<UnitStatsComponent>();
-		stats.evasionChance = throwerStats.EvasionChance;
-		stats.critChance = throwerStats.CritChance;
-		stats.critExtraMultiplier = throwerStats.CritExtraMultiplier;
-		stats.attackType = throwerStats.AttackType;
-		stats.damage = throwerStats.Damage;
-		stats.projectileSpeed = throwerStats.ProjectileSpeed;
+		ownerStats = Owner.GetComponent<UnitStatsComponent>();
+		stats.evasionChance = ownerStats.EvasionChance;
+		stats.critChance = ownerStats.CritChance;
+		stats.critExtraMultiplier = ownerStats.CritExtraMultiplier;
+		stats.attackType = ownerStats.AttackType;
+		stats.damage = ownerStats.Damage;
+		stats.projectileSpeed = ownerStats.ProjectileSpeed;
 	}
 
 	void Update()
@@ -29,7 +30,7 @@ public class HomingProjectile : ProjectileBehaviour
 
 		if (currentSpeed >= distanceLeft) {
 			// Deal damage to the target
-			Target.GetComponent<UnitStatsComponent>().DealDamage (stats.damage, stats);
+			Target.GetComponent<UnitStatsComponent>().DealDamage (stats.damage, stats, ownerStats);
 
 			Destroy(gameObject);
 			return;

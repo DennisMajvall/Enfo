@@ -4,9 +4,9 @@ using System.Collections;
 [System.Serializable]
 public class UnitStats
 {
-	public string[] abilitiesHero;      // Needed for the Wc3 porting
-	public string[] abilitiesNormal;    // Needed for the Wc3 porting
-	public float selectionScale = 1.7f; // Needed for the Wc3 porting
+	public string[] abilitiesHero;			// Needed for the Wc3 porting
+	public string[] abilitiesNormal;		// Needed for the Wc3 porting
+	public float selectionScale = 1.7f;		// Needed for the Wc3 porting
 
 	// defence
 	public float 			health;
@@ -16,14 +16,15 @@ public class UnitStats
 	public float 			armor;
 	public ArmorTypeEnum	armorType = ArmorTypeEnum.Normal;
 	public bool				invulnerable;
+	public float			lifeStealPercentage;
 
 	// offence
 	public float 			cooldownTime = 1.20f;
 	public float 			damage = 2f;
-	public float 			damageFactorMedium;
-	public float 			damageFactorSmall;
-	public float 			damageNumDice = 1f;
-	public float 			damageSidesPerDice = 8f;
+	public float 			damageFactorMedium;					// Needed for the Wc3 porting
+	public float 			damageFactorSmall;                  // Needed for the Wc3 porting
+	public float 			damageNumDice = 1f;					// Needed for the Wc3 porting
+	public float 			damageSidesPerDice = 8f;            // Needed for the Wc3 porting
 	public AttackTypeEnum 	attackType = AttackTypeEnum.Hero;
 	public float 			projectileSpeed = 900f;
 	public float 			range = 180f;
@@ -69,7 +70,7 @@ public class UnitStatsComponent : MonoBehaviour
 	public float 			Armor 				{ get { return unitStats.armor; } }
 	public ArmorTypeEnum 	ArmorType 			{ get { return unitStats.armorType; } }
 	public bool				Invulnerable		{ get { return unitStats.invulnerable; } }
-	
+
 	// offence
 	public float 			Damage 				{ get { return unitStats.damage; } }
 	public AttackTypeEnum	AttackType			{ get { return unitStats.attackType; } }
@@ -98,7 +99,7 @@ public class UnitStatsComponent : MonoBehaviour
 	 * SETTERS AND CHANGERS
 	 */
 	// defence
-	public void DealDamage(float amount, UnitStats attackerStats)
+	public void DealDamage(float amount, UnitStats attackerStats, UnitStatsComponent attackerStatsComponent)
 	{
 		if (Invulnerable)
 			return;
@@ -117,10 +118,14 @@ public class UnitStatsComponent : MonoBehaviour
 
 			unitStats.health -= amount;
 
-			 if (IsDead) {
+			if (attackerStatsComponent) {
+				attackerStatsComponent.ApplyOnAttackEffects(amount);
+			}
+
+			if (IsDead) {
 				// Give gold to killing player (always gives to Client as-of-now)
-				GameObject client = GameObject.Find ("Client");
-				client.GetComponent<GoldContainer> ().ChangeGold (gameObject.GetComponent<UnitStatsComponent> ().GoldDropped);
+				GameObject client = GameObject.Find("Client");
+				client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
 
 				// Give experience to the killing team (always gives to west team as-of-now)
 				Teams team = Globals.Teams;
@@ -129,13 +134,13 @@ public class UnitStatsComponent : MonoBehaviour
 					if (hero) {
 						// Divide experience between all Heroes on the killing team, calculated from a base value factored by the killed unit's level
 						float experience = GameplayConstants.MonsterLevelOneExpDrop * Mathf.Pow(GameplayConstants.MonsterExpDropIncreaseFactorPerLevel, MonsterLevel) / teamMembers;
-						hero.GetComponent<HeroStatsComponent> ().AddExperience (experience);
+						hero.GetComponent<HeroStatsComponent>().AddExperience(experience);
 					}
 				}
 
- 				// and destroy
- 				Destroy (gameObject);
- 			} else if (Health > MaxHealth) {
+				// and destroy
+				Destroy(gameObject);
+			} else if (Health > MaxHealth) {
 				unitStats.health = unitStats.maxHealth;
 			}
 		}
@@ -163,7 +168,8 @@ public class UnitStatsComponent : MonoBehaviour
 	public void IncreaseHealthRegeneration(float delta) { unitStats.healthRegeneration += delta; }
 	public void IncreaseEvasionChance(float amount)		{ unitStats.evasionChance += amount; }
 	public void SetInvulnerable(bool value)				{ unitStats.invulnerable = value; }
-
+	public void ChangeLifeStealPercentage(float delta)	{ unitStats.lifeStealPercentage += delta; }
+	
 	// offence
 	public void ChangeDamage(float delta) { unitStats.damage += delta; }
 	public void ChangeAttackSpeedPercentage(float delta) { unitStats.attackSpeedPercentage += delta; }
@@ -206,5 +212,14 @@ public class UnitStatsComponent : MonoBehaviour
 
 		if (ManaRegeneration > 0f)
 			ChangeMana(ManaRegeneration * Time.deltaTime);
+	}
+
+	// Apply Life-steal etc
+	public void ApplyOnAttackEffects(float damageAmount)
+	{
+		if (gameObject && !IsDead && unitStats.lifeStealPercentage > 0f) {
+			float lifeStealAmount = damageAmount * unitStats.lifeStealPercentage;
+			IncreaseHealth(lifeStealAmount);
+		}
 	}
 }
