@@ -11,9 +11,10 @@ public enum AttributeTypes
 [System.Serializable]
 public class HeroStats
 {
-	public float experience;
-	public int level = 1;
-	public string heroName; // class name, i.e. 'Ranger' 'Paladin'
+	public float	experience;
+	public float 	reqExperience;
+	public int 		level;
+	public string 	heroName; // class name, i.e. 'Ranger' 'Paladin'
 	
 	//Attributes
 	public AttributeTypes primaryAttribute;
@@ -34,21 +35,35 @@ public class HeroStatsComponent : UnitStatsComponent
 	/**
 	 * GETTERS
 	 */
-	public float 	Experience	{ get { return heroStats.experience; } }
-	public int 		Level		{ get { return heroStats.level; } }
-	public string 	HeroName 	{ get { return heroStats.heroName; } }
-	public int Strength			{ get { return Mathf.RoundToInt(heroStats.strength); } }
+	public float 	Experience			{ get { return heroStats.experience; } }
+	public float	RequiredExperience 	{ get { return heroStats.reqExperience; } }
+	public int 		Level				{ get { return heroStats.level; } }
+	public string 	HeroName 			{ get { return heroStats.heroName; } }
+	public int 		Strength			{ get { return Mathf.RoundToInt(heroStats.strength); } }
 
 	/**
 	 * SETTERS AND CHANGERS
 	 */
-	public void ChangeExperience(float delta)	{ heroStats.experience += delta; }
 	public void ChangeHeroName(string newName)	{ heroStats.heroName = newName; }
-	public void ChangeLevel(int delta)			{ heroStats.level += delta; }
-	public void AddExperience(float delta)
+	public void AddLevels(int levels)			{ heroStats.level += levels; }
+	public void SetRequiredExperience(float req){ heroStats.reqExperience = req; }
+	public void AddExperience(float amount)
 	{
-		heroStats.experience += delta;
-		// Something about leveling up here
+		// Check for Faenella's Grace and Enfeeble here, and adjust amount accordingly
+
+		// Add experience
+		heroStats.experience += amount;
+
+		if (Experience >= RequiredExperience) {
+			// Level up
+			while (Experience >= RequiredExperience) {
+				AddLevels (1);
+				heroStats.experience -= RequiredExperience;
+				heroStats.reqExperience *= GameplayConstants.ExpRequiredIncreaseFactorPerLevel;
+			}
+
+			// Do a level up special effect here
+		}
 	}
 
 	//Attributes
@@ -98,5 +113,8 @@ public class HeroStatsComponent : UnitStatsComponent
 		ChangeStrength(str);
 		ChangeIntelligence(intel);
 		ChangeAgility(agi);
+
+		heroStats.reqExperience = GameplayConstants.ExpRequiredAtLevelOne;
+		heroStats.level = 1;
 	}
 }

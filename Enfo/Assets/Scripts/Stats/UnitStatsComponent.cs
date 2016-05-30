@@ -9,42 +9,42 @@ public class UnitStats
 	public float selectionScale = 1.7f; // Needed for the Wc3 porting
 
 	// defence
-	public float health;
-	public float maxHealth;
-	public float healthRegeneration = 0.5f;
-	public float evasionChance;
-	public float armor;
-	public ArmorTypeEnum armorType = ArmorTypeEnum.Normal;
+	public float 			health;
+	public float 			maxHealth;
+	public float 			healthRegeneration = 0.5f;
+	public float 			evasionChance;
+	public float 			armor;
+	public ArmorTypeEnum	armorType = ArmorTypeEnum.Normal;
 
 	// offence
-	public float cooldownTime = 1.20f;
-	public float damage = 2f;
-	public float damageFactorMedium;
-	public float damageFactorSmall;
-	public float damageNumDice = 1f;
-	public float damageSidesPerDice = 8f;
-	public AttackTypeEnum attackType = AttackTypeEnum.Hero;
-	public float projectileSpeed = 900f;
-	public float range = 180f;
-	public float acquisitionRange = 400f;
-	public float critChance;
-	public float critExtraMultiplier;
-	public bool projectileHomingEnabled;
+	public float 			cooldownTime = 1.20f;
+	public float 			damage = 2f;
+	public float 			damageFactorMedium;
+	public float 			damageFactorSmall;
+	public float 			damageNumDice = 1f;
+	public float 			damageSidesPerDice = 8f;
+	public AttackTypeEnum 	attackType = AttackTypeEnum.Hero;
+	public float 			projectileSpeed = 900f;
+	public float 			range = 180f;
+	public float 			acquisitionRange = 400f;
+	public float 			critChance;
+	public float 			critExtraMultiplier;
+	public bool 			projectileHomingEnabled;
 
 	// magic
-	public float mana = 30f;
-	public float maxMana = 30f;
-	public float manaRegeneration = 0.02f;
+	public float 			mana = 30f;
+	public float 			maxMana = 30f;
+	public float 			manaRegeneration = 0.02f;
 
 	// utility
-	public float movementSpeed = 350f;
-	public float experienceDropped;
-	public float turnRate = 0.6f;
-	public float goldDropped;
-	public float goldBountyAwardedBase;					// Needed for the Wc3 porting
-	public float goldBountyAwardedNumbersPerDice = 1f;	// Needed for the Wc3 porting
-	public float goldBountyAwardedSidesPerDice;			// Needed for the Wc3 porting
-	public string name = "ProperName/TextName";
+	public float 			movementSpeed = 350f;
+	public float 			turnRate = 0.6f;
+	public float 			goldDropped;
+	public float 			goldBountyAwardedBase;					// Needed for the Wc3 porting
+	public float 			goldBountyAwardedNumbersPerDice	= 1f;	// Needed for the Wc3 porting
+	public float 			goldBountyAwardedSidesPerDice;			// Needed for the Wc3 porting
+	public string 			name = "ProperName/TextName";
+	public int 				monsterLevel;
 
 
 	[HideInInspector] public float movementSpeedPercentage = 1.0f;
@@ -61,35 +61,35 @@ public class UnitStatsComponent : MonoBehaviour
 	 * GETTERS
 	 */
 	// defence
-	public float Health { get { return unitStats.health; } }
-	public float MaxHealth { get { return unitStats.maxHealth; } }
-	public float HealthRegeneration { get { return unitStats.healthRegeneration; } }
-	public float EvasionChance { get { return unitStats.evasionChance; } }
-	public float Armor { get { return unitStats.armor; } }
-	public ArmorTypeEnum ArmorType { get { return unitStats.armorType; } }
+	public float 			Health 				{ get { return unitStats.health; } }
+	public float 			MaxHealth 			{ get { return unitStats.maxHealth; } }
+	public float 			HealthRegeneration	{ get { return unitStats.healthRegeneration; } }
+	public float 			EvasionChance 		{ get { return unitStats.evasionChance; } }
+	public float 			Armor 				{ get { return unitStats.armor; } }
+	public ArmorTypeEnum 	ArmorType 			{ get { return unitStats.armorType; } }
 
 	// offence
-	public float Damage { get { return unitStats.damage; } }
-	public AttackTypeEnum AttackType { get { return unitStats.attackType; } }
-	public float ProjectileSpeed { get { return unitStats.projectileSpeed; } }
-	public float Range { get { return unitStats.range; } }
-	public float AcquisitionRange { get { return unitStats.acquisitionRange; } }
-	public float CritChance { get { return unitStats.critChance; } }
-	public float CritExtraMultiplier { get { return unitStats.critExtraMultiplier; } }
+	public float 			Damage 				{ get { return unitStats.damage; } }
+	public AttackTypeEnum	AttackType			{ get { return unitStats.attackType; } }
+	public float 			ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
+	public float 			Range 				{ get { return unitStats.range; } }
+	public float 			AcquisitionRange 	{ get { return unitStats.acquisitionRange; } }
+	public float 			CritChance 			{ get { return unitStats.critChance; } }
+	public float 			CritExtraMultiplier	{ get { return unitStats.critExtraMultiplier; } }
 
 	// magic
-	public float Mana { get { return unitStats.mana; } }
-	public float MaxMana { get { return unitStats.maxMana; } }
-	public float ManaRegeneration { get { return unitStats.manaRegeneration; } }
+	public float 			Mana 				{ get { return unitStats.mana; } }
+	public float 			MaxMana 			{ get { return unitStats.maxMana; } }
+	public float 			ManaRegeneration	{ get { return unitStats.manaRegeneration; } }
 
 	// utility
-	public float MovementSpeed { get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
-	public float GoldDropped { get { return unitStats.goldDropped; } }
-	public float ExperienceDropped { get { return unitStats.experienceDropped; } }
-	public string Name { get { return unitStats.name; } }
+	public float 			MovementSpeed 		{ get { return unitStats.movementSpeed * unitStats.movementSpeedPercentage; } }
+	public float 			GoldDropped 		{ get { return unitStats.goldDropped; } }
+	public string 			Name 				{ get { return unitStats.name; } }
+	public int 				MonsterLevel		{ get { return unitStats.monsterLevel; } }
 
 	// other
-	public bool IsDead { get { return Health <= 0f; } }
+	public bool 			IsDead 				{ get { return Health <= 0f; } }
 
 
 	/**
@@ -112,14 +112,25 @@ public class UnitStatsComponent : MonoBehaviour
 
 			unitStats.health -= amount;
 
-			if (IsDead) {
-				// Give gold to killing player
-				GameObject client = GameObject.Find("Client");
-				client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
+			 if (IsDead) {
+				// Give gold to killing player (always gives to Client as-of-now)
+				GameObject client = GameObject.Find ("Client");
+				client.GetComponent<GoldContainer> ().ChangeGold (gameObject.GetComponent<UnitStatsComponent> ().GoldDropped);
 
-				// and destroy
-				Destroy(gameObject);
-			} else if (Health > MaxHealth) {
+				// Give experience to the killing team (always gives to west team as-of-now)
+				Teams team = Globals.Teams;
+				int teamMembers = team.countTeam(true);
+				foreach (GameObject hero in team.WestTeam) {
+					if (hero) {
+						// Divide experience between all Heroes on the killing team, calculated from a base value factored by the killed unit's level
+						float experience = GameplayConstants.MonsterLevelOneExpDrop * Mathf.Pow(GameplayConstants.MonsterExpDropIncreaseFactorPerLevel, MonsterLevel) / teamMembers;
+						hero.GetComponent<HeroStatsComponent> ().AddExperience (experience);
+					}
+				}
+
+ 				// and destroy
+ 				Destroy (gameObject);
+ 			} else if (Health > MaxHealth) {
 				unitStats.health = unitStats.maxHealth;
 			}
 		}
@@ -190,9 +201,4 @@ public class UnitStatsComponent : MonoBehaviour
 		if (ManaRegeneration > 0f)
 			ChangeMana(ManaRegeneration * Time.deltaTime);
 	}
-
-
-
-
-
 }

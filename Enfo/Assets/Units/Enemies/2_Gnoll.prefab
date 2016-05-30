@@ -130,13 +130,13 @@ MonoBehaviour:
     maxMana: 0
     manaRegeneration: 0
     movementSpeed: 0.8203125
-    experienceDropped: 0
     turnRate: 0.5
     goldDropped: 4
     goldBountyAwardedBase: 10
     goldBountyAwardedNumbersPerDice: 1
     goldBountyAwardedSidesPerDice: 20
     name: Gnoll
+    monsterLevel: 1
     movementSpeedPercentage: 1
     attackSpeedPercentage: 1
 --- !u!114 &11482474
