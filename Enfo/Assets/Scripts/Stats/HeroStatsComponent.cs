@@ -45,7 +45,7 @@ public class HeroStatsComponent : UnitStatsComponent
 	 * SETTERS AND CHANGERS
 	 */
 	public void ChangeHeroName(string newName)	{ heroStats.heroName = newName; }
-	public void AddLevels(int levels)			{ heroStats.level += levels; }
+	public void AddLevel()			{ heroStats.level += 1; }
 	public void SetRequiredExperience(float req){ heroStats.reqExperience = req; }
 	public void AddExperience(float amount)
 	{
@@ -57,7 +57,8 @@ public class HeroStatsComponent : UnitStatsComponent
 		if (Experience >= RequiredExperience) {
 			// Level up
 			while (Experience >= RequiredExperience) {
-				AddLevels (1);
+				AddLevel ();
+				LevelUpAttributes ();
 				heroStats.experience -= RequiredExperience;
 				heroStats.reqExperience *= GameplayConstants.ExpRequiredIncreaseFactorPerLevel;
 			}
@@ -67,6 +68,11 @@ public class HeroStatsComponent : UnitStatsComponent
 	}
 
 	//Attributes
+	public void LevelUpAttributes() {
+		ChangeAgility (heroStats.agilityPerLevel);
+		ChangeIntelligence (heroStats.intelligencePerLevel);
+		ChangeStrength (heroStats.strengthPerLevel);
+	}
 	public void ChangeStrength(float delta)
 	{
 		heroStats.strength += delta;
