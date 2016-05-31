@@ -40,9 +40,7 @@ public class AttackMoveOrder : Order
 			attackOrder.currentPosition = currentPosition;
 			attackOrder.Update();
 			currentPosition = attackOrder.currentPosition;
-		}
-
-		if (!attackOrder.target) {
+		} else {
 			if (moveOrder.hasStarted == false) {
 				moveOrder.hasStarted = true;
 				seeker.StartPath(currentPosition, targetPosition, moveOrder.SetNewPath);
@@ -68,6 +66,7 @@ public class AttackMoveOrder : Order
 				
 				attackOrder.SetTarget(closestCollider ? closestCollider.gameObject : null);
 				if (attackOrder.target) {
+					currentTargetingCooldown = 0f;
 					attackOrder.isCompleted = false;
 				}
 			}
