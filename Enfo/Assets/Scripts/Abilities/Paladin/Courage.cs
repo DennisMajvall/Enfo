@@ -18,7 +18,6 @@ public class Courage : AuraAbility
 		}
 
 		component.ApplyEffect(Level);
-		Debug.Log(other.gameObject.name + " entered the Courage Aura.");
 	}
 
 	protected override void OnAuraExit(Collider other)
@@ -28,7 +27,6 @@ public class Courage : AuraAbility
 
 		component.RemoveEffect();
 		Destroy(component);
-		Debug.Log(other.gameObject.name + " exited the Courage Aura.");
 	}
 
 	protected override void OnSetLevel(int level)
