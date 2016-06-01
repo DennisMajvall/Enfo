@@ -167,13 +167,8 @@ GameObject:
   - 114: {fileID: 11429272}
   - 54: {fileID: 5472204}
   - 114: {fileID: 11470914}
-  - 114: {fileID: 11402032}
-  - 114: {fileID: 11456614}
-  - 114: {fileID: 11472612}
-  - 114: {fileID: 11433854}
-  - 114: {fileID: 11478810}
   m_Layer: 10
-  m_Name: Paladin
+  m_Name: Spiked Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1019,24 +1014,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &11402032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edd9d2ce0401d2b48bde2b6ab640925d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 0
-  LevelRequirement: 1
-  NumSkipLevels: 2
-  Range: 0.78125
-  AffectsSelf: 1
-  AffectsLayers: 0a000000
-  AuraGameObject: {fileID: 192352, guid: 08a9c0e93eae9704aaa2e905024ae006, type: 2}
 --- !u!114 &11429272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1058,37 +1035,6 @@ MonoBehaviour:
   subdivideEveryIter: 0
   iterations: 1
   useGraphRaycasting: 0
---- !u!114 &11433854
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 715f727bbac732b4cb6a58c6cf659290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 0
-  LevelRequirement: 6
-  NumSkipLevels: 3
-  CurrentCooldown: 0
-  Cooldown: 0
-  ManaCost: 0
---- !u!114 &11456614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e10b6cc355668149affd529a72b4914, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 0
-  LevelRequirement: 1
-  NumSkipLevels: 2
 --- !u!114 &11463206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1135,7 +1081,7 @@ MonoBehaviour:
     maxHealth: 10
     healthRegeneration: 0.25
     evasionChance: 0
-    armor: 2
+    armor: 4
     armorType: 3
     invulnerable: 0
     lifeStealPercentage: 0
@@ -1178,41 +1124,6 @@ MonoBehaviour:
     strength: 9
     intelligence: 3
     agility: 6
---- !u!114 &11472612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b54549bbf42ebc41b9072fd76c60464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 1
-  LevelRequirement: 0
-  NumSkipLevels: 0
-  CurrentCooldown: 0
-  Cooldown: 20
-  ManaCost: 25
-  Radius: 10
---- !u!114 &11478810
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b258954e4dd8744f9e92c0e5e197b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 0
-  LevelRequirement: 10
-  NumSkipLevels: 5
-  CurrentCooldown: 0
-  Cooldown: 75
-  ManaCost: 0
 --- !u!114 &11495938
 MonoBehaviour:
   m_ObjectHideFlags: 1

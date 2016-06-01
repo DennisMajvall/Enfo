@@ -195,9 +195,10 @@ MonoBehaviour:
     maxHealth: 10
     healthRegeneration: 0.25
     evasionChance: 0
-    armor: 4
+    armor: 1
     armorType: 3
     invulnerable: 0
+    lifeStealPercentage: 0
     cooldownTime: 1.28
     damage: 2
     damageFactorMedium: 0
