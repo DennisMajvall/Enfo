@@ -19,7 +19,7 @@ public class UnitStats
 	public float			lifeStealPercentage;
 
 	// offence
-	public float 			cooldownTime = 1.20f;
+	public float 			attackCooldownTime;
 	public float 			damage = 2f;
 	public float 			damageFactorMedium;					// Needed for the Wc3 porting
 	public float 			damageFactorSmall;                  // Needed for the Wc3 porting

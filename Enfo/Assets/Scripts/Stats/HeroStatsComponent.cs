@@ -11,20 +11,20 @@ public enum AttributeTypes
 [System.Serializable]
 public class HeroStats
 {
-	public float	experience;
-	public float 	reqExperience;
+	public float	experience = 0;
+	public float 	reqExperience = GameplayConstants.ExpRequiredAtLevelOne; // This says 0 in Inspector, but the Start() method defaults it to the GameplayConstant's value.
 	public int 		level;
-	public string 	heroName; // class name, i.e. 'Ranger' 'Paladin'
+	public string 	heroClassName; // class name, i.e. 'Ranger' 'Paladin'
 	public bool		isInWestTeam;
 	
 	//Attributes
 	public AttributeTypes primaryAttribute;
-	public float agilityPerLevel = 2.0f;
-	public float intelligencePerLevel = 2.0f;
-	public float strengthPerLevel = 2.0f;
-	public float strength = 6;
-	public float intelligence = 6;
-	public float agility = 6;
+	public float strengthPerLevel;
+	public float agilityPerLevel;
+	public float intelligencePerLevel;
+	public float strength;
+	public float agility;
+	public float intelligence;
 
 }
 
@@ -39,14 +39,14 @@ public class HeroStatsComponent : UnitStatsComponent
 	public float 	Experience			{ get { return heroStats.experience; } }
 	public float	RequiredExperience 	{ get { return heroStats.reqExperience; } }
 	public int 		Level				{ get { return heroStats.level; } }
-	public string 	HeroName 			{ get { return heroStats.heroName; } }
+	public string 	HeroName 			{ get { return heroStats.heroClassName; } }
 	public int 		Strength			{ get { return Mathf.RoundToInt(heroStats.strength); } }
 	public bool		IsInWestTeam		{ get { return heroStats.isInWestTeam; } }
 
 	/**
 	 * SETTERS AND CHANGERS
 	 */
-	public void ChangeHeroName(string newName)	{ heroStats.heroName = newName; }
+	public void ChangeHeroName(string newName)	{ heroStats.heroClassName = newName; }
 	public void AddLevel()			{ heroStats.level += 1; }
 	public void SetRequiredExperience(float req){ heroStats.reqExperience = req; }
 	public void AddExperience(float amount)
@@ -106,6 +106,8 @@ public class HeroStatsComponent : UnitStatsComponent
 	void Start()
 	{
 		SetStartingAttributes();
+		heroStats.reqExperience = GameplayConstants.ExpRequiredAtLevelOne;
+		heroStats.level = 1;
 	}
 
 	void SetStartingAttributes()
@@ -121,8 +123,5 @@ public class HeroStatsComponent : UnitStatsComponent
 		ChangeStrength(str);
 		ChangeIntelligence(intel);
 		ChangeAgility(agi);
-
-		heroStats.reqExperience = GameplayConstants.ExpRequiredAtLevelOne;
-		heroStats.level = 1;
 	}
 }
