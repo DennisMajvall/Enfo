@@ -199,7 +199,7 @@ MonoBehaviour:
     armorType: 3
     invulnerable: 0
     lifeStealPercentage: 0
-    cooldownTime: 1.28
+    attackCooldownTime: 1.12
     damage: 2
     damageFactorMedium: 0
     damageFactorSmall: 0
@@ -229,15 +229,15 @@ MonoBehaviour:
     experience: 0
     reqExperience: 0
     level: 1
-    heroName: Paladin
+    heroClassName: 
     isInWestTeam: 1
     primaryAttribute: 2
+    strengthPerLevel: 3.7
     agilityPerLevel: 2
     intelligencePerLevel: 1
-    strengthPerLevel: 3.7
     strength: 9
-    intelligence: 3
     agility: 6
+    intelligence: 3
 --- !u!114 &11495938
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1085,14 +1085,14 @@ MonoBehaviour:
     armorType: 7
     invulnerable: 0
     lifeStealPercentage: 0
-    cooldownTime: 0
-    damage: 0
+    attackCooldownTime: 0
+    damage: 2
     damageFactorMedium: 0
     damageFactorSmall: 0
     damageNumDice: 1
     damageSidesPerDice: 8
     attackType: 7
-    projectileSpeed: 0
+    projectileSpeed: 7.03125
     range: 0
     acquisitionRange: 0
     critChance: 0
@@ -1115,15 +1115,15 @@ MonoBehaviour:
     experience: 0
     reqExperience: 0
     level: 1
-    heroName: 
+    heroClassName: 
     isInWestTeam: 1
     primaryAttribute: 2
+    strengthPerLevel: 0
     agilityPerLevel: 0
     intelligencePerLevel: 0
-    strengthPerLevel: 0
     strength: 0
-    intelligence: 0
     agility: 0
+    intelligence: 0
 --- !u!114 &11495938
 MonoBehaviour:
   m_ObjectHideFlags: 1
