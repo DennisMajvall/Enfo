@@ -55,12 +55,18 @@ public class OrderBehaviour : MonoBehaviour
 	void PerformedClickOnTargetable(int mouse_button, bool queue_order, ref RaycastHit hit)
 	{
 		if (mouse_button == 1) {
-			if (!queue_order)
-				orders.Clear();
 
-			AttackOrder attack_order = new AttackOrder(stats, gameObject.transform.position, hit.collider.gameObject, seeker, gameObject);
-			attack_order.projectilePrefab = projectilePrefab;
-			orders.Add(attack_order);
+			// TODO: This is a temporary way to activate spiked tree's skills. Change later.
+			if (gameObject.GetComponent<Barkskin> ().KeyWasPressed) {
+				gameObject.GetComponent<Barkskin> ().Activate (hit.collider.gameObject);
+			} else if (hit.collider.gameObject.layer == LayerMasks.Targetable9) {
+				if (!queue_order)
+					orders.Clear ();
+
+				AttackOrder attack_order = new AttackOrder (stats, gameObject.transform.position, hit.collider.gameObject, seeker, gameObject);
+				attack_order.projectilePrefab = projectilePrefab;
+				orders.Add (attack_order);
+			}
 		}
 	}
 
@@ -73,7 +79,7 @@ public class OrderBehaviour : MonoBehaviour
 	void UpdateInput()
 	{
 		if (Input.GetMouseButtonDown(1)) {
-			RaycastHit[] ray_hits = Globals.RaycastFromMouse(LayerMasks.Terrain8 | LayerMasks.Targetable9);
+			RaycastHit[] ray_hits = Globals.RaycastFromMouse(LayerMasks.Terrain8 | LayerMasks.Targetable9 | LayerMasks.Ally10);
 
 			if (ray_hits.Length > 0) {
 				bool queue_order = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);

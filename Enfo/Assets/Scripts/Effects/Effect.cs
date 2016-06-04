@@ -8,12 +8,14 @@ public class Effect : MonoBehaviour
 
 	public void ApplyEffect(int level = 0)
 	{
-		if (NumLevels > 1 && level == Level)
+		if (NumLevels > 1 && level == Level) {
 			return;
+		}
 
 		RemoveEffect();
-		if (NumLevels > 1 && level < 1 || level > NumLevels)
+		if (NumLevels > 1 && level < 1 || level > NumLevels) {
 			return;
+		}
 		
 		Level = level;
 		OnApplyEffect(level); // Override this method in your inherited class

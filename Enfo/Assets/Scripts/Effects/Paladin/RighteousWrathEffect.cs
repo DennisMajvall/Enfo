@@ -40,13 +40,13 @@ public class RighteousWrathEffect : Effect
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent>();
 
-		unitStats.ChangeDamage(DamageIncrease[level-1]);
+		unitStats.IncreaseDamage(DamageIncrease[level-1]);
 		unitStats.ChangeLifeStealPercentage(LifeStealPercentage[level-1]);
 	}
 
 	protected override void OnRemoveEffect()
 	{
-		unitStats.ChangeDamage(-DamageIncrease[Level - 1]);
+		unitStats.IncreaseDamage(-DamageIncrease[Level - 1]);
 		unitStats.ChangeLifeStealPercentage(-LifeStealPercentage[Level - 1]);
 	}
 

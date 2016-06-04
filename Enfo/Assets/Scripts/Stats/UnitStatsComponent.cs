@@ -21,6 +21,7 @@ public class UnitStats
 	// offence
 	public float 			attackCooldownTime;
 	public float 			damage = 2f;
+	public float			damageMultiplier = 1f;
 	public float 			damageFactorMedium;					// Needed for the Wc3 porting
 	public float 			damageFactorSmall;                  // Needed for the Wc3 porting
 	public float 			damageNumDice = 1f;					// Needed for the Wc3 porting
@@ -72,7 +73,8 @@ public class UnitStatsComponent : MonoBehaviour
 	public bool				Invulnerable		{ get { return unitStats.invulnerable; } }
 
 	// offence
-	public float 			Damage 				{ get { return unitStats.damage; } }
+	public float 			Damage 				{ get { return unitStats.damage * unitStats.damageMultiplier; } }
+	public float 			DamagePercentageMultiplier	{ get { return unitStats.damageMultiplier; } }
 	public AttackTypeEnum	AttackType			{ get { return unitStats.attackType; } }
 	public float 			ProjectileSpeed 	{ get { return unitStats.projectileSpeed; } }
 	public float 			Range 				{ get { return unitStats.range; } }
@@ -164,14 +166,15 @@ public class UnitStatsComponent : MonoBehaviour
 		}
 	}
 
-	public void ChangeArmor(float delta)				{ unitStats.armor += delta; }
+	public void IncreaseArmor(float delta)				{ unitStats.armor += delta; }
 	public void IncreaseHealthRegeneration(float delta) { unitStats.healthRegeneration += delta; }
 	public void IncreaseEvasionChance(float amount)		{ unitStats.evasionChance += amount; }
 	public void SetInvulnerable(bool value)				{ unitStats.invulnerable = value; }
 	public void ChangeLifeStealPercentage(float delta)	{ unitStats.lifeStealPercentage += delta; }
 	
 	// offence
-	public void ChangeDamage(float delta) { unitStats.damage += delta; }
+	public void IncreaseDamage(float delta) { unitStats.damage += delta; }
+	public void IncreaseDamageMultiplier(float delta) { unitStats.damageMultiplier += delta; }
 	public void ChangeAttackSpeedPercentage(float delta) { unitStats.attackSpeedPercentage += delta; }
 	public void IncreaseCritChance(float amount) { unitStats.critChance += amount; }
 	public void IncreaseCritExtraMultiplier(float amount) { unitStats.critExtraMultiplier += amount; }

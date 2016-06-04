@@ -81,15 +81,15 @@ public class HeroStatsComponent : UnitStatsComponent
 		ChangeMaxHealth(delta * GameplayConstants.HealthPerStrength, true);
 		IncreaseHealthRegeneration(delta * GameplayConstants.HealthRegenPerStrength);
 		if (heroStats.primaryAttribute == AttributeTypes.Strength)
-			ChangeDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
+			IncreaseDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
 	}
 	public void ChangeAgility(float delta)
 	{
 		heroStats.agility += delta;
 		ChangeAttackSpeedPercentage(delta * GameplayConstants.AttackSpeedPerAgility);
-		ChangeArmor(delta * GameplayConstants.ArmorPerAgility);
+		IncreaseArmor(delta * GameplayConstants.ArmorPerAgility);
 		if (heroStats.primaryAttribute == AttributeTypes.Agility)
-			ChangeDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
+			IncreaseDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
 	}
 	public void ChangeIntelligence(float delta)
 	{
@@ -97,7 +97,7 @@ public class HeroStatsComponent : UnitStatsComponent
 		ChangeMaxMana(delta * GameplayConstants.ManaPerIntelligence, true);
 		IncreaseManaRegeneration(delta * GameplayConstants.ManaRegenPerIntelligence);
 		if (heroStats.primaryAttribute == AttributeTypes.Intelligence)
-			ChangeDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
+			IncreaseDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
 	}
 
 	/**

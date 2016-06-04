@@ -4,7 +4,17 @@ using System.Collections;
 public class Barkskin : Ability
 {
 
-	bool keyWasPressed = false;
+	public bool KeyWasPressed = false;
+
+	public void Activate(GameObject target) {
+		KeyWasPressed = false;
+
+		if (target.layer == LayerNames.Ally10) {
+			target.AddComponent<BarkskinEffect> ();
+			target.GetComponent<BarkskinEffect> ().ApplyEffect (1);
+		}
+
+	}
 
 	void Start()
 	{
@@ -14,7 +24,7 @@ public class Barkskin : Ability
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.F)) {
-			keyWasPressed = true;
+			KeyWasPressed = true;
 		}
 	}
 }
