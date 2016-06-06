@@ -1,60 +1,63 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections.Generic;
 
 public class NetworkReceiveMessage
 {
 	public int socket;
 	public int connectionId;
 	public int channelId;
-	public byte[] recBuffer = new byte[1024];
 	public int bufferSize = 1024;
 	public int dataSize;
 	public byte error;
 }
 
-public enum ServerToUse
+public class NetworkManager
 {
-	localhost,
-	Dennis,
-	DennisLANLaptop,
+	readonly string[] serverIPaddresses = { "127.0.0.1", "84.219.252.92", "192.168.1.248", "" };
+	readonly int[] serverPorts = { 6111, 6111, 6110, 0 };
 
-	None,
-}
+	public static NetworkManager Get()
+	{
+		if (myInstance == null)
+			myInstance = new NetworkManager();
 
-public class NetworkManager : MonoBehaviour
-{
+		return myInstance;
+	}
+
+	static NetworkManager myInstance;
 	const bool printMessageError = true;
 
-	public ushort maxPacketSize = 500;
-	public ServerToUse serverToUse;
-
+	ServerToUse serverToUse;
 	GlobalConfig globalConfig;
 	ConnectionConfig connectionConfig;
-
-	int reliableChannelId;
-	//int unreliableChannelId;
 
 	HostTopology topology;
 	int socket;
 	int port;
 	string ipAddress;
-	int maxNumConnections = 1;
+	int maxNumConnections;
 
-	int myConnectionId;
-	bool isBatchmode;
+	int myConnectionId = -1;
+	bool isServer;
+
+	public byte[] receiveBuffer = new byte[1024];
+	List<NetMsg>[] messagesToSend = new List<NetMsg>[(int)NetMsgPriority.COUNT];
+	int[] channelIDs = new int[(int)NetMsgPriority.COUNT];
 
 	NetworkReceiveMessage message;
-	readonly string[] serverIPaddresses = { "127.0.0.1", "84.219.252.92", "192.168.1.243", "" };
-	readonly int[] serverPorts = { 6111, 6111, 6110, 0 };
 
-	void Start()
-	{
-		SetBatchModeOrNot();
-		SetServerPortAndIP();
-
-		if (isBatchmode) {
-			maxNumConnections = 10;
+	private NetworkManager() {
+		for (int i = 0; i < messagesToSend.Length; ++i) {
+			messagesToSend[i] = new List<NetMsg>();
 		}
+	}
+
+	public void Start(ServerToUse serverToUse)
+	{
+		this.serverToUse = serverToUse;
+		SetBatchModeOrNot();
+		SetServerOrClient();
 
 		message = new NetworkReceiveMessage();
 
@@ -62,23 +65,18 @@ public class NetworkManager : MonoBehaviour
 		NetworkTransport.Init(globalConfig);
 
 		connectionConfig = new ConnectionConfig();
-		reliableChannelId = connectionConfig.AddChannel(QosType.Reliable);
-		//unreliableChannelId = config.AddChannel(QosType.Unreliable);
+		channelIDs[(int)NetMsgPriority.ReliableTCP] = connectionConfig.AddChannel(QosType.Reliable);
+		channelIDs[(int)NetMsgPriority.ReliableUDP] = connectionConfig.AddChannel(QosType.AllCostDelivery);
+		channelIDs[(int)NetMsgPriority.UDP] = connectionConfig.AddChannel(QosType.Unreliable);
+		channelIDs[(int)NetMsgPriority.UnimportantSeq] = connectionConfig.AddChannel(QosType.UnreliableSequenced);
 
 		topology = new HostTopology(connectionConfig, maxNumConnections);
 		socket = NetworkTransport.AddHost(topology, port, ipAddress);
 	}
 
-	public void ConnectToHost()
+	public void Update()
 	{
-		myConnectionId = NetworkTransport.Connect(socket, ipAddress, port, 0, out message.error);
-		if (printMessageError)
-			PrintErrorMessage(message.error);
-	}
-
-	void Update()
-	{
-		if (!isBatchmode) {
+		if (!isServer) {
 			if (Input.GetKeyUp(KeyCode.C)) {
 				ConnectToHost();
 			}
@@ -90,7 +88,13 @@ public class NetworkManager : MonoBehaviour
 				msg[0] = (byte)'h';
 				msg[1] = (byte)'e';
 				msg[2] = (byte)'j';
-				Send(msg);
+				Send(msg, NetMsgPriority.ReliableTCP);
+			}
+		} else {
+			for (int i = 0; i < messagesToSend.Length; ++i) {
+				foreach (NetMsg msg in messagesToSend[i]) {
+					Send(msg.GetRawData(), msg.Priority);
+				}
 			}
 		}
 
@@ -103,7 +107,7 @@ public class NetworkManager : MonoBehaviour
 		NetworkEventType receivedData = ReceiveFromHost();
 		switch (receivedData) {
 			case NetworkEventType.DataEvent:
-				Debug.Log(((char)message.recBuffer[0]).ToString() + ((char)message.recBuffer[1]).ToString() + ((char)message.recBuffer[2]).ToString());
+				Debug.Log(((char)receiveBuffer[0]).ToString() + ((char)receiveBuffer[1]).ToString() + ((char)receiveBuffer[2]).ToString());
 				break;
 			case NetworkEventType.ConnectEvent:
 				if (myConnectionId == message.connectionId)
@@ -120,6 +124,13 @@ public class NetworkManager : MonoBehaviour
 		}
 	}
 
+	public void ConnectToHost()
+	{
+		myConnectionId = NetworkTransport.Connect(socket, ipAddress, port, 0, out message.error);
+		if (printMessageError)
+			PrintErrorMessage(message.error);
+	}
+
 	public void Disconnect()
 	{
 		NetworkTransport.Disconnect(socket, myConnectionId, out message.error);
@@ -127,17 +138,22 @@ public class NetworkManager : MonoBehaviour
 			PrintErrorMessage(message.error);
 	}
 
-	public void Send(byte[] buffer)
+	public void Send(byte[] buffer, NetMsgPriority channelID)
 	{
-		NetworkTransport.Send(socket, myConnectionId, reliableChannelId, buffer, buffer.Length, out message.error);
+		NetworkTransport.Send(socket, myConnectionId, (int)channelID, buffer, buffer.Length, out message.error);
 		if (printMessageError)
 			PrintErrorMessage(message.error);
+	}
+
+	public void PrepareToSend(NetMsg msg)
+	{
+		messagesToSend[(int)msg.Priority].Add(msg);
 	}
 
 	public NetworkEventType Receive()
 	{
 		NetworkEventType result = NetworkTransport.Receive(out message.socket, out message.connectionId,
-			out message.channelId, message.recBuffer, message.bufferSize, out message.dataSize, out message.error);
+			out message.channelId, receiveBuffer, message.bufferSize, out message.dataSize, out message.error);
 		if (printMessageError)
 			PrintErrorMessage(message.error);
 		return result;
@@ -146,7 +162,7 @@ public class NetworkManager : MonoBehaviour
 	public NetworkEventType ReceiveFromHost()
 	{
 		NetworkEventType result = NetworkTransport.ReceiveFromHost(socket, out message.connectionId,
-			out message.channelId, message.recBuffer, message.bufferSize, out message.dataSize, out message.error);
+			out message.channelId, receiveBuffer, message.bufferSize, out message.dataSize, out message.error);
 		if (printMessageError)
 			PrintErrorMessage(message.error);
 		return result;
@@ -203,14 +219,22 @@ public class NetworkManager : MonoBehaviour
 		string[] args = System.Environment.GetCommandLineArgs();
 		foreach (string s in args) {
 			if (s.Equals("-batchmode") || s.Equals("-fakebatchmode")) {
-				isBatchmode = true;
+				isServer = true;
 			}
 		}
 	}
 
-	void SetServerPortAndIP()
+	void SetServerOrClient()
 	{
-		ipAddress = serverIPaddresses[(int)serverToUse];
-		port = serverPorts[(int)serverToUse];
+		
+		if (isServer) {
+			maxNumConnections = 10;
+			ipAddress = null;
+			port = 0;
+		} else {
+			maxNumConnections = 1;
+			ipAddress = serverIPaddresses[(int)serverToUse];
+			port = serverPorts[(int)serverToUse];
+		}
 	}
 }
