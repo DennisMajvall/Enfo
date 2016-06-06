@@ -5,6 +5,7 @@ public class RighteousWrath : ClickableAbility
 {
 	float StartingManaCost = 60f;
 	float ManaCostPerLevel = 20f;
+	RighteousWrathEffect effect;
 
 	void Start()
 	{
@@ -14,12 +15,21 @@ public class RighteousWrath : ClickableAbility
 
 	sealed protected override void UseAbility()
 	{
-		RighteousWrathEffect effect = gameObject.AddComponent<RighteousWrathEffect>();
-		effect.ApplyEffect(Level);
+		GetEffectComponent().ApplyEffect(Level);
 	}
 
 	sealed protected override void OnSetLevel(int level)
 	{
 		ManaCost = StartingManaCost + (level * ManaCostPerLevel);
+	}
+
+	RighteousWrathEffect GetEffectComponent()
+	{
+		if (!effect) {
+			effect = gameObject.GetComponent<RighteousWrathEffect>();
+			if (!effect)
+				effect = gameObject.AddComponent<RighteousWrathEffect>();
+		}
+		return effect;
 	}
 }

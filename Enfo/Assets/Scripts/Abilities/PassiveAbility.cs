@@ -10,7 +10,8 @@ public class PassiveAbility : Ability
 
 	void Start()
 	{
-		SetLevel(Level);
+		if (Level != 0)
+			SetLevel(Level);
 	}
 
 	sealed protected override void OnSetLevel(int level)
