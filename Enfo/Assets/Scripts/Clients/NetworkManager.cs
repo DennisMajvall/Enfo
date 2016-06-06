@@ -12,40 +12,60 @@ public class NetworkReceiveMessage
 	public byte error;
 }
 
+public enum ServerToUse
+{
+	localhost,
+	Dennis,
+	DennisLANLaptop,
+
+	None,
+}
+
 public class NetworkManager : MonoBehaviour
 {
 	const bool printMessageError = true;
 
 	public ushort maxPacketSize = 500;
-	public int maxNumConnections = 10;
-	public int port = 8888;
-	public string ipAddress = "83.227.12.224";
+	public ServerToUse serverToUse;
 
 	GlobalConfig globalConfig;
-	ConnectionConfig config;
+	ConnectionConfig connectionConfig;
 
 	int reliableChannelId;
 	//int unreliableChannelId;
 
 	HostTopology topology;
 	int socket;
+	int port;
+	string ipAddress;
+	int maxNumConnections = 1;
 
 	int myConnectionId;
+	bool isBatchmode;
 
 	NetworkReceiveMessage message;
+	readonly string[] serverIPaddresses = { "127.0.0.1", "84.219.252.92", "192.168.1.243", "" };
+	readonly int[] serverPorts = { 6111, 6111, 6110, 0 };
 
 	void Start()
 	{
+		SetBatchModeOrNot();
+		SetServerPortAndIP();
+
+		if (isBatchmode) {
+			maxNumConnections = 10;
+		}
+
 		message = new NetworkReceiveMessage();
+
 		globalConfig = new GlobalConfig();
-		globalConfig.MaxPacketSize = maxPacketSize;
 		NetworkTransport.Init(globalConfig);
 
-		config = new ConnectionConfig();
-		reliableChannelId = config.AddChannel(QosType.Reliable);
+		connectionConfig = new ConnectionConfig();
+		reliableChannelId = connectionConfig.AddChannel(QosType.Reliable);
 		//unreliableChannelId = config.AddChannel(QosType.Unreliable);
-		
-		topology = new HostTopology(config, maxNumConnections);
+
+		topology = new HostTopology(connectionConfig, maxNumConnections);
 		socket = NetworkTransport.AddHost(topology, port, ipAddress);
 	}
 
@@ -56,41 +76,48 @@ public class NetworkManager : MonoBehaviour
 			PrintErrorMessage(message.error);
 	}
 
-
 	void Update()
 	{
-		//if (Input.GetKeyUp(KeyCode.C)) {
-		//	ConnectToHost();
-		//}
-		//if (Input.GetKeyUp(KeyCode.D)) {
-		//	Disconnect();
-		//}
-		//if (Input.GetKeyUp(KeyCode.S)) {
-		//	byte[] msg = new byte[3];
-		//	msg[0] = (byte)'h';
-		//	msg[1] = (byte)'e';
-		//	msg[2] = (byte)'j';
-		//	Send(msg);
-		//}
+		if (!isBatchmode) {
+			if (Input.GetKeyUp(KeyCode.C)) {
+				ConnectToHost();
+			}
+			if (Input.GetKeyUp(KeyCode.D)) {
+				Disconnect();
+			}
+			if (Input.GetKeyUp(KeyCode.S)) {
+				byte[] msg = new byte[3];
+				msg[0] = (byte)'h';
+				msg[1] = (byte)'e';
+				msg[2] = (byte)'j';
+				Send(msg);
+			}
+		}
 
-		//NetworkEventType receivedData = ReceiveFromHost();
-		//switch (receivedData) {
-		//	case NetworkEventType.DataEvent:
-		//		Debug.Log(((char)message.recBuffer[0]).ToString() + ((char)message.recBuffer[1]).ToString() + ((char)message.recBuffer[2]).ToString());
-		//		break;
-		//	case NetworkEventType.ConnectEvent:
-		//		if (myConnectionId == message.connectionId)
-		//			Debug.Log("my active connect request approved: " + message.connectionId.ToString());
-		//		else
-		//			Debug.Log("somebody else connect to me: " + message.connectionId.ToString());
-		//		break;
-		//	case NetworkEventType.DisconnectEvent:
-		//		if (myConnectionId == message.connectionId)
-		//			Debug.Log("cannot connect by some reason see error: " + message.connectionId.ToString());
-		//		else
-		//			Debug.Log("one of the established connection has been disconnected: " + message.connectionId.ToString());
-		//		break;
-		//}
+		ReceiveAndHandleData();
+	}
+
+	void ReceiveAndHandleData()
+	{
+
+		NetworkEventType receivedData = ReceiveFromHost();
+		switch (receivedData) {
+			case NetworkEventType.DataEvent:
+				Debug.Log(((char)message.recBuffer[0]).ToString() + ((char)message.recBuffer[1]).ToString() + ((char)message.recBuffer[2]).ToString());
+				break;
+			case NetworkEventType.ConnectEvent:
+				if (myConnectionId == message.connectionId)
+					Debug.Log("my active connect request approved: " + message.connectionId.ToString());
+				else
+					Debug.Log("somebody else connect to me: " + message.connectionId.ToString());
+				break;
+			case NetworkEventType.DisconnectEvent:
+				if (myConnectionId == message.connectionId)
+					Debug.Log("cannot connect by some reason see error: " + message.connectionId.ToString());
+				else
+					Debug.Log("one of the established connection has been disconnected: " + message.connectionId.ToString());
+				break;
+		}
 	}
 
 	public void Disconnect()
@@ -169,5 +196,21 @@ public class NetworkManager : MonoBehaviour
 			default:
 				break;
 		}
+	}
+
+	void SetBatchModeOrNot()
+	{
+		string[] args = System.Environment.GetCommandLineArgs();
+		foreach (string s in args) {
+			if (s.Equals("-batchmode") || s.Equals("-fakebatchmode")) {
+				isBatchmode = true;
+			}
+		}
+	}
+
+	void SetServerPortAndIP()
+	{
+		ipAddress = serverIPaddresses[(int)serverToUse];
+		port = serverPorts[(int)serverToUse];
 	}
 }
