@@ -8,8 +8,7 @@ public class Ability : MonoBehaviour
 	public int LevelRequirement = 0;
 	public const int NumLevels = 10;
 	public int NumSkipLevels = 2;
-	
-	
+		
 	// Override this
 	protected virtual void OnSetLevel(int level) { }
 

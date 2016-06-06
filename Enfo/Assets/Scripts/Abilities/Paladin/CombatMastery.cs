@@ -11,6 +11,6 @@ public class CombatMastery : PassiveAbility
 		if (!effect_component)
 			effect_component = gameObject.AddComponent<CombatMasteryEffect>();
 
-		effect_component.ApplyEffect(Level);
+		effect_component.ApplyEffect(level);
 	}
 }
