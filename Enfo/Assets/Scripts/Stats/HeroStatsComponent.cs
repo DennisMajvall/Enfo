@@ -71,11 +71,12 @@ public class HeroStatsComponent : UnitStatsComponent
 
 	//Attributes
 	public void LevelUpAttributes() {
-		ChangeAgility (heroStats.agilityPerLevel);
-		ChangeIntelligence (heroStats.intelligencePerLevel);
-		ChangeStrength (heroStats.strengthPerLevel);
+		IncreaseAgility (heroStats.agilityPerLevel);
+		IncreaseIntelligence (heroStats.intelligencePerLevel);
+		IncreaseStrength (heroStats.strengthPerLevel);
 	}
-	public void ChangeStrength(float delta)
+
+	public void IncreaseStrength(float delta)
 	{
 		heroStats.strength += delta;
 		ChangeMaxHealth(delta * GameplayConstants.HealthPerStrength, true);
@@ -83,7 +84,8 @@ public class HeroStatsComponent : UnitStatsComponent
 		if (heroStats.primaryAttribute == AttributeTypes.Strength)
 			IncreaseDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
 	}
-	public void ChangeAgility(float delta)
+
+	public void IncreaseAgility(float delta)
 	{
 		heroStats.agility += delta;
 		ChangeAttackSpeedPercentage(delta * GameplayConstants.AttackSpeedPerAgility);
@@ -91,7 +93,8 @@ public class HeroStatsComponent : UnitStatsComponent
 		if (heroStats.primaryAttribute == AttributeTypes.Agility)
 			IncreaseDamage(delta * GameplayConstants.DamagePerPrimaryAttribute);
 	}
-	public void ChangeIntelligence(float delta)
+
+	public void IncreaseIntelligence(float delta)
 	{
 		heroStats.intelligence += delta;
 		ChangeMaxMana(delta * GameplayConstants.ManaPerIntelligence, true);
@@ -120,8 +123,8 @@ public class HeroStatsComponent : UnitStatsComponent
 		heroStats.intelligence = 0f;
 		heroStats.agility = 0f;
 
-		ChangeStrength(str);
-		ChangeIntelligence(intel);
-		ChangeAgility(agi);
+		IncreaseStrength(str);
+		IncreaseIntelligence(intel);
+		IncreaseAgility(agi);
 	}
 }

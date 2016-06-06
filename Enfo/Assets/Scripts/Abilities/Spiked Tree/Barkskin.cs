@@ -3,11 +3,7 @@ using System.Collections;
 
 public class Barkskin : Ability
 {
-
-	public bool KeyWasPressed = false;
-
 	public void Activate(GameObject target) {
-		KeyWasPressed = false;
 
 		if (target.layer == LayerNames.Ally10) {
 			BarkskinEffect componentExistsButIsDisabled = target.GetComponent<BarkskinEffect> ();
@@ -19,17 +15,5 @@ public class Barkskin : Ability
 			}
 		}
 
-	}
-
-	void Start()
-	{
-
-	}
-	
-	void Update()
-	{
-		if (Input.GetKeyDown (KeyCode.F)) {
-			KeyWasPressed = true;
-		}
 	}
 }

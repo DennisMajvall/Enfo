@@ -54,19 +54,13 @@ public class OrderBehaviour : MonoBehaviour
 
 	void PerformedClickOnTargetable(int mouse_button, bool queue_order, ref RaycastHit hit)
 	{
-		if (mouse_button == 1) {
+		if (mouse_button == 1 && hit.collider.gameObject.layer == LayerNames.Targetable9) {
+			if (!queue_order)
+				orders.Clear ();
 
-			// TODO: This is a temporary way to activate spiked tree's skills. Change later.
-			if (gameObject.GetComponent<Barkskin> ().KeyWasPressed) {
-				gameObject.GetComponent<Barkskin> ().Activate (hit.collider.gameObject);
-			} else if (hit.collider.gameObject.layer == LayerMasks.Targetable9) {
-				if (!queue_order)
-					orders.Clear ();
-
-				AttackOrder attack_order = new AttackOrder (stats, gameObject.transform.position, hit.collider.gameObject, seeker, gameObject);
-				attack_order.projectilePrefab = projectilePrefab;
-				orders.Add (attack_order);
-			}
+			AttackOrder attack_order = new AttackOrder (stats, gameObject.transform.position, hit.collider.gameObject, seeker, gameObject);
+			attack_order.projectilePrefab = projectilePrefab;
+			orders.Add (attack_order);
 		}
 	}
 

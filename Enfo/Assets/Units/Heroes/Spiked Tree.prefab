@@ -168,6 +168,7 @@ GameObject:
   - 54: {fileID: 5472204}
   - 114: {fileID: 11470914}
   - 114: {fileID: 11402936}
+  - 114: {fileID: 11496360}
   m_Layer: 10
   m_Name: Spiked Tree
   m_TagString: Untagged
@@ -1102,6 +1103,7 @@ MonoBehaviour:
     lifeStealPercentage: 0
     attackCooldownTime: 1.2
     damage: 2
+    damageMultiplier: 1
     damageFactorMedium: 0
     damageFactorSmall: 0
     damageNumDice: 1
@@ -1151,6 +1153,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 142628, guid: 05b1f01a8ce9d5a438f892a0f7a33d43, type: 2}
+--- !u!114 &11496360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf8f9da4773fbd4caa5cdaf8bfebd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 1
+  LevelRequirement: 0
+  NumSkipLevels: 2
 --- !u!136 &13698738
 CapsuleCollider:
   m_ObjectHideFlags: 1
