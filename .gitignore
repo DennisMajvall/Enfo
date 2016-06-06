@@ -24,3 +24,5 @@ ExportedObj/
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 Enfo/ProjectSettings/ProjectSettings.asset
+Builds/server.exe - Shortcut.lnk
+Builds/server_Data/output_log.txt

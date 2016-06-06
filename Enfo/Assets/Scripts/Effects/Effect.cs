@@ -2,29 +2,34 @@
 
 public class Effect : MonoBehaviour
 {
+	readonly public bool EnabledInspector;
+
 	public const int NumLevels = 10;
 	public int Level;
-	protected bool IsApplied;
 
-	public void ApplyEffect(int level = 0)
+	public Effect()
 	{
-		if (NumLevels > 1 && level == Level)
-			return;
+		enabled = false;
+	}
 
+	public void ApplyEffect(int level)
+	{
 		RemoveEffect();
-		if (NumLevels > 1 && level < 1 || level > NumLevels)
-			return;
-		
+
+		if (!enabled && level != 0) {
+			enabled = true;
+			OnApplyEffect(level); // Override this method in your inherited class
+		}
+
 		Level = level;
-		OnApplyEffect(level); // Override this method in your inherited class
-		IsApplied = true;
 	}
 
 	public void RemoveEffect()
 	{
-		if (IsApplied) {
+		if (enabled) {
+			enabled = false;
 			OnRemoveEffect(); // Override this method in your inherited class
-			IsApplied = false;
+			Level = 0;
 		}
 	}
 

@@ -813,6 +813,14 @@ Prefab:
       propertyPath: Level
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11402032, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11402032, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
+      propertyPath: Range
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6e1a50355c89544a10706d50a07232, type: 2}
   m_IsPrefabParent: 0
@@ -828,7 +836,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1593226552}
-  - 114: {fileID: 1593226553}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -849,21 +856,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &1593226553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1593226549}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3446a4f8a24e44f4ca9d7568f71d33f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPacketSize: 500
-  maxNumConnections: 10
-  port: 8888
-  ipAddress: 83.227.12.224
 --- !u!1001 &1605903495
 Prefab:
   m_ObjectHideFlags: 0

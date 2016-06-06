@@ -50,7 +50,7 @@ public class CombatMasteryEffect : Effect
 	
 	UnitStatsComponent unitStats;
 
-	protected override void OnApplyEffect(int level = 0)
+	protected override void OnApplyEffect(int level)
 	{
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent>();

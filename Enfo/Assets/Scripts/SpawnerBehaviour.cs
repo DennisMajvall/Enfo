@@ -29,7 +29,7 @@ public class SpawnerBehaviour : MonoBehaviour
 		const float spawn_dist_offset = 2f;
 		if (spawn_pos_index == 0) {
 			spawn_pos.x -= spawn_dist_offset;
-		} else if (spawn_pos_index == 2) {
+		} else if (spawn_pos_index == 1) {
 			spawn_pos.x += spawn_dist_offset;
 		}
 
