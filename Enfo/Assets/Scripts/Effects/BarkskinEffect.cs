@@ -14,12 +14,9 @@ public class BarkskinEffect : Effect {
 	 * Apply
 	 */
 	protected override void OnApplyEffect(int lvl) {
-		print (gameObject);
-
 		if (!unitStats)
 			unitStats = GetComponent<UnitStatsComponent> ();
 
-		print ("adding armor");
 		durationCounter = Duration;
 		unitStats.IncreaseArmor (10f);
 		unitStats.IncreaseDamageMultiplier (DamageIncreaseFactor);
@@ -31,16 +28,7 @@ public class BarkskinEffect : Effect {
 	protected override void OnRemoveEffect() {
 		unitStats.IncreaseArmor (-10f);
 		unitStats.IncreaseDamageMultiplier (-DamageIncreaseFactor);
-		unitStats = null;
 
-	}
-
-	/**
-	 * Refresh duration
-	 * If this spell is applied again to the same target, it's better to refresh the duration of the previous one.
-	 */
-	public void RefreshDuration() {
-		durationCounter = Duration;
 	}
 
 	/**
@@ -49,10 +37,8 @@ public class BarkskinEffect : Effect {
 	// Used for removing the effect once the duration has run out
 	void Update () {
 		durationCounter -= Time.deltaTime;
-		print (durationCounter);
 		if (durationCounter <= 0f) {
 			RemoveEffect ();
-			Destroy (gameObject.GetComponent<BarkskinEffect> ());
 		}
 	}
 }

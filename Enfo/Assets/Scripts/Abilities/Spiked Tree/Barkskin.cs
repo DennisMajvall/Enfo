@@ -10,8 +10,13 @@ public class Barkskin : Ability
 		KeyWasPressed = false;
 
 		if (target.layer == LayerNames.Ally10) {
-			target.AddComponent<BarkskinEffect> ();
-			target.GetComponent<BarkskinEffect> ().ApplyEffect (1);
+			BarkskinEffect componentExistsButIsDisabled = target.GetComponent<BarkskinEffect> ();
+			if (componentExistsButIsDisabled) {
+				target.GetComponent<BarkskinEffect> ().ApplyEffect (1);
+			} else {
+				BarkskinEffect effect = target.AddComponent<BarkskinEffect> ();
+				effect.ApplyEffect (1);
+			}
 		}
 
 	}
