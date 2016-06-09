@@ -6,7 +6,9 @@ public class HomingProjectile : MonoBehaviour
 	public GameObject Target;
 	public GameObject Owner; // the unit who threw/shot/cast the projectile at the target
 	public UnitStatsComponent ownerStats;
+
 	UnitStats stats = new UnitStats();
+	Vector3 targetPosition;
 
 	void Start()
 	{
@@ -21,19 +23,27 @@ public class HomingProjectile : MonoBehaviour
 
 	void Update()
 	{
-		if (!Target) {
-			Destroy(gameObject);
-			return;
+		// As long as the target is alive, we update the position field.
+		// This way, if the target dies, the projectile will keep travelling toward
+		// the target's last known position.
+		if (Target) {
+			targetPosition = Target.transform.position;
 		}
 
-		float distanceLeft = Vector3.Distance(transform.position, Target.transform.position);
+		float distanceLeft = Vector3.Distance(transform.position, targetPosition);
 		float currentSpeed = stats.projectileSpeed * Time.deltaTime;
 
 		if (currentSpeed >= distanceLeft) {
-			// Deal damage to the target
-			Target.GetComponent<UnitStatsComponent>().DealProjectileDamage (stats.damage, stats, ownerStats);
+			// Destroy projectile if target is dead
+			if (!Target) {			
+				Destroy (gameObject);
+				return;
+			}
 
-			Destroy(gameObject);
+			// Deal damage to the target
+			Target.GetComponent<UnitStatsComponent> ().DealProjectileDamage (stats.damage, stats, ownerStats);
+
+			Destroy (gameObject);
 			return;
 		}
 

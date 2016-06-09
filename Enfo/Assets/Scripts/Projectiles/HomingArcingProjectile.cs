@@ -5,18 +5,11 @@ public class HomingArcingProjectile : MonoBehaviour
 {
 	public GameObject Target;
 	public GameObject Owner; // the unit who threw/shot/cast the projectile at the target
-	public UnitStatsComponent ownerStats;
 	UnitStats stats = new UnitStats();
 
 	void Start()
 	{
-		ownerStats = Owner.GetComponent<UnitStatsComponent>();
-		stats.evasionChance = ownerStats.EvasionChance;
-		stats.critChance = ownerStats.CritChance;
-		stats.critExtraMultiplier = ownerStats.CritExtraMultiplier;
-		stats.attackType = ownerStats.AttackType;
-		stats.damage = ownerStats.Damage;
-		stats.projectileSpeed = ownerStats.ProjectileSpeed;
+		
 	}
 
 	void Update()
