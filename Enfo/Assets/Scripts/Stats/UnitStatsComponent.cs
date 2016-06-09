@@ -101,7 +101,38 @@ public class UnitStatsComponent : MonoBehaviour
 	 * SETTERS AND CHANGERS
 	 */
 	// defence
-	public void DealDamage(float amount, UnitStats attackerStats, UnitStatsComponent attackerStatsComponent)
+	void killIfDead() {
+		if (Health <= 0f) {
+			// Give gold to killing player (always gives to Client as-of-now)
+			GameObject client = GameObject.Find("Client");
+			client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
+
+			// Give experience to the killing team (always gives to west team as-of-now)
+			Teams team = Globals.Teams;
+			int teamMembers = team.CountTeam(true);
+			foreach (GameObject hero in team.WestTeam) {
+				if (hero) {
+					// Divide experience between all Heroes on the killing team, calculated from a base value factored by the killed unit's level
+					float experience = GameplayConstants.MonsterLevelOneExpDrop * Mathf.Pow(GameplayConstants.MonsterExpDropIncreaseFactorPerLevel, MonsterLevel) / teamMembers;
+					hero.GetComponent<HeroStatsComponent>().AddExperience(experience);
+				}
+			}
+
+			// and destroy
+			Destroy(gameObject);
+		}
+	}
+
+	public void DealSpellDamage(float amount) {
+		if (Invulnerable)
+			return;
+
+		amount *= GameplayConstants.ArmorDamageReduction (AttackTypeEnum.Spells, ArmorType, 0f);
+		unitStats.health -= amount;
+		killIfDead ();
+	}
+
+	public void DealProjectileDamage(float amount, UnitStats attackerStats, UnitStatsComponent attackerStatsComponent)
 	{
 		if (Invulnerable)
 			return;
@@ -124,25 +155,9 @@ public class UnitStatsComponent : MonoBehaviour
 				attackerStatsComponent.ApplyOnAttackEffects(amount);
 			}
 
-			if (IsDead) {
-				// Give gold to killing player (always gives to Client as-of-now)
-				GameObject client = GameObject.Find("Client");
-				client.GetComponent<GoldContainer>().ChangeGold(gameObject.GetComponent<UnitStatsComponent>().GoldDropped);
+			killIfDead ();
 
-				// Give experience to the killing team (always gives to west team as-of-now)
-				Teams team = Globals.Teams;
-				int teamMembers = team.CountTeam(true);
-				foreach (GameObject hero in team.WestTeam) {
-					if (hero) {
-						// Divide experience between all Heroes on the killing team, calculated from a base value factored by the killed unit's level
-						float experience = GameplayConstants.MonsterLevelOneExpDrop * Mathf.Pow(GameplayConstants.MonsterExpDropIncreaseFactorPerLevel, MonsterLevel) / teamMembers;
-						hero.GetComponent<HeroStatsComponent>().AddExperience(experience);
-					}
-				}
-
-				// and destroy
-				Destroy(gameObject);
-			} else if (Health > MaxHealth) {
+			if (Health > MaxHealth) {
 				unitStats.health = unitStats.maxHealth;
 			}
 		}

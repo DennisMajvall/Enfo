@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HomingProjectile : MonoBehaviour
+public class HomingArcingProjectile : MonoBehaviour
 {
 	public GameObject Target;
 	public GameObject Owner; // the unit who threw/shot/cast the projectile at the target

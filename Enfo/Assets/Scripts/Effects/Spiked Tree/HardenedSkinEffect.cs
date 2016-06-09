@@ -25,12 +25,12 @@ public class HardenedSkinEffect : Effect
 		if (!heroStats)
 			heroStats = GetComponent<HeroStatsComponent>();
 
-		heroStats.IncreaseStrength (strengthAtLevel[level]);
+		heroStats.IncreaseStrength (strengthAtLevel[level - 1]);
 		appliedLevel = level;
 	}
 
 	protected override void OnRemoveEffect()
 	{
-		heroStats.IncreaseStrength (-strengthAtLevel[appliedLevel]);
+		heroStats.IncreaseStrength (-strengthAtLevel[appliedLevel - 1]);
 	}
 }
